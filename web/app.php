@@ -21,8 +21,18 @@ $app->get("/{parameter}", function (\Silex\Application $app, $parameter) {
     $parameterSize = $parameterParts[0];
     $imageFormat = $parameterParts[1];
     $parameterWidthHeight = explode("x", $parameterSize);
+
+    if (sizeof($parameterWidthHeight) != 2) {
+        $app->abort(404, "Unknpwn image size");
+    }
+
     $imageWidth = (int) $parameterWidthHeight[0];
     $imageHeight = (int) $parameterWidthHeight[1];
+
+    if (($imageWidth < 1) or ($imageHeight < 1)) {
+        $app->abort(404, "Unknown image size");
+    }
+
     switch ($imageFormat) {
         case "jpg": $imageMime = "image/jpeg"; break;
         case "png": $imageMime = "image/png"; break;

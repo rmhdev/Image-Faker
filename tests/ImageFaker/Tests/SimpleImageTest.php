@@ -39,11 +39,26 @@ class SimpleImageTest extends WebTestCase
         $this->assertTrue($response->isSuccessful());
     }
 
-    public function testNoFileFormatShouldReturnError()
+    public function wrongUrlTestProvider()
     {
-        $response = $this->getResponse("/20x20");
+        return array(
+            array("/20x20"),
+            array("/x20.gif"),
+            array("/20x.png"),
+            array("/20.jpg"),
+            array("/.gif"),
+            array("/gif"),
+            array("/doesnotexist.gif")
+        );
+    }
+
+    /**
+     * @dataProvider wrongUrlTestProvider
+     */
+    public function testWrongUrlShouldReturnError($uri)
+    {
+        $response = $this->getResponse($uri);
         $this->assertTrue($response->isClientError());
-        $this->assertContains("text/html", $response->headers->get("Content-Type"));
     }
 
     protected function genericTestCreateSimpleImage($uri, $expectedWidth, $expectedHeight, $expectedMimeType)
