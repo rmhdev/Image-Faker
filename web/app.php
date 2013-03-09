@@ -15,6 +15,9 @@ $app->get("/", function () {
 $app->get("/{parameter}", function ($parameter) {
 
     $parameterParts = explode(".", $parameter);
+    if (sizeof($parameterParts) != 2) {
+        return new Response("Image must have an extension", 404);
+    }
     $parameterSize = $parameterParts[0];
     $imageFormat = $parameterParts[1];
     $parameterWidthHeight = explode("x", $parameterSize);
@@ -38,7 +41,6 @@ $app->get("/{parameter}", function ($parameter) {
         "Content_Type" => $imageMime
     ));
 });
-
 
 
 $app->run();

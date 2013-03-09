@@ -15,46 +15,36 @@ class SimpleImageTest extends WebTestCase
 
     public function testCreateSimpleImage100x100()
     {
-        $image = $this->getImageFromRequest("/100x100.jpg");
-        $this->assertEquals(100, $image->getSize()->getWidth());
-        $this->assertEquals(100, $image->getSize()->getHeight());
+        $this->genericTestCreateSimpleImage("/100x100.jpg", 100, 100, "image/jpeg");
     }
 
     public function testCreateSimpleImage100x200()
     {
-        $image = $this->getImageFromRequest("/100x200.jpg");
-        $this->assertEquals(100, $image->getSize()->getWidth());
-        $this->assertEquals(200, $image->getSize()->getHeight());
+        $this->genericTestCreateSimpleImage("/100x200.jpg", 100, 200, "image/jpeg");
     }
 
     public function testCreateSimpleImage50x150Png()
     {
-        $image = $this->getImageFromRequest("/50x150.png");
-        $this->assertEquals(50, $image->getSize()->getWidth());
-        $this->assertEquals(150, $image->getSize()->getHeight());
+        $this->genericTestCreateSimpleImage("/50x150.png", 50, 150, "image/png");
     }
 
     public function testCreateSimpleImage50x100Gif()
     {
-        $uri = "/40x100.gif";
-        $response = $this->getResponse($uri);
-        $expectedMimeType = $this->getMimeType("gif");
-        $this->assertTrue($response->isSuccessful());
-        $this->assertEquals($response->headers->get("Content-Type"), $expectedMimeType);
-
-        $responseFileName = $this->getTempFileFromResponse($response, $uri);
-        $this->assertFileExists($responseFileName);
-
-        $fileMimeType = $this->getMimeTypeFromFileName($responseFileName);
-        $this->assertEquals($expectedMimeType, $fileMimeType);
+        $this->genericTestCreateSimpleImage("/50x100.gif", 50, 100, "image/gif");
     }
 
-    protected function getImageFromRequest($uri)
+    public function testNoFileFormatShouldReturnError()
     {
-        $expectedMimeType = $this->getMimeType($this->getImageFormatFromUri($uri));
+        $response = $this->getResponse("/20x20");
+        $this->assertTrue($response->isClientError());
+        $this->assertContains("text/html", $response->headers->get("Content-Type"));
+    }
+
+    protected function genericTestCreateSimpleImage($uri, $expectedWidth, $expectedHeight, $expectedMimeType)
+    {
         $response = $this->getResponse($uri);
         $this->assertTrue($response->isSuccessful());
-        $this->assertEquals($response->headers->get("Content-Type"), $expectedMimeType);
+        $this->assertEquals($expectedMimeType, $response->headers->get("Content-Type"));
 
         $responseFileName = $this->getTempFileFromResponse($response, $uri);
         $this->assertFileExists($responseFileName);
@@ -64,9 +54,9 @@ class SimpleImageTest extends WebTestCase
 
         $imagine = new \Imagine\GD\Imagine();
         $image = $imagine->open($responseFileName);
+        $this->assertEquals($expectedWidth, $image->getSize()->getWidth());
+        $this->assertEquals($expectedHeight, $image->getSize()->getHeight());
         unlink($responseFileName);
-
-        return $image;
     }
 
     /**
