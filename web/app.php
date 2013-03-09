@@ -23,7 +23,7 @@ $app->get("/{parameter}", function (\Silex\Application $app, $parameter) {
     $parameterWidthHeight = explode("x", $parameterSize);
 
     if (sizeof($parameterWidthHeight) != 2) {
-        $app->abort(404, "Unknpwn image size");
+        $app->abort(404, "Unknown image size");
     }
 
     $imageWidth = (int) $parameterWidthHeight[0];
@@ -31,6 +31,10 @@ $app->get("/{parameter}", function (\Silex\Application $app, $parameter) {
 
     if (($imageWidth < 1) or ($imageHeight < 1)) {
         $app->abort(404, "Unknown image size");
+    }
+
+    if (($imageWidth > 1500) or ($imageHeight > 1500)) {
+        $app->abort(404, "Image width is too big");
     }
 
     switch ($imageFormat) {
@@ -57,6 +61,6 @@ $app->error(function (\Exception $e, $code) use ($app) {
 });
 
 
-$app->run();
+//$app->run();
 
 return $app;

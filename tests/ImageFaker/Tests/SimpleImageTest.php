@@ -61,6 +61,26 @@ class SimpleImageTest extends WebTestCase
         $this->assertTrue($response->isClientError());
     }
 
+    public function outOfRangeUrlTestProvider()
+    {
+        return array(
+            array("/0x10.png"),
+            array("/10x0.png"),
+            array("/-1x-10.png"),
+            array("/1501x200.jpg"),
+            array("/200x1501.jpg"),
+        );
+    }
+
+    /**
+     * @dataProvider outOfRangeUrlTestProvider
+     */
+    public function testOutOfRangeImageSizesShouldReturnError($uri)
+    {
+        $response = $this->getResponse($uri);
+        $this->assertTrue($response->isClientError());
+    }
+
     protected function genericTestCreateSimpleImage($uri, $expectedWidth, $expectedHeight, $expectedMimeType)
     {
         $response = $this->getResponse($uri);
