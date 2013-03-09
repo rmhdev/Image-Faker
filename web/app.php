@@ -12,19 +12,34 @@ $app->get("/", function () {
     return "Hello world!";
 });
 
-$app->get("/100x100.jpg", function () {
+$app->get("/{parameter}", function ($parameter) {
 
-    $size = new \Imagine\Image\Box(100, 100);
+    $parameterParts = explode(".", $parameter);
+    $parameterSize = $parameterParts[0];
+    $imageFormat = $parameterParts[1];
+    $parameterWidthHeight = explode("x", $parameterSize);
+    $imageWidth = (int) $parameterWidthHeight[0];
+    $imageHeight = (int) $parameterWidthHeight[1];
+    switch ($imageFormat) {
+        case "jpg": $imageMime = "image/jpeg"; break;
+        case "png": $imageMime = "image/png"; break;
+        case "gif": $imageMime = "image/gif"; break;
+        default: $imageMime = "text/plain";
+    }
+
+    $size = new \Imagine\Image\Box($imageWidth, $imageHeight);
     $color = new \Imagine\Image\Color("CCCCCC", 100);
     $imagine = new \Imagine\Gd\Imagine();
     $image = $imagine->create($size, $color);
 
-    $content = $image->get("jpg");
+    $content = $image->get($imageFormat);
 
     return new Response($content, 200, array(
-        "Content_Type" => "image/jpeg"
+        "Content_Type" => $imageMime
     ));
 });
+
+
 
 $app->run();
 
