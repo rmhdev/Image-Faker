@@ -17,11 +17,13 @@ class ImageFakerTest extends WebTestCase
     {
         $client = $this->createClient();
         $crawler = $client->request("GET", "/");
+        /* @var $response Response */
+        $response = $client->getResponse();
 
-        $this->assertTrue($client->getResponse()->isOk());
+        $this->assertTrue($response->isSuccessful());
     }
 
-    public function testCreateSimpleImage()
+    public function testCreateSimpleSquareImage()
     {
         $client = $this->createClient();
         $crawler = $client->request("GET", "/100x100.jpg");
@@ -34,7 +36,6 @@ class ImageFakerTest extends WebTestCase
 
         $responseFileName = sys_get_temp_dir() . "/create-simple-image.jpg";
         file_put_contents($responseFileName, $response->getContent());
-
         chmod($responseFileName, 0777);
         $this->assertFileExists($responseFileName);
 
@@ -42,8 +43,9 @@ class ImageFakerTest extends WebTestCase
         $image = $imagine->open($responseFileName);
 
         $this->assertEquals(100, $image->getSize()->getWidth());
+        $this->assertEquals(100, $image->getSize()->getHeight());
 
-        //unlink($responseFileName);
+        unlink($responseFileName);
     }
 
 }
