@@ -14,7 +14,7 @@ $app->get("/", function () {
 
 $app->get("/{parameter}", function (\Silex\Application $app, $parameter) {
 
-    $parameterParts = explode(".", $parameter);
+    $parameterParts = explode(".", strtolower($parameter));
     if (sizeof($parameterParts) != 2) {
         $app->abort(404, "Image must have an extension");
     }

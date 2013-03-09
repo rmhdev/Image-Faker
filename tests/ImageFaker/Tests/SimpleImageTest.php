@@ -33,6 +33,12 @@ class SimpleImageTest extends WebTestCase
         $this->genericTestCreateSimpleImage("/50x100.gif", 50, 100, "image/gif");
     }
 
+    public function testUrlShouldBeCaseInsensitive()
+    {
+        $response = $this->getResponse("40X30.JPG");
+        $this->assertTrue($response->isSuccessful());
+    }
+
     public function testNoFileFormatShouldReturnError()
     {
         $response = $this->getResponse("/20x20");
