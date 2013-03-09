@@ -10,7 +10,7 @@ class SimpleImageTest extends WebTestCase
 
     public function createApplication()
     {
-        return require __DIR__ . "/../../../web/app.php";
+        return require __DIR__ . "/../../../src/production.php";
     }
 
     public function testCreateSimpleImage100x100()

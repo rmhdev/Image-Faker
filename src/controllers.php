@@ -1,12 +1,6 @@
 <?php
 
-require __DIR__ . "/../vendor/autoload.php";
-
-use Silex\Application;
 use Symfony\Component\HttpFoundation\Response;
-
-$app = new \Silex\Application();
-$app["debug"] = true;
 
 $app->get("/", function () {
     return "Hello world!";
@@ -57,10 +51,8 @@ $app->get("/{parameter}", function (\Silex\Application $app, $parameter) {
 });
 
 $app->error(function (\Exception $e, $code) use ($app) {
+    if ($app['debug']) {
+        return ;
+    }
     return new Response($e->getMessage(), $code);
 });
-
-
-//$app->run();
-
-return $app;
