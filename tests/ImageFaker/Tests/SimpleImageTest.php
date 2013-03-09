@@ -131,9 +131,7 @@ class SimpleImageTest extends WebTestCase
 
     protected function getMimeTypeFromFileName($fileName)
     {
-        $finfoOpen = finfo_open(FILEINFO_MIME_TYPE);
-
-        return finfo_file($finfoOpen, $fileName);
+        return finfo_file(finfo_open(FILEINFO_MIME_TYPE), $fileName);
     }
 
     protected function getMimeType($format)

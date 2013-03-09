@@ -42,17 +42,16 @@ $app->get("/{parameter}", function (\Silex\Application $app, $parameter) {
     $color = new \Imagine\Image\Color("CCCCCC", 100);
     $imagine = new \Imagine\Gd\Imagine();
     $image = $imagine->create($size, $color);
-
     $content = $image->get($imageFormat);
 
     return new Response($content, 200, array(
-        "Content_Type" => $imageMime
+        "Content-Type" => $imageMime
     ));
 });
 
 $app->error(function (\Exception $e, $code) use ($app) {
     if ($app['debug']) {
-        return ;
+        return null;
     }
     return new Response($e->getMessage(), $code);
 });
