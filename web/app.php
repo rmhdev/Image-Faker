@@ -12,11 +12,11 @@ $app->get("/", function () {
     return "Hello world!";
 });
 
-$app->get("/{parameter}", function ($parameter) {
+$app->get("/{parameter}", function (\Silex\Application $app, $parameter) {
 
     $parameterParts = explode(".", $parameter);
     if (sizeof($parameterParts) != 2) {
-        return new Response("Image must have an extension", 404);
+        $app->abort(404, "Image must have an extension");
     }
     $parameterSize = $parameterParts[0];
     $imageFormat = $parameterParts[1];
@@ -40,6 +40,10 @@ $app->get("/{parameter}", function ($parameter) {
     return new Response($content, 200, array(
         "Content_Type" => $imageMime
     ));
+});
+
+$app->error(function (\Exception $e, $code) use ($app) {
+    return new Response($e->getMessage(), $code);
 });
 
 
