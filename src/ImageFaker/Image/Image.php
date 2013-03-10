@@ -20,7 +20,7 @@ class Image
     protected function generateImage()
     {
         $imageSize = new \Imagine\Image\Box($this->imageConfig->getWidth(), $this->imageConfig->getHeight());
-        $color = new \Imagine\Image\Color("CCCCCC", 100);
+        $color = new \Imagine\Image\Color("000000", 0);
         $imagine = new \Imagine\Gd\Imagine();
 
         return $imagine->create($imageSize, $color);
