@@ -12,8 +12,8 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     {
         $image = $this->createImage("120x120", "jpg");
         $this->assertInstanceOf("ImageFaker\Image\Image", $image);
-        $this->assertObjectHasAttribute("request", $image);
-        $this->assertAttributeInstanceOf("ImageFaker\Image\ImageConfig", "request", $image);
+        $this->assertObjectHasAttribute("imageConfig", $image);
+        $this->assertAttributeInstanceOf("ImageFaker\Image\ImageConfig", "imageConfig", $image);
     }
 
     public function testImagineImageAttributeShouldBeCreated()
@@ -52,17 +52,17 @@ class ImageTest extends \PHPUnit_Framework_TestCase
         $fileName = sprintf("%s/%s.%s",
             sys_get_temp_dir(),
             uniqid("image-test-"),
-            $image->getRequest()->getExtension()
+            $image->getImageConfig()->getExtension()
         );
         file_put_contents($fileName, $image->getContent());
         $this->assertFileExists($fileName);
 
         $mimeType = finfo_file(finfo_open(FILEINFO_MIME_TYPE), $fileName);
-        $this->assertEquals($image->getRequest()->getMimeType(), $mimeType);
+        $this->assertEquals($image->getImageConfig()->getMimeType(), $mimeType);
 
         $tempImage = $this->createTempImage($fileName);
-        $this->assertEquals($image->getRequest()->getWidth(), $tempImage->getSize()->getWidth());
-        $this->assertEquals($image->getRequest()->getHeight(), $tempImage->getSize()->getHeight());
+        $this->assertEquals($image->getImageConfig()->getWidth(), $tempImage->getSize()->getWidth());
+        $this->assertEquals($image->getImageConfig()->getHeight(), $tempImage->getSize()->getHeight());
 
         unlink($fileName);
     }

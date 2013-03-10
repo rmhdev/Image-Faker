@@ -8,27 +8,27 @@ use Imagine\Image\Box;
 class Image
 {
     protected
-        $request,
+        $imageConfig,
         $image;
 
-    public function __construct(ImageConfig $request)
+    public function __construct(ImageConfig $imageConfig)
     {
-        $this->request = $request;
+        $this->imageConfig = $imageConfig;
         $this->image = $this->generateImage();
     }
 
     protected function generateImage()
     {
-        $imageSize = new \Imagine\Image\Box($this->request->getWidth(), $this->request->getHeight());
+        $imageSize = new \Imagine\Image\Box($this->imageConfig->getWidth(), $this->imageConfig->getHeight());
         $color = new \Imagine\Image\Color("CCCCCC", 100);
         $imagine = new \Imagine\Gd\Imagine();
 
         return $imagine->create($imageSize, $color);
     }
 
-    public function getRequest()
+    public function getImageConfig()
     {
-        return $this->request;
+        return $this->imageConfig;
     }
 
     /**
@@ -41,6 +41,6 @@ class Image
 
     public function getContent()
     {
-        return $this->image->get($this->request->getExtension());
+        return $this->image->get($this->imageConfig->getExtension());
     }
 }

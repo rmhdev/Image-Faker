@@ -13,9 +13,11 @@ $app->get("/{size}.{extension}", function ($size, $extension) use ($app) {
     $imageConfig = new \ImageFaker\Image\ImageConfig($size, $extension);
     $image = new ImageFaker\Image\Image($imageConfig);
 
-    return new Response($image->getContent(), 200, array(
+    $response = new Response($image->getContent(), 200, array(
         "Content-Type" => $imageConfig->getMimeType()
     ));
+
+    return $response;
 });
 
 
