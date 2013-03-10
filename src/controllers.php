@@ -2,6 +2,7 @@
 
 use Symfony\Component\HttpFoundation\Response;
 use ImageFaker\Request\Request;
+use ImageFaker\Image\Image;
 
 $app->get("/", function () {
     return "Hello world!";
@@ -10,14 +11,9 @@ $app->get("/", function () {
 $app->get("/{size}.{extension}", function ($size, $extension) use ($app) {
 
     $request = new \ImageFaker\Request\Request($size, $extension);
+    $image = new ImageFaker\Image\Image($request);
 
-    $imageSize = new \Imagine\Image\Box($request->getWidth(), $request->getHeight());
-    $color = new \Imagine\Image\Color("CCCCCC", 100);
-    $imagine = new \Imagine\Gd\Imagine();
-    $image = $imagine->create($imageSize, $color);
-    $content = $image->get($request->getExtension());
-
-    return new Response($content, 200, array(
+    return new Response($image->getContent(), 200, array(
         "Content-Type" => $request->getMimeType()
     ));
 });
