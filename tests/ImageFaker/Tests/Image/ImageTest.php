@@ -49,10 +49,27 @@ class ImageTest extends \PHPUnit_Framework_TestCase
         unlink($fileName);
     }
 
-    public function testCreatedImageImage22x22Png()
+    public function testCreatedImage22x22Png()
     {
         $image = $this->createImage("22x22", "png");
-        $fileName = sys_get_temp_dir() . "image-test-22x22.png";
+        $fileName = sys_get_temp_dir() . "/image-test-22x22.png";
+        file_put_contents($fileName, $image->getContent());
+        $this->assertFileExists($fileName);
+
+        $mimeType = finfo_file(finfo_open(FILEINFO_MIME_TYPE), $fileName);
+        $this->assertEquals($image->getRequest()->getMimeType(), $mimeType);
+
+        $tempImage = $this->createTempImage($fileName);
+        $this->assertEquals($image->getRequest()->getWidth(), $tempImage->getSize()->getWidth());
+        $this->assertEquals($image->getRequest()->getHeight(), $tempImage->getSize()->getHeight());
+
+        unlink($fileName);
+    }
+
+    public function testCreatedImage23x23Gif()
+    {
+        $image = $this->createImage("23x23", "gif");
+        $fileName = sys_get_temp_dir() . "/image-test-23x23.gif";
         file_put_contents($fileName, $image->getContent());
         $this->assertFileExists($fileName);
 
