@@ -1,11 +1,11 @@
 <?php
 
-namespace ImageFaker\Request;
+namespace ImageFaker\Image;
 
 use ImageFaker\Exception\InvalidArgumentException;
 use ImageFaker\Exception\OutOfBoundsException;
 
-class Request
+class ImageConfig
 {
 
     protected

@@ -1,7 +1,7 @@
 <?php
 
 use Symfony\Component\HttpFoundation\Response;
-use ImageFaker\Request\Request;
+use ImageFaker\Image\ImageConfig;
 use ImageFaker\Image\Image;
 
 $app->get("/", function () {
@@ -10,11 +10,11 @@ $app->get("/", function () {
 
 $app->get("/{size}.{extension}", function ($size, $extension) use ($app) {
 
-    $request = new \ImageFaker\Request\Request($size, $extension);
-    $image = new ImageFaker\Image\Image($request);
+    $imageConfig = new \ImageFaker\Image\ImageConfig($size, $extension);
+    $image = new ImageFaker\Image\Image($imageConfig);
 
     return new Response($image->getContent(), 200, array(
-        "Content-Type" => $request->getMimeType()
+        "Content-Type" => $imageConfig->getMimeType()
     ));
 });
 

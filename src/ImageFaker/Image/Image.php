@@ -2,7 +2,7 @@
 
 namespace ImageFaker\Image;
 
-use ImageFaker\Request\Request;
+use ImageFaker\Image\ImageConfig;
 use Imagine\Image\Box;
 
 class Image
@@ -11,7 +11,7 @@ class Image
         $request,
         $image;
 
-    public function __construct(Request $request)
+    public function __construct(ImageConfig $request)
     {
         $this->request = $request;
         $this->image = $this->generateImage();

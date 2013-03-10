@@ -2,7 +2,7 @@
 
 namespace ImageFaker\Tests;
 
-use ImageFaker\Request\Request;
+use ImageFaker\Image\ImageConfig;
 use ImageFaker\Image\Image;
 
 class ImageTest extends \PHPUnit_Framework_TestCase
@@ -13,7 +13,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
         $image = $this->createImage("120x120", "jpg");
         $this->assertInstanceOf("ImageFaker\Image\Image", $image);
         $this->assertObjectHasAttribute("request", $image);
-        $this->assertAttributeInstanceOf("ImageFaker\Request\Request", "request", $image);
+        $this->assertAttributeInstanceOf("ImageFaker\Image\ImageConfig", "request", $image);
     }
 
     public function testImagineImageAttributeShouldBeCreated()
@@ -69,7 +69,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
 
     protected function createImage($size, $extension)
     {
-        $request = new Request($size, $extension);
+        $request = new ImageConfig($size, $extension);
 
         return new Image($request);
     }

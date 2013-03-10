@@ -1,12 +1,14 @@
 <?php
 
-use ImageFaker\Request\Request;
+namespace ImageFaker\Tests;
 
-class RequestTest extends PHPUnit_Framework_TestCase
+use ImageFaker\Image\ImageConfig;
+
+class RequestTest extends \PHPUnit_Framework_TestCase
 {
     public function testImage100x100Jpg()
     {
-        $request = new Request("100x100", "jpg");
+        $request = new ImageConfig("100x100", "jpg");
 
         $this->assertEquals(100, $request->getWidth());
         $this->assertEquals(100, $request->getHeight());
@@ -16,7 +18,7 @@ class RequestTest extends PHPUnit_Framework_TestCase
 
     public function testImage100x200Jpg()
     {
-        $request = new Request("100x200", "jpg");
+        $request = new ImageConfig("100x200", "jpg");
         $this->assertEquals(100, $request->getWidth());
         $this->assertEquals(200, $request->getHeight());
         $this->assertEquals("jpg", $request->getExtension());
@@ -25,7 +27,7 @@ class RequestTest extends PHPUnit_Framework_TestCase
 
     public function testImage50x150Png()
     {
-        $request = new Request("50x150", "png");
+        $request = new ImageConfig("50x150", "png");
         $this->assertEquals(50, $request->getWidth());
         $this->assertEquals(150, $request->getHeight());
         $this->assertEquals("png", $request->getExtension());
@@ -34,7 +36,7 @@ class RequestTest extends PHPUnit_Framework_TestCase
 
     public function testImage50x100Gif()
     {
-        $request = new Request("50x100", "gif");
+        $request = new ImageConfig("50x100", "gif");
         $this->assertEquals(50, $request->getWidth());
         $this->assertEquals(100, $request->getHeight());
         $this->assertEquals("gif", $request->getExtension());
@@ -43,7 +45,7 @@ class RequestTest extends PHPUnit_Framework_TestCase
 
     public function testShouldBeCaseInsensitive()
     {
-        $request = new Request("55X105", "PNG");
+        $request = new ImageConfig("55X105", "PNG");
         $this->assertEquals(55, $request->getWidth());
         $this->assertEquals(105, $request->getHeight());
         $this->assertEquals("png", $request->getExtension());
@@ -68,7 +70,7 @@ class RequestTest extends PHPUnit_Framework_TestCase
      */
     public function testWrongSizeShouldReturnException($size, $extension)
     {
-        $request = new Request($size, $extension);
+        $request = new ImageConfig($size, $extension);
     }
 
 
@@ -89,7 +91,7 @@ class RequestTest extends PHPUnit_Framework_TestCase
      */
     public function testOutOfBoundsImageSizesShouldReturnException($size, $extension)
     {
-        $request = new \ImageFaker\Request\Request($size, $extension);
+        $request = new ImageConfig($size, $extension);
     }
 
     /**
@@ -97,7 +99,7 @@ class RequestTest extends PHPUnit_Framework_TestCase
      */
     public function testUnknowsExtensionShouldReturnException()
     {
-        $request = new Request("9x9", "txt");
+        $request = new ImageConfig("9x9", "txt");
     }
 
 
