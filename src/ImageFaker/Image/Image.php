@@ -26,11 +26,21 @@ class Image
         return $imagine->create($imageSize, $color);
     }
 
+    public function getRequest()
+    {
+        return $this->request;
+    }
+
     /**
      * @return \Imagine\Image\BoxInterface
      */
     public function getSize()
     {
         return $this->image->getSize();
+    }
+
+    public function getContent()
+    {
+        return $this->image->get($this->request->getExtension());
     }
 }

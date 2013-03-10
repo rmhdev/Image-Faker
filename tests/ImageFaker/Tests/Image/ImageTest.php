@@ -32,11 +32,35 @@ class ImageTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(15, $size->getHeight());
     }
 
+    public function testCreatedImage21x21Jpg()
+    {
+        $image = $this->createImage("21x21", "jpg");
+        $fileName = sys_get_temp_dir() . "/image-test-21x21.jpg";
+        file_put_contents($fileName, $image->getContent());
+        $this->assertFileExists($fileName);
+
+        $mimeType = finfo_file(finfo_open(FILEINFO_MIME_TYPE), $fileName);
+        $this->assertEquals($image->getRequest()->getMimeType(), $mimeType);
+
+        $tempImage = $this->createTempImage($fileName);
+        $this->assertEquals($image->getRequest()->getWidth(), $tempImage->getSize()->getWidth());
+        $this->assertEquals($image->getRequest()->getHeight(), $tempImage->getSize()->getHeight());
+
+        unlink($fileName);
+    }
+
     protected function createImage($size, $extension)
     {
         $request = new Request($size, $extension);
 
         return new Image($request);
+    }
+
+    protected function createTempImage($fileName)
+    {
+        $imagine = new \Imagine\GD\Imagine();
+
+        return $imagine->open($fileName);
     }
 
 }
