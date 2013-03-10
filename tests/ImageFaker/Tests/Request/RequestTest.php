@@ -66,9 +66,9 @@ class RequestTest extends PHPUnit_Framework_TestCase
      * @dataProvider wrongUrlTestProvider
      * @expectedException \ImageFaker\Exception\InvalidArgumentException
      */
-    public function testWrongSizeShouldReturnException($size)
+    public function testWrongSizeShouldReturnException($size, $extension)
     {
-        $request = new Request($size);
+        $request = new Request($size, $extension);
     }
 
 
@@ -87,9 +87,9 @@ class RequestTest extends PHPUnit_Framework_TestCase
      * @dataProvider outOfBoundsImageSizesTestProvider
      * @expectedException \ImageFaker\Exception\OutOfBoundsException
      */
-    public function testOutOfBoundsImageSizesShouldReturnException($size)
+    public function testOutOfBoundsImageSizesShouldReturnException($size, $extension)
     {
-        $request = new \ImageFaker\Request\Request($size);
+        $request = new \ImageFaker\Request\Request($size, $extension);
     }
 
 

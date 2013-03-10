@@ -14,7 +14,7 @@ class Request
         $extension,
         $mimeType;
 
-    public function __construct($size = "", $extension = "")
+    public function __construct($size, $extension)
     {
         $this->processSize($size);
         $this->processExtension($extension);
