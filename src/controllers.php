@@ -1,57 +1,31 @@
 <?php
 
 use Symfony\Component\HttpFoundation\Response;
+use ImageFaker\Request\Request;
 
 $app->get("/", function () {
     return "Hello world!";
 });
 
-$app->get("/{parameter}", function (\Silex\Application $app, $parameter) {
+$app->get("/{size}.{extension}", function ($size, $extension) use ($app) {
 
-    $parameterParts = explode(".", strtolower($parameter));
-    if (sizeof($parameterParts) != 2) {
-        $app->abort(404, "Image must have an extension");
-    }
-    $parameterSize = $parameterParts[0];
-    $imageFormat = $parameterParts[1];
-    $parameterWidthHeight = explode("x", $parameterSize);
+    $request = new \ImageFaker\Request\Request($size, $extension);
 
-    if (sizeof($parameterWidthHeight) != 2) {
-        $app->abort(404, "Unknown image size");
-    }
-
-    $imageWidth = (int) $parameterWidthHeight[0];
-    $imageHeight = (int) $parameterWidthHeight[1];
-
-    if (($imageWidth < 1) or ($imageHeight < 1)) {
-        $app->abort(404, "Unknown image size");
-    }
-
-    if (($imageWidth > 1500) or ($imageHeight > 1500)) {
-        $app->abort(404, "Image width is too big");
-    }
-
-    switch ($imageFormat) {
-        case "jpg": $imageMime = "image/jpeg"; break;
-        case "png": $imageMime = "image/png"; break;
-        case "gif": $imageMime = "image/gif"; break;
-        default: $imageMime = "text/plain";
-    }
-
-    $size = new \Imagine\Image\Box($imageWidth, $imageHeight);
+    $imageSize = new \Imagine\Image\Box($request->getWidth(), $request->getHeight());
     $color = new \Imagine\Image\Color("CCCCCC", 100);
     $imagine = new \Imagine\Gd\Imagine();
-    $image = $imagine->create($size, $color);
-    $content = $image->get($imageFormat);
+    $image = $imagine->create($imageSize, $color);
+    $content = $image->get($request->getExtension());
 
     return new Response($content, 200, array(
-        "Content-Type" => $imageMime
+        "Content-Type" => $request->getMimeType()
     ));
 });
+
 
 $app->error(function (\Exception $e, $code) use ($app) {
     if ($app['debug']) {
         return null;
     }
-    return new Response($e->getMessage(), $code);
+    return new Response($e->getMessage(), 404);
 });
