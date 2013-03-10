@@ -92,5 +92,13 @@ class RequestTest extends PHPUnit_Framework_TestCase
         $request = new \ImageFaker\Request\Request($size, $extension);
     }
 
+    /**
+     * @expectedException \ImageFaker\Exception\InvalidArgumentException
+     */
+    public function testUnknowsExtensionShouldReturnException()
+    {
+        $request = new Request("9x9", "txt");
+    }
+
 
 }

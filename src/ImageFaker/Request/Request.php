@@ -60,14 +60,14 @@ class Request
 
     protected function processExtension($extension)
     {
-        $this->extension = strtolower($extension);
-
-        $mimeType = "";
-        switch ($this->getExtension()) {
+        $extension = strtolower($extension);
+        switch ($extension) {
             case "jpg";     $mimeType = "image/jpeg"; break;
             case "png";     $mimeType = "image/png"; break;
             case "gif";     $mimeType = "image/gif"; break;
+            default:        throw new InvalidArgumentException();
         }
+        $this->extension = $extension;
         $this->mimeType = $mimeType;
     }
 
