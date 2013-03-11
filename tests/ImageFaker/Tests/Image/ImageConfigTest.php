@@ -109,7 +109,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         return array(
             array("10x10", "jpg", "10x10"),
             array("31x31", "png", "31x31"),
-            array("41X45", "gif", "41x45"),
+            array("41X45", "GIF", "41x45"),
         );
     }
 
