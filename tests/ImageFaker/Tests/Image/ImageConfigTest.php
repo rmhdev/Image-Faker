@@ -103,4 +103,22 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     }
 
 
+
+    public function textForImageTestProvider()
+    {
+        return array(
+            array("10x10", "jpg", "10x10"),
+            array("31x31", "png", "31x31"),
+            array("41X45", "gif", "41x45"),
+        );
+    }
+
+    /**
+     * @dataProvider textForImageTestProvider
+     */
+    public function testTextForImage($size, $extension, $expectedText)
+    {
+        $imageConfig = new ImageConfig($size, $extension);
+        $this->assertEquals($expectedText, $imageConfig->getText());
+    }
 }

@@ -12,12 +12,14 @@ class ImageConfig
         $width,
         $height,
         $extension,
-        $mimeType;
+        $mimeType,
+        $text;
 
     public function __construct($size, $extension)
     {
         $this->processSize($size);
         $this->processExtension($extension);
+        $this->text = sprintf("%dx%d", $this->getWidth(), $this->getHeight());
     }
 
     protected function processSize($size)
@@ -90,5 +92,10 @@ class ImageConfig
     public function getMimeType()
     {
         return $this->mimeType;
+    }
+
+    public function getText()
+    {
+        return $this->text;
     }
 }
