@@ -101,6 +101,6 @@ class ImageConfig
 
     public function getFontSize()
     {
-        return floor($this->getWidth()*0.8*1.618 / strlen($this->getText()));
+        return floor($this->getWidth()*0.8*1.618 / (strlen($this->getWidth())*2 + 1));
     }
 }

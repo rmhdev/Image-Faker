@@ -130,7 +130,9 @@ class RequestTest extends \PHPUnit_Framework_TestCase
             array("50x50", "jpg", 12),
             array("100x100", "jpg", 18),
             array("200x200", "jpg", 36),
-            array("500x500", "jpg", 92)
+            array("500x500", "jpg", 92),
+            array("50x100", "jpg", 12),
+            array("100x50", "jpg", 18),
         );
     }
 
