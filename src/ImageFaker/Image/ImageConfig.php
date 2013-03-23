@@ -98,4 +98,9 @@ class ImageConfig
     {
         return $this->text;
     }
+
+    public function getFontSize()
+    {
+        return floor($this->getWidth()*0.8*1.618 / strlen($this->getText()));
+    }
 }

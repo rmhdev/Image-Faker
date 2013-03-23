@@ -121,4 +121,27 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $imageConfig = new ImageConfig($size, $extension);
         $this->assertEquals($expectedText, $imageConfig->getText());
     }
+
+
+
+    public function fontSizeForImageTestProvider()
+    {
+        return array(
+            array("50x50", "jpg", 12),
+            array("100x100", "jpg", 18),
+            array("200x200", "jpg", 36),
+            array("500x500", "jpg", 92)
+        );
+    }
+
+    /**
+     * @dataProvider fontSizeForImageTestProvider
+     */
+    public function testFontSizeForImage($size, $extension, $expectedFontSize)
+    {
+        $imageConfig = new ImageConfig($size, $extension);
+        $this->assertEquals($expectedFontSize, $imageConfig->getFontSize());
+    }
+
+
 }
