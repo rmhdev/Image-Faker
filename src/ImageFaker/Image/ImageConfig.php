@@ -13,13 +13,14 @@ class ImageConfig
         $height,
         $extension,
         $mimeType,
-        $text;
+        $text,
+        $fontSize;
 
     public function __construct($size, $extension)
     {
         $this->processSize($size);
         $this->processExtension($extension);
-        $this->text = sprintf("%dx%d", $this->getWidth(), $this->getHeight());
+        $this->processText();
     }
 
     protected function processSize($size)
@@ -73,6 +74,20 @@ class ImageConfig
         $this->mimeType = $mimeType;
     }
 
+    protected function processText()
+    {
+        $this->text = sprintf("%dx%d", $this->getWidth(), $this->getHeight());
+        $this->fontSize = $this->calculateFontSize();
+    }
+
+    protected function calculateFontSize()
+    {
+        $length = strlen($this->getWidth())*2 + 1;
+        $fontSize = floor($this->getWidth()*0.8*1.618 / $length);
+        $maxFontSize = floor($this->getHeight() * 0.7);
+
+        return min($fontSize, $maxFontSize);
+    }
 
     public function getWidth()
     {
@@ -101,10 +116,6 @@ class ImageConfig
 
     public function getFontSize()
     {
-        $length = strlen($this->getWidth())*2 + 1;
-        $fontSize = floor($this->getWidth()*0.8*1.618 / $length);
-        $maxFontSize = floor($this->getHeight() * 0.7);
-
-        return min($fontSize, $maxFontSize);
+        return $this->fontSize;
     }
 }
