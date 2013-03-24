@@ -3,6 +3,7 @@
 namespace ImageFaker\Tests;
 
 use ImageFaker\Image\ImageConfig;
+use Imagine\Image\Color;
 
 class RequestTest extends \PHPUnit_Framework_TestCase
 {
@@ -147,6 +148,49 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     {
         $imageConfig = new ImageConfig($size, $extension);
         $this->assertEquals($expectedFontSize, $imageConfig->getFontSize());
+    }
+
+
+    public function testGetFontPointShouldReturnPoint()
+    {
+        $imageConfig = new ImageConfig("100x100", "jpg");
+        $fontColor = new \Imagine\Image\Color("CCCCCC", 0);
+        $path   = 'tests/ImageFaker/Tests/Fixtures/font/Arial.ttf';
+        $font = new \Imagine\Gd\Font($path, $imageConfig->getFontSize(), $fontColor);
+
+        $this->assertInstanceOf("\Imagine\Image\Point", $imageConfig->calculateFontPoint(80, 20));
+    }
+
+    public function testGetFontPointFor100x100ShouldReturnCenteredPoint()
+    {
+        $imageConfig = new ImageConfig("100x100", "jpg");
+        $fontColor = new \Imagine\Image\Color("CCCCCC", 0);
+        $path   = 'tests/ImageFaker/Tests/Fixtures/font/Arial.ttf';
+        $font = new \Imagine\Gd\Font($path, $imageConfig->getFontSize(), $fontColor);
+        $fontBox = $font->box($imageConfig->getText(), 0);
+        $point = $imageConfig->calculateFontPoint($fontBox->getWidth(), $fontBox->getHeight());
+
+        $expectedY = floor((100 - $fontBox->getHeight()) / 2);
+        $expectedX = floor((100 - $fontBox->getWidth()) / 2);
+
+        $this->assertEquals($expectedY, $point->getY());
+        $this->assertEquals($expectedX, $point->getX());
+    }
+
+    public function testGetFontPointFor250x250ShouldReturnCenteredPoint()
+    {
+        $imageConfig = new ImageConfig("250x250", "jpg");
+        $fontColor = new \Imagine\Image\Color("CCCCCC", 0);
+        $path   = 'tests/ImageFaker/Tests/Fixtures/font/Arial.ttf';
+        $font = new \Imagine\Gd\Font($path, $imageConfig->getFontSize(), $fontColor);
+        $fontBox = $font->box($imageConfig->getText(), 0);
+        $point = $imageConfig->calculateFontPoint($fontBox->getWidth(), $fontBox->getHeight());
+
+        $expectedY = floor((250 - $fontBox->getHeight()) / 2);
+        $expectedX = floor((250 - $fontBox->getWidth()) / 2);
+
+        $this->assertEquals($expectedY, $point->getY());
+        $this->assertEquals($expectedX, $point->getX());
     }
 
 

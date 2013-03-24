@@ -4,6 +4,8 @@ namespace ImageFaker\Image;
 
 use ImageFaker\Exception\InvalidArgumentException;
 use ImageFaker\Exception\OutOfBoundsException;
+use Imagine\Image\Point;
+
 
 class ImageConfig
 {
@@ -117,5 +119,13 @@ class ImageConfig
     public function getFontSize()
     {
         return $this->fontSize;
+    }
+
+    public function calculateFontPoint($textWidth, $textHeight)
+    {
+        $y = floor(($this->getHeight() - $textHeight) / 2);
+        $x = floor(($this->getWidth() - $textWidth) / 2);
+
+        return new Point($x, $y);
     }
 }

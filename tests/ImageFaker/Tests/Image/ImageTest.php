@@ -4,6 +4,8 @@ namespace ImageFaker\Tests;
 
 use ImageFaker\Image\ImageConfig;
 use ImageFaker\Image\Image;
+use Imagine\Gd\Font;
+use Imagine\Gd\Imagine;
 
 class ImageTest extends \PHPUnit_Framework_TestCase
 {

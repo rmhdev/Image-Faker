@@ -9,11 +9,13 @@ class Image
 {
     protected
         $imageConfig,
+        $imagine,
         $image;
 
     public function __construct(ImageConfig $imageConfig)
     {
         $this->imageConfig = $imageConfig;
+        $this->imagine = new \Imagine\Gd\Imagine();
         $this->image = $this->generateImage();
     }
 
@@ -21,9 +23,8 @@ class Image
     {
         $imageSize = new \Imagine\Image\Box($this->imageConfig->getWidth(), $this->imageConfig->getHeight());
         $color = new \Imagine\Image\Color("000000", 0);
-        $imagine = new \Imagine\Gd\Imagine();
 
-        return $imagine->create($imageSize, $color);
+        return $this->imagine->create($imageSize, $color);
     }
 
     public function getImageConfig()
