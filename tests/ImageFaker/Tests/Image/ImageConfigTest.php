@@ -155,8 +155,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     {
         $imageConfig = new ImageConfig("100x100", "jpg");
         $fontColor = new \Imagine\Image\Color("CCCCCC", 0);
-        $path   = 'tests/ImageFaker/Tests/Fixtures/font/Arial.ttf';
-        $font = new \Imagine\Gd\Font($path, $imageConfig->getFontSize(), $fontColor);
+        $font = new \Imagine\Gd\Font($this->getFontPath(), $imageConfig->getFontSize(), $fontColor);
 
         $this->assertInstanceOf("\Imagine\Image\Point", $imageConfig->calculateFontPoint(80, 20));
     }
@@ -165,8 +164,8 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     {
         $imageConfig = new ImageConfig("100x100", "jpg");
         $fontColor = new \Imagine\Image\Color("CCCCCC", 0);
-        $path   = 'tests/ImageFaker/Tests/Fixtures/font/Arial.ttf';
-        $font = new \Imagine\Gd\Font($path, $imageConfig->getFontSize(), $fontColor);
+
+        $font = new \Imagine\Gd\Font($this->getFontPath(), $imageConfig->getFontSize(), $fontColor);
         $fontBox = $font->box($imageConfig->getText(), 0);
         $point = $imageConfig->calculateFontPoint($fontBox->getWidth(), $fontBox->getHeight());
 
@@ -181,8 +180,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     {
         $imageConfig = new ImageConfig("250x250", "jpg");
         $fontColor = new \Imagine\Image\Color("CCCCCC", 0);
-        $path   = 'tests/ImageFaker/Tests/Fixtures/font/Arial.ttf';
-        $font = new \Imagine\Gd\Font($path, $imageConfig->getFontSize(), $fontColor);
+        $font = new \Imagine\Gd\Font($this->getFontPath(), $imageConfig->getFontSize(), $fontColor);
         $fontBox = $font->box($imageConfig->getText(), 0);
         $point = $imageConfig->calculateFontPoint($fontBox->getWidth(), $fontBox->getHeight());
 
@@ -191,6 +189,11 @@ class RequestTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($expectedY, $point->getY());
         $this->assertEquals($expectedX, $point->getX());
+    }
+
+    protected function getFontPath()
+    {
+        return 'tests/ImageFaker/Tests/Fixtures/font/Ubuntu-C.ttf';
     }
 
 

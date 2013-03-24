@@ -17,6 +17,25 @@ class Image
         $this->imageConfig = $imageConfig;
         $this->imagine = new \Imagine\Gd\Imagine();
         $this->image = $this->generateImage();
+
+        $fontColor = new \Imagine\Image\Color("CCCCCC", 0);
+
+        // In GD, resolution is 96 by default. Font size must be "hacked".
+        // See: https://github.com/avalanche123/Imagine/issues/32
+        $fontSize = $imageConfig->getFontSize() *  (72 / 96);
+        $font = $this->imagine->font("web/Ubuntu-C.ttf", $fontSize, $fontColor);
+        $fontBox = $font->box($imageConfig->getText(), 0);
+        $fontPoint = $imageConfig->calculateFontPoint($fontBox->getWidth(), $fontBox->getHeight());
+
+        // draw a poligon to test is text area is correct.
+        $this->image->draw()->polygon(array(
+            new \Imagine\Image\Point($fontPoint->getX(), $fontPoint->getY()),
+            new \Imagine\Image\Point($fontPoint->getX(), $fontPoint->getY() + $fontBox->getHeight()),
+            new \Imagine\Image\Point($fontPoint->getX() + $fontBox->getWidth(), $fontPoint->getY() + $fontBox->getHeight()),
+            new \Imagine\Image\Point($fontPoint->getX() + $fontBox->getWidth(), $fontPoint->getY()),
+        ), new \Imagine\Image\Color('fff'), true);
+
+        $this->image->draw()->text($imageConfig->getText(), $font, $fontPoint, 0);
     }
 
     protected function generateImage()
