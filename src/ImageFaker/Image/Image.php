@@ -27,14 +27,6 @@ class Image
         $fontBox = $font->box($imageConfig->getText(), 0);
         $fontPoint = $imageConfig->calculateFontPoint($fontBox->getWidth(), $fontBox->getHeight());
 
-        // draw a poligon to test is text area is correct.
-        $this->image->draw()->polygon(array(
-            new \Imagine\Image\Point($fontPoint->getX(), $fontPoint->getY()),
-            new \Imagine\Image\Point($fontPoint->getX(), $fontPoint->getY() + $fontBox->getHeight()),
-            new \Imagine\Image\Point($fontPoint->getX() + $fontBox->getWidth(), $fontPoint->getY() + $fontBox->getHeight()),
-            new \Imagine\Image\Point($fontPoint->getX() + $fontBox->getWidth(), $fontPoint->getY()),
-        ), new \Imagine\Image\Color('fff'), true);
-
         $this->image->draw()->text($imageConfig->getText(), $font, $fontPoint, 0);
     }
 
