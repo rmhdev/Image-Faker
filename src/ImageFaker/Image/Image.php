@@ -23,7 +23,7 @@ class Image
         // In GD, resolution is 96 by default. Font size must be "hacked".
         // See: https://github.com/avalanche123/Imagine/issues/32
         $fontSize = $imageConfig->getFontSize() *  (72 / 96);
-        $font = $this->imagine->font("web/Ubuntu-C.ttf", $fontSize, $fontColor);
+        $font = $this->imagine->font(ImageConfig::getFontPath(), $fontSize, $fontColor);
         $fontBox = $font->box($imageConfig->getText(), 0);
         $fontPoint = $imageConfig->calculateFontPoint($fontBox->getWidth(), $fontBox->getHeight());
 

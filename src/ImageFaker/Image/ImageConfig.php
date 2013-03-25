@@ -128,4 +128,9 @@ class ImageConfig
 
         return new Point($x, $y);
     }
+
+    public static function getFontPath()
+    {
+        return __DIR__ . "/../Fixtures/font/Ubuntu-C.ttf";
+    }
 }

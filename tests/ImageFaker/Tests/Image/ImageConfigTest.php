@@ -196,5 +196,13 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         return 'tests/ImageFaker/Tests/Fixtures/font/Ubuntu-C.ttf';
     }
 
+    public function testGetFontPath()
+    {
+        $fontPath = ImageConfig::getFontPath();
+        $this->assertFileExists($fontPath);
+        $this->assertTrue(is_file($fontPath));
+        $this->assertEquals("application/x-font-ttf", finfo_file(finfo_open(FILEINFO_MIME_TYPE), $fontPath));
+    }
+
 
 }
