@@ -58,7 +58,6 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         return array(
             array("20x", "jpg"),
             array("x20", "jpg"),
-            array("20", "jpg"),
             array("nopx20", "jpg"),
             array("20xnop", "jpg"),
             array("nopxnop", "gif")

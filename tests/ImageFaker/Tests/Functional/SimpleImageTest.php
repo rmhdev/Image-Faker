@@ -21,6 +21,7 @@ class SimpleImageTest extends WebTestCase
             array("/50x150/png" , 50    , 150   , "image/png"),
             array("/50x100/gif" , 50    , 100   , "image/gif"),
             array("/75x125"     , 75    , 125   , "image/png"),
+            array("/75/gif"     , 75    , 75    , "image/gif"),
         );
     }
 
@@ -86,7 +87,6 @@ class SimpleImageTest extends WebTestCase
         return array(
             array("/x20/gif"),
             array("/20x/png"),
-            array("/20/jpg"),
             array("/.gif"),
             array("/gif"),
             array("/doesnotexist/gif")
@@ -111,6 +111,7 @@ class SimpleImageTest extends WebTestCase
             array("/-1x-10/png"),
             array("/1501x200/jpg"),
             array("/200x1501/jpg"),
+            array("/1501"),
         );
     }
 

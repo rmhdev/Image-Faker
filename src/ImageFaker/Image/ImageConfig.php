@@ -37,22 +37,33 @@ class ImageConfig
 
     protected function extractWidthHeight($size)
     {
-        $widthHeight = explode("x", strtolower($size));
-        if ($this->isInvalidArgument($widthHeight)) {
-            throw new InvalidArgumentException();
+        // todo: improve this
+        $width = NULL;
+        $height = NULL;
+        if (is_numeric($size)) {
+            $width = (int) $size;
+            $height = $width;
+        } else {
+            $widthHeight = explode("x", strtolower($size));
+            if ($this->isInvalidArgument($widthHeight)) {
+                throw new InvalidArgumentException();
+            }
+            $width = (int) $widthHeight[0];
+            $height = (int) $widthHeight[1];
         }
 
-        return array((int) $widthHeight[0], (int) $widthHeight[1]);
+        return array($width, $height);
     }
 
     protected function isInvalidArgument($widthHeight = array())
     {
-        return
-            (sizeof($widthHeight) != 2) or
+        return (
+            sizeof($widthHeight) != 2) or
             ($widthHeight[0] === "") or
             ($widthHeight[1] === "") or
             (!is_numeric($widthHeight[0])) or
-            (!is_numeric($widthHeight[1])) ? true : false;
+            (!is_numeric($widthHeight[1])
+        ) ? true : false;
     }
 
     protected function isOutOfBounds($width, $height)
