@@ -155,6 +155,6 @@ class ImageConfig
 
     public function getFontColor()
     {
-        return "CCCCCC";
+        return new Color("CCCCCC");
     }
 }

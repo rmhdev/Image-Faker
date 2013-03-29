@@ -215,7 +215,11 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $imageConfig = new ImageConfig("75x75", "gif");
         $backgroundColor = $imageConfig->getBackgroundColor();
         $this->assertInstanceOf("\Imagine\Image\Color", $backgroundColor);
-        $this->assertEquals("CCCCCC", $imageConfig->getFontColor());
+        $this->assertEquals("#000000", $backgroundColor->__toString());
+
+        $fontColor = $imageConfig->getFontColor();
+        $this->assertInstanceOf("\Imagine\Image\Color", $fontColor);
+        $this->assertEquals("#cccccc", $fontColor->__toString());
     }
 
     public function notTestPersonalizedBackgroundColor()

@@ -32,8 +32,7 @@ class Image
     {
         $fontSize = $this->calculateFontSize();
         if ($fontSize > 0) {
-            $fontColor = new Color($this->getImageConfig()->getFontColor(), 0);
-            $font = $this->imagine->font(ImageConfig::getFontPath(), $fontSize, $fontColor);
+            $font = $this->imagine->font(ImageConfig::getFontPath(), $fontSize, $this->getImageConfig()->getFontColor());
             $fontBox = $font->box($this->getImageConfig()->getText(), 0);
             $fontPoint = $this->getImageConfig()->calculateFontPoint($fontBox->getWidth(), $fontBox->getHeight());
 
