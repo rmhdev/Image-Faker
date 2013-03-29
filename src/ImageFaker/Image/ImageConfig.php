@@ -97,11 +97,27 @@ class ImageConfig
         if (!isset($attributes['background-color'])) {
             $attributes['background-color'] = "000000";
         }
-        if (!isset($attributes['color'])) {
-            $attributes['color'] = "cccccc";
-        }
         $this->backgroundColor  = new Color($attributes['background-color']);
-        $this->fontColor        = new Color($attributes['color']);
+
+        if (isset($attributes['color'])) {
+            $fontColor = $attributes['color'];
+        } else {
+            $fontColor = $this->calculateDefaultRGBFontColor();
+        }
+        $this->fontColor = new Color($fontColor, 0);
+    }
+
+    protected function calculateDefaultRGBFontColor()
+    {
+        // Algorithm to calculate brightness: http://www.w3.org/TR/AERT
+        $brightness = (
+            $this->getBackgroundColor()->getRed() * 299 +
+            $this->getBackgroundColor()->getGreen() * 587 +
+            $this->getBackgroundColor()->getBlue() * 114
+        ) / 1000;
+        $contrastColor = ($brightness >= 125) ? 0 : 255;
+
+        return array($contrastColor, $contrastColor, $contrastColor);
     }
 
     protected function processText()
@@ -162,11 +178,17 @@ class ImageConfig
         return __DIR__ . "/../Fixtures/font/Ubuntu-C.ttf";
     }
 
+    /**
+     * @return Color
+     */
     public function getBackgroundColor()
     {
         return $this->backgroundColor;
     }
 
+    /**
+     * @return Color
+     */
     public function getFontColor()
     {
         return $this->fontColor;

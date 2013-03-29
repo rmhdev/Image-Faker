@@ -219,21 +219,53 @@ class RequestTest extends \PHPUnit_Framework_TestCase
 
         $fontColor = $imageConfig->getFontColor();
         $this->assertInstanceOf("\Imagine\Image\Color", $fontColor);
-        $this->assertEquals("#cccccc", $fontColor->__toString());
+        $this->assertEquals("#ffffff", (string)$fontColor);
     }
 
     public function testPersonalizedBackgroundColor()
     {
         $imageConfig = new ImageConfig("80x80", "jpg", array("background-color" => "FFFFFF"));
-
         $this->assertEquals("#ffffff", (string)$imageConfig->getBackgroundColor());
     }
 
     public function testPersonalizedFontColor()
     {
         $imageConfig = new ImageConfig("40x50", "gif", array("color" => "555555"));
-
         $this->assertEquals("#555555", (string)$imageConfig->getFontColor());
+    }
+
+
+    public function defaultFontColorContrastDataProvider()
+    {
+        return array(
+            array("72x72", "jpg", "000000"),
+            array("72x72", "jpg", "ff0000"),
+            array("72x72", "jpg", "ffff00"),
+            array("72x72", "jpg", "ffffff"),
+            array("72x72", "jpg", "7d7d7d"),
+        );
+    }
+
+    /**
+     * @dataProvider defaultFontColorContrastDataProvider
+     */
+    public function testDefaultFontColorShouldHaveEnoughContrast($size, $extension, $backgroundColor)
+    {
+        $imageConfig            = new ImageConfig($size, $extension, array("background-color" => $backgroundColor));
+        $fontColor              = new Color((string)$imageConfig->getFontColor(), 0);
+        $backgroundColor        = $imageConfig->getBackgroundColor();
+        $brightnessDifference   = abs($this->calculateBrightness($backgroundColor) - $this->calculateBrightness($fontColor));
+        $this->assertGreaterThanOrEqual(125, $brightnessDifference);
+    }
+
+    protected function calculateBrightness(Color $color)
+    {
+        // Algorithm to calculate brightness: http://www.w3.org/TR/AERT
+        return (
+            $color->getRed() * 299 +
+            $color->getGreen() * 587 +
+            $color->getBlue() * 114
+        ) / 1000;
     }
 
 }
