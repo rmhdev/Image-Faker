@@ -24,9 +24,8 @@ class Image
     protected function createImage()
     {
         $imageSize = new Box($this->getImageConfig()->getWidth(), $this->getImageConfig()->getHeight());
-        $color = new Color($this->getImageConfig()->getBackgroundColor(), 0);
 
-        return $this->imagine->create($imageSize, $color);
+        return $this->imagine->create($imageSize, $this->getImageConfig()->getBackgroundColor());
     }
 
     protected function writeText()

@@ -5,6 +5,7 @@ namespace ImageFaker\Image;
 use ImageFaker\Exception\InvalidArgumentException;
 use ImageFaker\Exception\OutOfBoundsException;
 use Imagine\Image\Point;
+use Imagine\Image\Color;
 
 
 class ImageConfig
@@ -23,7 +24,7 @@ class ImageConfig
     {
         $this->processSize($size);
         $this->processExtension($extension);
-        $this->backgroundColor = isset($attributes["background-color"]) ? $attributes["background-color"] : "000000";
+        $this->backgroundColor = new Color("000000", 0);
         $this->processText();
     }
 
