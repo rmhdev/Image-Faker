@@ -204,5 +204,4 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("application/x-font-ttf", finfo_file(finfo_open(FILEINFO_MIME_TYPE), $fontPath));
     }
 
-
 }

@@ -10,8 +10,8 @@ $app->get("/", function () {
 
 $app->get("/{size}.{extension}", function ($size, $extension) use ($app) {
 
-    $imageConfig = new \ImageFaker\Image\ImageConfig($size, $extension);
-    $image = new ImageFaker\Image\Image($imageConfig);
+    $imageConfig = new ImageConfig($size, $extension);
+    $image = new Image($imageConfig);
 
     $response = new Response($image->getContent(), 200, array(
         "Content-Type" => $imageConfig->getMimeType()
