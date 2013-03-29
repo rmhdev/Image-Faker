@@ -15,27 +15,27 @@ class SimpleImageTest extends WebTestCase
 
     public function testCreateSimpleImage100x100()
     {
-        $this->genericTestCreateSimpleImage("/100x100.jpg", 100, 100, "image/jpeg");
+        $this->genericTestCreateSimpleImage("/100x100/jpg", 100, 100, "image/jpeg");
     }
 
     public function testCreateSimpleImage100x200()
     {
-        $this->genericTestCreateSimpleImage("/100x200.jpg", 100, 200, "image/jpeg");
+        $this->genericTestCreateSimpleImage("/100x200/jpg", 100, 200, "image/jpeg");
     }
 
     public function testCreateSimpleImage50x150Png()
     {
-        $this->genericTestCreateSimpleImage("/50x150.png", 50, 150, "image/png");
+        $this->genericTestCreateSimpleImage("/50x150/png", 50, 150, "image/png");
     }
 
     public function testCreateSimpleImage50x100Gif()
     {
-        $this->genericTestCreateSimpleImage("/50x100.gif", 50, 100, "image/gif");
+        $this->genericTestCreateSimpleImage("/50x100/gif", 50, 100, "image/gif");
     }
 
     public function testUrlShouldBeCaseInsensitive()
     {
-        $response = $this->getResponse("40X30.JPG");
+        $response = $this->getResponse("40X30/JPG");
         $this->assertTrue($response->isSuccessful());
     }
 
@@ -43,12 +43,12 @@ class SimpleImageTest extends WebTestCase
     {
         return array(
             array("/20x20"),
-            array("/x20.gif"),
-            array("/20x.png"),
-            array("/20.jpg"),
+            array("/x20/gif"),
+            array("/20x/png"),
+            array("/20/jpg"),
             array("/.gif"),
             array("/gif"),
-            array("/doesnotexist.gif")
+            array("/doesnotexist/gif")
         );
     }
 
@@ -64,11 +64,11 @@ class SimpleImageTest extends WebTestCase
     public function outOfRangeUrlTestProvider()
     {
         return array(
-            array("/0x10.png"),
-            array("/10x0.png"),
-            array("/-1x-10.png"),
-            array("/1501x200.jpg"),
-            array("/200x1501.jpg"),
+            array("/0x10/png"),
+            array("/10x0/png"),
+            array("/-1x-10/png"),
+            array("/1501x200/jpg"),
+            array("/200x1501jpg"),
         );
     }
 
@@ -115,7 +115,9 @@ class SimpleImageTest extends WebTestCase
 
     protected function getTempFileFromResponse(Response $response, $uri)
     {
-        $responseFileName = sys_get_temp_dir() . $uri;
+        $uriParts = explode("/", $uri);
+        $fileName = $uriParts[0] . "." . $uriParts[1];
+        $responseFileName = sys_get_temp_dir() . $fileName;
         file_put_contents($responseFileName, $response->getContent());
         chmod($responseFileName, 0777);
 

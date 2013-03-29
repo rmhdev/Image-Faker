@@ -8,7 +8,7 @@ $app->get("/", function () {
     return "Hello world!";
 });
 
-$app->get("/{size}.{extension}", function ($size, $extension) use ($app) {
+$app->get("/{size}/{extension}", function ($size, $extension) use ($app) {
 
     $imageConfig = new ImageConfig($size, $extension);
     $image = new Image($imageConfig);
