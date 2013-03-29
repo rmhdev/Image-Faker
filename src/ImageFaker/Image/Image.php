@@ -18,16 +18,17 @@ class Image
         $this->imagine = new \Imagine\Gd\Imagine();
         $this->image = $this->generateImage();
 
-        $fontColor = new \Imagine\Image\Color("CCCCCC", 0);
-
         // In GD, resolution is 96 by default. Font size must be "hacked".
         // See: https://github.com/avalanche123/Imagine/issues/32
         $fontSize = $imageConfig->getFontSize() *  (72 / 96);
-        $font = $this->imagine->font(ImageConfig::getFontPath(), $fontSize, $fontColor);
-        $fontBox = $font->box($imageConfig->getText(), 0);
-        $fontPoint = $imageConfig->calculateFontPoint($fontBox->getWidth(), $fontBox->getHeight());
+        if ($fontSize > 0) {
+            $fontColor = new \Imagine\Image\Color("CCCCCC", 0);
+            $font = $this->imagine->font(ImageConfig::getFontPath(), $fontSize, $fontColor);
+            $fontBox = $font->box($imageConfig->getText(), 0);
+            $fontPoint = $imageConfig->calculateFontPoint($fontBox->getWidth(), $fontBox->getHeight());
 
-        $this->image->draw()->text($imageConfig->getText(), $font, $fontPoint, 0);
+            $this->image->draw()->text($imageConfig->getText(), $font, $fontPoint, 0);
+        }
     }
 
     protected function generateImage()

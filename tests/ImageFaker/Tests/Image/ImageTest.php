@@ -49,6 +49,14 @@ class ImageTest extends \PHPUnit_Framework_TestCase
         $this->genericTestCreatedImage($this->createImage("23x23", "gif"));
     }
 
+    public function testCreateTinyImageShouldNotWriteText()
+    {
+        $this->genericTestCreatedImage($this->createImage("2x2", "jpg"));
+        $this->genericTestCreatedImage($this->createImage("1x1", "gif"));
+        $this->genericTestCreatedImage($this->createImage("1x2", "jpg"));
+        $this->genericTestCreatedImage($this->createImage("2x4", "jpg"));
+    }
+
     protected function genericTestCreatedImage(\ImageFaker\Image\Image $image)
     {
         $fileName = sprintf("%s/%s.%s",
