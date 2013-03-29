@@ -24,7 +24,7 @@ class ImageConfig
     {
         $this->processSize($size);
         $this->processExtension($extension);
-        $this->backgroundColor = new Color("000000", 0);
+        $this->backgroundColor = new Color(isset($attributes['background-color']) ? $attributes['background-color'] : "000000", 0);
         $this->processText();
     }
 
