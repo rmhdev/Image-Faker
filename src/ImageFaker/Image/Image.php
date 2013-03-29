@@ -4,6 +4,7 @@ namespace ImageFaker\Image;
 
 use ImageFaker\Image\ImageConfig;
 use Imagine\Image\Box;
+use Imagine\Image\Color;
 
 class Image
 {
@@ -16,27 +17,36 @@ class Image
     {
         $this->imageConfig = $imageConfig;
         $this->imagine = new \Imagine\Gd\Imagine();
-        $this->image = $this->generateImage();
+        $this->image = $this->createImage();
+        $this->writeText();
+    }
 
-        // In GD, resolution is 96 by default. Font size must be "hacked".
-        // See: https://github.com/avalanche123/Imagine/issues/32
-        $fontSize = $imageConfig->getFontSize() *  (72 / 96);
+    protected function createImage()
+    {
+        $imageSize = new Box($this->imageConfig->getWidth(), $this->imageConfig->getHeight());
+        $color = new Color("000000", 0);
+
+        return $this->imagine->create($imageSize, $color);
+    }
+
+    protected function writeText()
+    {
+        $fontSize = $this->calculateFontSize();
         if ($fontSize > 0) {
-            $fontColor = new \Imagine\Image\Color("CCCCCC", 0);
+            $fontColor = new Color("CCCCCC", 0);
             $font = $this->imagine->font(ImageConfig::getFontPath(), $fontSize, $fontColor);
-            $fontBox = $font->box($imageConfig->getText(), 0);
-            $fontPoint = $imageConfig->calculateFontPoint($fontBox->getWidth(), $fontBox->getHeight());
+            $fontBox = $font->box($this->getImageConfig()->getText(), 0);
+            $fontPoint = $this->getImageConfig()->calculateFontPoint($fontBox->getWidth(), $fontBox->getHeight());
 
-            $this->image->draw()->text($imageConfig->getText(), $font, $fontPoint, 0);
+            $this->image->draw()->text($this->getImageConfig()->getText(), $font, $fontPoint, 0);
         }
     }
 
-    protected function generateImage()
+    protected function calculateFontSize()
     {
-        $imageSize = new \Imagine\Image\Box($this->imageConfig->getWidth(), $this->imageConfig->getHeight());
-        $color = new \Imagine\Image\Color("000000", 0);
-
-        return $this->imagine->create($imageSize, $color);
+        // In GD, resolution is 96 by default. Font size must be "hacked".
+        // See: https://github.com/avalanche123/Imagine/issues/32
+        return floor($this->getImageConfig()->getFontSize() *  (72 / 96));
     }
 
     public function getImageConfig()
