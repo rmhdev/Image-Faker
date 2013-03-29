@@ -20,6 +20,7 @@ class SimpleImageTest extends WebTestCase
             array("/100x200/jpg", 100   , 200   , "image/jpeg"),
             array("/50x150/png" , 50    , 150   , "image/png"),
             array("/50x100/gif" , 50    , 100   , "image/gif"),
+            array("/75x125"     , 75    , 125   , "image/png"),
         );
     }
 
@@ -83,7 +84,6 @@ class SimpleImageTest extends WebTestCase
     public function wrongUrlTestProvider()
     {
         return array(
-            array("/20x20"),
             array("/x20/gif"),
             array("/20x/png"),
             array("/20/jpg"),
