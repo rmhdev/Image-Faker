@@ -16,12 +16,14 @@ class ImageConfig
         $extension,
         $mimeType,
         $text,
-        $fontSize;
+        $fontSize,
+        $backgroundColor;
 
-    public function __construct($size, $extension = "png")
+    public function __construct($size, $extension = "png", $attributes = array())
     {
         $this->processSize($size);
         $this->processExtension($extension);
+        $this->backgroundColor = isset($attributes["background-color"]) ? $attributes["background-color"] : "000000";
         $this->processText();
     }
 
@@ -147,7 +149,7 @@ class ImageConfig
 
     public function getBackgroundColor()
     {
-        return "000000";
+        return $this->backgroundColor;
     }
 
     public function getFontColor()

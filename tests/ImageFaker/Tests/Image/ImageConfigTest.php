@@ -218,4 +218,11 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("CCCCCC", $imageConfig->getFontColor());
     }
 
+    public function testPersonalizedBackgroundColor()
+    {
+        $imageConfig = new ImageConfig("80x80", "jpg", array("background-color" => "FFFFFF"));
+
+        $this->assertEquals("FFFFFF", $imageConfig->getBackgroundColor());
+    }
+
 }
