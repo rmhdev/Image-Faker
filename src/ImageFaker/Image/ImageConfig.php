@@ -18,7 +18,7 @@ class ImageConfig
         $text,
         $fontSize;
 
-    public function __construct($size, $extension)
+    public function __construct($size, $extension = "png")
     {
         $this->processSize($size);
         $this->processExtension($extension);

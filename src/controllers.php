@@ -22,7 +22,7 @@ $app->get("/{size}/{extension}", function ($size, $extension) use ($app) {
 
 $app->get("/{size}", function ($size) use ($app) {
 
-    $imageConfig = new ImageConfig($size, "png");
+    $imageConfig = new ImageConfig($size);
     $image = new Image($imageConfig);
 
     $response = new Response($image->getContent(), 200, array(

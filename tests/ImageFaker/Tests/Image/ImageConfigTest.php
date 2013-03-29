@@ -53,6 +53,13 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("image/png", $request->getMimeType());
     }
 
+    public function testEmptyExtensionShouldDefineDefaultImageFormat()
+    {
+        $request = new ImageConfig("66X66");
+        $this->assertEquals("png", $request->getExtension());
+        $this->assertEquals("image/png", $request->getMimeType());
+    }
+
     public function wrongUrlTestProvider()
     {
         return array(
