@@ -6,6 +6,7 @@ use ImageFaker\Exception\InvalidArgumentException;
 use ImageFaker\Exception\OutOfBoundsException;
 use Imagine\Image\Point;
 use Imagine\Image\Color;
+use Symfony\Component\BrowserKit\Cookie;
 
 
 class ImageConfig
@@ -24,7 +25,7 @@ class ImageConfig
     {
         $this->processSize($size);
         $this->processExtension($extension);
-        $this->backgroundColor = new Color(isset($attributes['background-color']) ? $attributes['background-color'] : "000000", 0);
+        $this->processAttributes($attributes);
         $this->processText();
     }
 
@@ -88,6 +89,14 @@ class ImageConfig
         }
         $this->extension = $extension;
         $this->mimeType = $mimeType;
+    }
+
+    protected function processAttributes($attributes = array())
+    {
+        if (!isset($attributes['background-color'])) {
+            $attributes['background-color'] = "000000";
+        }
+        $this->backgroundColor = new Color($attributes['background-color']);
     }
 
     protected function processText()
