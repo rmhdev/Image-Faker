@@ -215,7 +215,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $imageConfig = new ImageConfig("75x75", "gif");
         $backgroundColor = $imageConfig->getBackgroundColor();
         $this->assertInstanceOf("\Imagine\Image\Color", $backgroundColor);
-        $this->assertEquals("#000000", $backgroundColor->__toString());
+        $this->assertEquals("#000000", (string)$backgroundColor);
 
         $fontColor = $imageConfig->getFontColor();
         $this->assertInstanceOf("\Imagine\Image\Color", $fontColor);
@@ -226,7 +226,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     {
         $imageConfig = new ImageConfig("80x80", "jpg", array("background-color" => "FFFFFF"));
 
-        $this->assertEquals("#ffffff", $imageConfig->getBackgroundColor()->__toString());
+        $this->assertEquals("#ffffff", (string)$imageConfig->getBackgroundColor());
     }
 
 }
