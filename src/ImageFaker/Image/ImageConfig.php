@@ -19,7 +19,8 @@ class ImageConfig
         $mimeType,
         $text,
         $fontSize,
-        $backgroundColor;
+        $backgroundColor,
+        $fontColor;
 
     public function __construct($size, $extension = "png", $attributes = array())
     {
@@ -96,7 +97,11 @@ class ImageConfig
         if (!isset($attributes['background-color'])) {
             $attributes['background-color'] = "000000";
         }
-        $this->backgroundColor = new Color($attributes['background-color']);
+        if (!isset($attributes['color'])) {
+            $attributes['color'] = "cccccc";
+        }
+        $this->backgroundColor  = new Color($attributes['background-color']);
+        $this->fontColor        = new Color($attributes['color']);
     }
 
     protected function processText()
@@ -164,6 +169,6 @@ class ImageConfig
 
     public function getFontColor()
     {
-        return new Color("CCCCCC");
+        return $this->fontColor;
     }
 }

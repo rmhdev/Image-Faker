@@ -229,4 +229,11 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("#ffffff", (string)$imageConfig->getBackgroundColor());
     }
 
+    public function testPersonalizedFontColor()
+    {
+        $imageConfig = new ImageConfig("40x50", "gif", array("color" => "555555"));
+
+        $this->assertEquals("#555555", (string)$imageConfig->getFontColor());
+    }
+
 }
