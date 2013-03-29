@@ -210,4 +210,12 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("application/x-font-ttf", finfo_file(finfo_open(FILEINFO_MIME_TYPE), $fontPath));
     }
 
+    public function testDefaultColors()
+    {
+        $imageConfig = new ImageConfig("75x75", "gif");
+
+        $this->assertEquals("000000", $imageConfig->getBackgroundColor());
+        $this->assertEquals("CCCCCC", $imageConfig->getFontColor());
+    }
+
 }

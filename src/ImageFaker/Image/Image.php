@@ -23,8 +23,8 @@ class Image
 
     protected function createImage()
     {
-        $imageSize = new Box($this->imageConfig->getWidth(), $this->imageConfig->getHeight());
-        $color = new Color("000000", 0);
+        $imageSize = new Box($this->getImageConfig()->getWidth(), $this->getImageConfig()->getHeight());
+        $color = new Color($this->getImageConfig()->getBackgroundColor(), 0);
 
         return $this->imagine->create($imageSize, $color);
     }
@@ -33,7 +33,7 @@ class Image
     {
         $fontSize = $this->calculateFontSize();
         if ($fontSize > 0) {
-            $fontColor = new Color("CCCCCC", 0);
+            $fontColor = new Color($this->getImageConfig()->getFontColor(), 0);
             $font = $this->imagine->font(ImageConfig::getFontPath(), $fontSize, $fontColor);
             $fontBox = $font->box($this->getImageConfig()->getText(), 0);
             $fontPoint = $this->getImageConfig()->calculateFontPoint($fontBox->getWidth(), $fontBox->getHeight());

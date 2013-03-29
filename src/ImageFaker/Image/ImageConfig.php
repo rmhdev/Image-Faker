@@ -144,4 +144,14 @@ class ImageConfig
     {
         return __DIR__ . "/../Fixtures/font/Ubuntu-C.ttf";
     }
+
+    public function getBackgroundColor()
+    {
+        return "000000";
+    }
+
+    public function getFontColor()
+    {
+        return "CCCCCC";
+    }
 }
