@@ -13,25 +13,66 @@ class SimpleImageTest extends WebTestCase
         return require __DIR__ . "/../../../../src/production.php";
     }
 
-    public function testCreateSimpleImage100x100()
+    public function getCreateSimpleImageTestProvider()
     {
-        $this->genericTestCreateSimpleImage("/100x100/jpg", 100, 100, "image/jpeg");
+        return array(
+            array("/100x100/jpg", 100   , 100   , "image/jpeg"),
+            array("/100x200/jpg", 100   , 200   , "image/jpeg"),
+            array("/50x150/png" , 50    , 150   , "image/png"),
+            array("/50x100/gif" , 50    , 100   , "image/gif"),
+        );
     }
 
-    public function testCreateSimpleImage100x200()
+    /**
+     * @dataProvider getCreateSimpleImageTestProvider
+     */
+    public function testCreateSimpleImage($uri, $expectedWidth, $expectedHeight, $expectedMimeType)
     {
-        $this->genericTestCreateSimpleImage("/100x200/jpg", 100, 200, "image/jpeg");
+        $response = $this->getResponse($uri);
+        $this->assertTrue($response->isSuccessful());
+        $this->assertEquals($expectedMimeType, $response->headers->get("Content-Type"));
+
+        $responseFileName = $this->getTempFileFromResponse($response, $uri);
+        $this->assertFileExists($responseFileName);
+
+        $fileMimeType = $this->getMimeTypeFromFileName($responseFileName);
+        $this->assertEquals($expectedMimeType, $fileMimeType);
+
+        $imagine = new \Imagine\GD\Imagine();
+        $image = $imagine->open($responseFileName);
+        $this->assertEquals($expectedWidth, $image->getSize()->getWidth());
+        $this->assertEquals($expectedHeight, $image->getSize()->getHeight());
+        unlink($responseFileName);
     }
 
-    public function testCreateSimpleImage50x150Png()
+    /**
+     * @param $uri
+     * @return Response
+     */
+    protected function getResponse($uri)
     {
-        $this->genericTestCreateSimpleImage("/50x150/png", 50, 150, "image/png");
+        $client = $this->createClient();
+        $crawler = $client->request("GET", $uri);
+
+        return $client->getResponse();
     }
 
-    public function testCreateSimpleImage50x100Gif()
+    protected function getTempFileFromResponse(Response $response, $uri)
     {
-        $this->genericTestCreateSimpleImage("/50x100/gif", 50, 100, "image/gif");
+        $uriParts = explode("/", $uri);
+        $fileName = $uriParts[0] . "." . $uriParts[1];
+        $responseFileName = sys_get_temp_dir() . $fileName;
+        file_put_contents($responseFileName, $response->getContent());
+        chmod($responseFileName, 0777);
+
+        return $responseFileName;
     }
+
+    protected function getMimeTypeFromFileName($fileName)
+    {
+        return finfo_file(finfo_open(FILEINFO_MIME_TYPE), $fileName);
+    }
+
 
     public function testUrlShouldBeCaseInsensitive()
     {
@@ -61,6 +102,7 @@ class SimpleImageTest extends WebTestCase
         $this->assertTrue($response->isClientError());
     }
 
+
     public function outOfRangeUrlTestProvider()
     {
         return array(
@@ -68,7 +110,7 @@ class SimpleImageTest extends WebTestCase
             array("/10x0/png"),
             array("/-1x-10/png"),
             array("/1501x200/jpg"),
-            array("/200x1501jpg"),
+            array("/200x1501/jpg"),
         );
     }
 
@@ -79,73 +121,6 @@ class SimpleImageTest extends WebTestCase
     {
         $response = $this->getResponse($uri);
         $this->assertTrue($response->isClientError());
-    }
-
-    protected function genericTestCreateSimpleImage($uri, $expectedWidth, $expectedHeight, $expectedMimeType)
-    {
-        $response = $this->getResponse($uri);
-        $this->assertTrue($response->isSuccessful());
-        $this->assertEquals($expectedMimeType, $response->headers->get("Content-Type"));
-
-        $responseFileName = $this->getTempFileFromResponse($response, $uri);
-        $this->assertFileExists($responseFileName);
-
-        $fileMimeType = $this->getMimeTypeFromFileName($responseFileName);
-        $this->assertEquals($expectedMimeType, $fileMimeType);
-
-        $imagine = new \Imagine\GD\Imagine();
-        $image = $imagine->open($responseFileName);
-        $this->assertEquals($expectedWidth, $image->getSize()->getWidth());
-        $this->assertEquals($expectedHeight, $image->getSize()->getHeight());
-        unlink($responseFileName);
-    }
-
-    /**
-     * @param $uri
-     * @return Response
-     *
-     */
-    protected function getResponse($uri)
-    {
-        $client = $this->createClient();
-        $crawler = $client->request("GET", $uri);
-
-        return $client->getResponse();
-    }
-
-    protected function getTempFileFromResponse(Response $response, $uri)
-    {
-        $uriParts = explode("/", $uri);
-        $fileName = $uriParts[0] . "." . $uriParts[1];
-        $responseFileName = sys_get_temp_dir() . $fileName;
-        file_put_contents($responseFileName, $response->getContent());
-        chmod($responseFileName, 0777);
-
-        return $responseFileName;
-    }
-
-    protected function getImageFormatFromUri($uri)
-    {
-        $uriParameters = explode(".", $uri);
-
-        return $uriParameters[1];
-    }
-
-    protected function getMimeTypeFromFileName($fileName)
-    {
-        return finfo_file(finfo_open(FILEINFO_MIME_TYPE), $fileName);
-    }
-
-    protected function getMimeType($format)
-    {
-        $imageMime = "";
-        switch ($format) {
-            case "jpg": $imageMime = "image/jpeg"; break;
-            case "png": $imageMime = "image/png"; break;
-            case "gif": $imageMime = "image/gif"; break;
-        }
-
-        return $imageMime;
     }
 
 }
