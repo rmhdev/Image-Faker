@@ -8,7 +8,7 @@ $app->get("/", function () {
     return "Hello world!";
 });
 
-$app->get("/{size}/{extension}", function ($size, $extension) use ($app) {
+$app->get("/{size}.{extension}", function ($size, $extension) use ($app) {
 
     $imageConfig = new ImageConfig($size, $extension);
     $image = new Image($imageConfig);
@@ -19,19 +19,6 @@ $app->get("/{size}/{extension}", function ($size, $extension) use ($app) {
 
     return $response;
 });
-
-$app->get("/{size}", function ($size) use ($app) {
-
-    $imageConfig = new ImageConfig($size);
-    $image = new Image($imageConfig);
-
-    $response = new Response($image->getContent(), 200, array(
-        "Content-Type" => $imageConfig->getMimeType()
-    ));
-
-    return $response;
-});
-
 
 $app->error(function (\Exception $e, $code) use ($app) {
     if ($app['debug']) {

@@ -16,12 +16,11 @@ class SimpleImageTest extends WebTestCase
     public function getCreateSimpleImageTestProvider()
     {
         return array(
-            array("/100x100/jpg", 100   , 100   , "image/jpeg"),
-            array("/100x200/jpg", 100   , 200   , "image/jpeg"),
-            array("/50x150/png" , 50    , 150   , "image/png"),
-            array("/50x100/gif" , 50    , 100   , "image/gif"),
-            array("/75x125"     , 75    , 125   , "image/png"),
-            array("/75/gif"     , 75    , 75    , "image/gif"),
+            array("/100x100.jpg", 100   , 100   , "image/jpeg"),
+            array("/100x200.jpg", 100   , 200   , "image/jpeg"),
+            array("/50x150.png" , 50    , 150   , "image/png"),
+            array("/50x100.gif" , 50    , 100   , "image/gif"),
+            array("/75.gif"     , 75    , 75    , "image/gif"),
         );
     }
 
@@ -78,7 +77,7 @@ class SimpleImageTest extends WebTestCase
 
     public function testUrlShouldBeCaseInsensitive()
     {
-        $response = $this->getResponse("40X30/JPG");
+        $response = $this->getResponse("/40X30.JPG");
         $this->assertTrue($response->isSuccessful());
     }
 
@@ -89,6 +88,8 @@ class SimpleImageTest extends WebTestCase
             array("/20x/png"),
             array("/.gif"),
             array("/gif"),
+            array("/20"),
+            array("/20x30"),
             array("/doesnotexist/gif")
         );
     }
@@ -106,12 +107,12 @@ class SimpleImageTest extends WebTestCase
     public function outOfRangeUrlTestProvider()
     {
         return array(
-            array("/0x10/png"),
-            array("/10x0/png"),
-            array("/-1x-10/png"),
-            array("/1501x200/jpg"),
-            array("/200x1501/jpg"),
-            array("/1501"),
+            array("/0x10.png"),
+            array("/10x0.png"),
+            array("/-1x-10.png"),
+            array("/1501x200.jpg"),
+            array("/200x1501.jpg"),
+            array("/1501.png"),
         );
     }
 
