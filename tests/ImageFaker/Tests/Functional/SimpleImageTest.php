@@ -61,7 +61,11 @@ class SimpleImageTest extends WebTestCase
     protected function getTempFileFromResponse(Response $response, $uri)
     {
         $uriParts = explode("/", $uri);
-        $fileName = $uriParts[0] . "." . $uriParts[1];
+        if (sizeof($uriParts) == 1){
+            $fileName = $uriParts[0];
+        } else {
+            $fileName = $uriParts[0] . "-" . $uriParts[1];
+        }
         $responseFileName = sys_get_temp_dir() . $fileName;
         file_put_contents($responseFileName, $response->getContent());
         chmod($responseFileName, 0777);
@@ -123,6 +127,15 @@ class SimpleImageTest extends WebTestCase
     {
         $response = $this->getResponse($uri);
         $this->assertTrue($response->isClientError());
+    }
+
+    public function testParameterBackgroundColor()
+    {
+        $response = $this->getResponse("/cccccc/60x60.png");
+        $this->assertTrue($response->isSuccessful());
+        $this->assertEquals("image/png", $response->headers->get("Content-Type"));
+
+        $responseFileName = $this->getTempFileFromResponse($response, "/cccccc/60x60.png");
     }
 
 }
