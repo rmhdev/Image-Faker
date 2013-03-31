@@ -89,6 +89,18 @@ class SimpleImageTest extends WebTestCase
         return finfo_file(finfo_open(FILEINFO_MIME_TYPE), $fileName);
     }
 
+    protected function getColorDifference($hexColorA, $hexColorB)
+    {
+        $colorA = new Color($hexColorA);
+        $colorB = new Color($hexColorB);
+
+        return
+            (max($colorA->getRed(), $colorB->getRed())      - min($colorA->getRed(), $colorB->getRed())) +
+            (max($colorA->getGreen(), $colorB->getGreen())  - min($colorA->getGreen(), $colorB->getGreen())) +
+            (max($colorA->getBlue(), $colorB->getBlue())    - min($colorA->getBlue(), $colorB->getBlue()))
+            ;
+    }
+
 
     public function testUrlShouldBeCaseInsensitive()
     {
@@ -138,18 +150,6 @@ class SimpleImageTest extends WebTestCase
     {
         $response = $this->getResponse($uri);
         $this->assertTrue($response->isClientError());
-    }
-
-    protected function getColorDifference($hexColorA, $hexColorB)
-    {
-        $colorA = new Color($hexColorA);
-        $colorB = new Color($hexColorB);
-
-        return
-            (max($colorA->getRed(), $colorB->getRed())      - min($colorA->getRed(), $colorB->getRed())) +
-            (max($colorA->getGreen(), $colorB->getGreen())  - min($colorA->getGreen(), $colorB->getGreen())) +
-            (max($colorA->getBlue(), $colorB->getBlue())    - min($colorA->getBlue(), $colorB->getBlue()))
-        ;
     }
 
 }
