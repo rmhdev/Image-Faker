@@ -136,6 +136,10 @@ class SimpleImageTest extends WebTestCase
         $this->assertEquals("image/png", $response->headers->get("Content-Type"));
 
         $responseFileName = $this->getTempFileFromResponse($response, "/cccccc/60x60.png");
+        $this->assertFileExists($responseFileName);
+
+        $fileMimeType = $this->getMimeTypeFromFileName($responseFileName);
+        $this->assertEquals("image/png", $fileMimeType);
     }
 
 }
