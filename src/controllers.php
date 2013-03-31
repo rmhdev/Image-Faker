@@ -8,8 +8,8 @@ $app->get("/", function () {
     return "Hello world!";
 });
 
-$app->get("/{background}/{size}.{extension}", function () use ($app) {
-    $imageConfig = new ImageConfig("10x10", "png");
+$app->get("/{background}/{size}.{extension}", function ($background, $size, $extension) use ($app) {
+    $imageConfig = new ImageConfig($size, $extension, array('background-color' => $background));
     $image = new Image($imageConfig);
 
     return new Response($image->getContent(), 200, array(

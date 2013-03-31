@@ -2,6 +2,7 @@
 
 namespace ImageFaker\Tests;
 
+use Imagine\Image\Point;
 use Silex\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -131,7 +132,7 @@ class SimpleImageTest extends WebTestCase
 
     public function testParameterBackgroundColor()
     {
-        $response = $this->getResponse("/cccccc/60x60.png");
+        $response = $this->getResponse("/cccccc/60x70.png");
         $this->assertTrue($response->isSuccessful());
         $this->assertEquals("image/png", $response->headers->get("Content-Type"));
 
@@ -140,6 +141,14 @@ class SimpleImageTest extends WebTestCase
 
         $fileMimeType = $this->getMimeTypeFromFileName($responseFileName);
         $this->assertEquals("image/png", $fileMimeType);
+
+        $imagine = new \Imagine\Gd\Imagine();
+        $image = $imagine->open($responseFileName);
+        $this->assertEquals(60, $image->getSize()->getWidth());
+        $this->assertEquals(70, $image->getSize()->getHeight());
+
+        $colorTest = $image->getColorAt(new Point(0, 0));
+        $this->assertEquals("#cccccc", (string)$colorTest);
     }
 
 }
