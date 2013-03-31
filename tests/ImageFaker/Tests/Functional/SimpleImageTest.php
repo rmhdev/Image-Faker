@@ -151,21 +151,23 @@ class SimpleImageTest extends WebTestCase
         $this->assertTrue($response->isClientError());
     }
 
-    public function testUnknownBackgroundColorCC()
+
+    public function unknownBackgroundColorUris()
     {
-        $response = $this->getResponse("/cc/123x123.png");
-        $this->assertTrue($response->isClientError());
+        return array(
+            array("/cc/123x123.png"),
+            array("/aaaaaaa/123x321.gif"),
+            array("/green/123x123.jpg")
+        );
     }
 
-    public function testUnknownBackgroundColorAAAAAA()
+    /**
+     * @dataProvider unknownBackgroundColorUris
+     */
+    public function testUnknownBackgroundColorUris($uri)
     {
-        $response = $this->getResponse("/aaaaaaa/123x321.gif");
+        $response = $this->getResponse($uri);
         $this->assertTrue($response->isClientError());
-    }
-
-    public function testUnknownBackgroundColorRed()
-    {
-        $response = $this->getResponse("/red/123x123.gif");
     }
 
 }
