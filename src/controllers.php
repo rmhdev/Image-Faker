@@ -13,7 +13,7 @@ $app->get("/{background}/{size}.{extension}", function ($background, $size, $ext
     $image = new Image($imageConfig);
 
     return new Response($image->getContent(), 200, array(
-        "Content-Type" => "image/png"
+        "Content-Type" => $imageConfig->getMimeType()
     ));
 });
 

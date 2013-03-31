@@ -2,6 +2,7 @@
 
 namespace ImageFaker\Tests;
 
+use Imagine\Image\Color;
 use Imagine\Image\Point;
 use Silex\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,18 +18,22 @@ class SimpleImageTest extends WebTestCase
     public function getCreateSimpleImageTestProvider()
     {
         return array(
-            array("/100x100.jpg", 100   , 100   , "image/jpeg"),
-            array("/100x200.jpg", 100   , 200   , "image/jpeg"),
-            array("/50x150.png" , 50    , 150   , "image/png"),
-            array("/50x100.gif" , 50    , 100   , "image/gif"),
-            array("/75.gif"     , 75    , 75    , "image/gif"),
+            array("/100x100.jpg", 100   , 100   , "image/jpeg"  , "#000000"),
+            array("/100x200.jpg", 100   , 200   , "image/jpeg"  , "#000000"),
+            array("/50x150.png" , 50    , 150   , "image/png"   , "#000000"),
+            array("/50x100.gif" , 50    , 100   , "image/gif"   , "#000000"),
+            array("/75.gif"     , 75    , 75    , "image/gif"   , "#000000"),
+
+            array("/cccccc/60x70.png"   , 60    , 70    , "image/png"   , "#cccccc"),
+            array("/d7d7d7/123x321.gif" , 123   , 321   , "image/gif"   , "#d7d7d7"),
+            array("/ffffff/47x100.jpg"   , 47   , 100   , "image/jpeg"  , "#ffffff"),
         );
     }
 
     /**
      * @dataProvider getCreateSimpleImageTestProvider
      */
-    public function testCreateSimpleImage($uri, $expectedWidth, $expectedHeight, $expectedMimeType)
+    public function testCreateSimpleImage($uri, $expectedWidth, $expectedHeight, $expectedMimeType, $expectedBackgroundColor)
     {
         $response = $this->getResponse($uri);
         $this->assertTrue($response->isSuccessful());
@@ -44,6 +49,11 @@ class SimpleImageTest extends WebTestCase
         $image = $imagine->open($responseFileName);
         $this->assertEquals($expectedWidth, $image->getSize()->getWidth());
         $this->assertEquals($expectedHeight, $image->getSize()->getHeight());
+
+        // gif images have a slightly different background color (because of compression?)
+        $colorTest = $image->getColorAt(new Point(0, 0));
+        $this->assertLessThanOrEqual(10, $this->getColorDifference($expectedBackgroundColor, (string)$colorTest));
+
         unlink($responseFileName);
     }
 
@@ -130,25 +140,16 @@ class SimpleImageTest extends WebTestCase
         $this->assertTrue($response->isClientError());
     }
 
-    public function testParameterBackgroundColor()
+    protected function getColorDifference($hexColorA, $hexColorB)
     {
-        $response = $this->getResponse("/cccccc/60x70.png");
-        $this->assertTrue($response->isSuccessful());
-        $this->assertEquals("image/png", $response->headers->get("Content-Type"));
+        $colorA = new Color($hexColorA);
+        $colorB = new Color($hexColorB);
 
-        $responseFileName = $this->getTempFileFromResponse($response, "/cccccc/60x60.png");
-        $this->assertFileExists($responseFileName);
-
-        $fileMimeType = $this->getMimeTypeFromFileName($responseFileName);
-        $this->assertEquals("image/png", $fileMimeType);
-
-        $imagine = new \Imagine\Gd\Imagine();
-        $image = $imagine->open($responseFileName);
-        $this->assertEquals(60, $image->getSize()->getWidth());
-        $this->assertEquals(70, $image->getSize()->getHeight());
-
-        $colorTest = $image->getColorAt(new Point(0, 0));
-        $this->assertEquals("#cccccc", (string)$colorTest);
+        return
+            (max($colorA->getRed(), $colorB->getRed())      - min($colorA->getRed(), $colorB->getRed())) +
+            (max($colorA->getGreen(), $colorB->getGreen())  - min($colorA->getGreen(), $colorB->getGreen())) +
+            (max($colorA->getBlue(), $colorB->getBlue())    - min($colorA->getBlue(), $colorB->getBlue()))
+        ;
     }
 
 }
