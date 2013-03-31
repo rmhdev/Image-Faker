@@ -26,7 +26,7 @@ class SimpleImageTest extends WebTestCase
 
             array("/cccccc/60x70.png"   , 60    , 70    , "image/png"   , "#cccccc"),
             array("/d7d7d7/123x321.gif" , 123   , 321   , "image/gif"   , "#d7d7d7"),
-            array("/ffffff/47x100.jpg"   , 47   , 100   , "image/jpeg"  , "#ffffff"),
+            array("/fff/47x100.jpg"     , 47    , 100   , "image/jpeg"  , "#fff"),
         );
     }
 
@@ -97,8 +97,7 @@ class SimpleImageTest extends WebTestCase
         return
             (max($colorA->getRed(), $colorB->getRed())      - min($colorA->getRed(), $colorB->getRed())) +
             (max($colorA->getGreen(), $colorB->getGreen())  - min($colorA->getGreen(), $colorB->getGreen())) +
-            (max($colorA->getBlue(), $colorB->getBlue())    - min($colorA->getBlue(), $colorB->getBlue()))
-            ;
+            (max($colorA->getBlue(), $colorB->getBlue())    - min($colorA->getBlue(), $colorB->getBlue()));
     }
 
 
@@ -150,6 +149,23 @@ class SimpleImageTest extends WebTestCase
     {
         $response = $this->getResponse($uri);
         $this->assertTrue($response->isClientError());
+    }
+
+    public function testUnknownBackgroundColorCC()
+    {
+        $response = $this->getResponse("/cc/123x123.png");
+        $this->assertTrue($response->isClientError());
+    }
+
+    public function testUnknownBackgroundColorAAAAAA()
+    {
+        $response = $this->getResponse("/aaaaaaa/123x321.gif");
+        $this->assertTrue($response->isClientError());
+    }
+
+    public function testUnknownBackgroundColorRed()
+    {
+        $response = $this->getResponse("/red/123x123.gif");
     }
 
 }
