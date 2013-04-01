@@ -20,5 +20,6 @@ class HomePageTest extends WebTestCase
         $response = $client->getResponse();
 
         $this->assertTrue($response->isSuccessful());
+        $this->assertEquals(1, $crawler->filter('html:contains("Image Faker")')->count());
     }
 }
