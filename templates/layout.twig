@@ -8,15 +8,24 @@
     <meta name="author" content="Rober Martín H (rmhdev)">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
+    {% for asset in ['base.css', 'skeleton.css', 'layout.css'] %}
+    <link rel="stylesheet" href="/css/{{ asset }}" type="text/css">
+    {% endfor %}
+
     <link rel="shortcut icon" href="/favicon.ico">
 </head>
 
 <body>
-<h1>Image Faker</h1>
-<p>Create images dinamically</p>
+<div class="container">
+    <div class="five columns">
+        <h1>Image Faker</h1>
+        <p>Create images dinamically</p>
+    </div>
 
+    <div class="ten columns offset-by-one content">
 {% block content %}{% endblock %}
-
+    </div>
+</div>
 </body>
 
 </html>
