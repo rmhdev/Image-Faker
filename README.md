@@ -1,4 +1,4 @@
 Image-Faker
 ===========
 
-Web service to create images
+Create images dynamically.
