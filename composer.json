@@ -6,7 +6,8 @@
         "silex/silex": "1.0.*@dev",
         "symfony/browser-kit": ">=2.1,<2.3-dev",
         "imagine/imagine": "v0.4.1",
-        "monolog/monolog": ">=1.0.0"
+        "monolog/monolog": ">=1.0.0",
+        "twig/twig": "1.*"
     },
     "require-dev": {
         "phpunit/phpunit": "3.7.*"
