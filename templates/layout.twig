@@ -17,15 +17,30 @@
 
 <body>
 <div class="container">
-    <div class="five columns">
-        <h1>Image Faker</h1>
-        <p>Create images dynamically</p>
+    <div class="three columns">
+        <nav>
+            <h1 id="logo">Image Faker</h1>
+            <ul>
+                <li><a href="#description">Description</a></li>
+                <li><a href="#param">Parameters</a></li>
+                <li><a href="#code">Code</a></li>
+                <li><a href="#road-map">Road map</a></li>
+                <li><a href="#author">Author</a></li>
+            </ul>
+            <hr>
+            <p class="version">v1.0.0 - <a href="https://github.com/rmhdev/Image-Faker">View in GitHub</a></p>
+        </nav>
     </div>
 
-    <div class="ten columns offset-by-one content">
+    <div class="twelve columns offset-by-one content">
 {% block content %}{% endblock %}
     </div>
 </div>
+
+<footer class="footer">
+    <p>Created by <a href="http://twitter.com/rmhdev" target="_blank">@rmhdev</a>.</p>
+    <p>Code licensed under <a href="http://opensource.org/licenses/MIT" target="_blank">MIT License</a>, documentation under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
+</footer>
 </body>
 
 </html>

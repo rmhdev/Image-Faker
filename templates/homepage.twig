@@ -2,6 +2,80 @@
 
 {% block content %}
 
-<h2>Welcome</h2>
+<header>
+    <h2>Create images dynamically</h2>
 
-{% endblock %}
+</header>
+
+    <section id="description">
+        <div class="page-header">
+            <h1>Description</h1>
+        </div>
+        <p>Image Faker is a web app built to generate images dynamically, using simple urls.</p>
+
+        <pre class="basic-example">http://localhost/<abbr title="Background color">6d3353</abbr>/<abbr title="Width">300</abbr>x<abbr title="Height">150</abbr>.<abbr title="Format">png</abbr></pre>
+
+    </section>
+
+    <section id="param">
+        <div class="page-header">
+            <h1>Parameters</h1>
+        </div>
+
+        <dl class="dl-horizontal">
+            <dt>Size</dt>
+            <dd>You can define the width and height of the image in pixels, separated with <code>x</code>.
+                The maximum value for both is 1500.
+                <pre>http://localhost/<strong>300x150</strong>.png</pre></dd>
+
+            <dd>Height is optional. If not defined, it will be equal to width.
+                <pre>http://localhost/<strong>300</strong>.png</pre></dd>
+
+            <dt>Extension</dt>
+            <dd>It can be <code>jpg</code>, <code>png</code> or <code>gif</code>.
+                <pre>http://localhost/300x150.<strong>jpg</strong></pre></dd>
+
+            <dt>Background color</dt>
+            <dd>Optional. Hexadecimal code, 6 (or 3) characters. The default color is <code>000000</code> (black).
+                <pre>http://localhost/<strong>6d3353</strong>/300x150.png</pre></dd>
+        </dl>
+    </section>
+
+    <section id="code">
+        <div class="page-header">
+            <h1>Code</h1>
+        </div>
+        <p>I started this project with some goals in mind:</p>
+        <ul class="square">
+            <li>Work with a micro framework.</li>
+            <li>Practice TDD.</li>
+        </ul>
+        <p>You can <a href="https://github.com/rmhdev/Image-Faker">fork this project on  GitHub</a>!</p>
+        <p>Image Faker uses <a href="http://silex.sensiolabs.org/">Silex</a>, a PHP microframework created by <a href="http://fabien.potencier.org/">Fabien Potencier</a>.
+            The images are generated using <a href="http://imagine.readthedocs.org/">Imagine</a>, a PHP library for image manipulation created by <a href="http://avalanche123.com/">Bulat Shakirzyanov</a>.</p>
+
+        <p>This project is inspired in <a href="https://dummyimage.com">Dynamic Dummy Image Generator</a> by <a href="http://www.russellheimlich.com/blog/">Russell Heimlich</a>.</p>
+
+    </section>
+
+    <section id="road-map">
+        <div class="page-header">
+            <h1>Road Map</h1>
+        </div>
+        <ul class="disc">
+            <li>Personalize font color.</li>
+            <li>Personalize default values in a config file.</li>
+            <li>Work with <code>Imagick</code> and <code>Gmagick</code> (actually only works with <code>GD</code>).</li>
+            <li>Use the HTTP cache.</li>
+            <li>Default image sizes: <abbr class="initialism" title="bla">NTSC</abbr>, <abbr class="initialism" title="bla">PAL</abbr>, ...</li>
+        </ul>
+    </section>
+
+    <section id="author">
+        <div class="page-header">
+            <h1>Author</h1>
+        </div>
+        <p>Created by Rober Martín H (@rmhdev).</p>
+    </section>
+
+        {% endblock %}
