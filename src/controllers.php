@@ -10,7 +10,7 @@ $app->get("/", function () use ($app) {
         200,
         array()
     );
-});
+})->bind("homepage");
 
 $app->get("/{background}/{size}.{extension}", function ($background, $size, $extension) use ($app) {
     $imageConfig = new ImageConfig($size, $extension, array('background-color' => $background));
@@ -19,7 +19,7 @@ $app->get("/{background}/{size}.{extension}", function ($background, $size, $ext
     return new Response($image->getContent(), 200, array(
         "Content-Type" => $imageConfig->getMimeType()
     ));
-});
+})->bind("background");
 
 $app->get("/{size}.{extension}", function ($size, $extension) use ($app) {
 
@@ -31,7 +31,7 @@ $app->get("/{size}.{extension}", function ($size, $extension) use ($app) {
     ));
 
     return $response;
-});
+})->bind("simple");
 
 $app->error(function (\Exception $e, $code) use ($app) {
     if ($app['debug']) {

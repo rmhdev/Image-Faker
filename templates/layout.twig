@@ -1,46 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <title>Image Faker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Create images dynamically">
     <meta name="author" content="Rober Martín H (rmhdev)">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    {% for asset in ['base.css', 'skeleton.css', 'layout.css'] %}
-    <link rel="stylesheet" href="/css/{{ asset }}" type="text/css">
-    {% endfor %}
+{% for asset in ['bootstrap.min.css', 'image-faker.css'] %}
+    <link rel="stylesheet" href="./css/{{ asset }}" type="text/css">
+{% endfor %}
 
-    <link rel="shortcut icon" href="/favicon.ico">
+    <!--[if lt IE 9]>
+    <script src="./js/html5shiv.js"></script>
+    <![endif]-->
+
+    <link rel="shortcut icon" href="./favicon.ico">
+
 </head>
-
 <body>
-<div class="container">
-    <div class="three columns">
-        <nav>
-            <h1 id="logo">Image Faker</h1>
-            <ul>
-                <li><a href="#description">Description</a></li>
-                <li><a href="#param">Parameters</a></li>
-                <li><a href="#code">Code</a></li>
-                <li><a href="#road-map">Road map</a></li>
-                <li><a href="#author">Author</a></li>
-            </ul>
-            <hr>
-            <p class="version">v1.0.0 - <a href="https://github.com/rmhdev/Image-Faker">View in GitHub</a></p>
-        </nav>
-    </div>
 
-    <div class="twelve columns offset-by-one content">
-{% block content %}{% endblock %}
+<header class="jumbotron subhead" id="overview">
+    <div class="container">
+
+        <div class="row-fluid">
+            <div class="span8 header">
+                <h1>Image Faker</h1>
+                <p class="lead">Generate images dynamically</p>
+            </div>
+            <div class="span4 version">
+                <p class="">Version: 1.0.0</p>
+                <a href="https://github.com/rmhdev/Image-Faker" class="btn btn-large btn-success">View on GitHub</a>
+            </div>
+        </div>
+
     </div>
+</header>
+
+<div class="container">
+{% block content %}{% endblock %}
 </div>
 
 <footer class="footer">
-    <p>Created by <a href="http://twitter.com/rmhdev" target="_blank">@rmhdev</a>.</p>
-    <p>Code licensed under <a href="http://opensource.org/licenses/MIT" target="_blank">MIT License</a>, documentation under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
+    <div class="container">
+        <p>Created by <a href="http://twitter.com/rmhdev" target="_blank">@rmhdev</a>.</p>
+        <p>Code licensed under <a href="http://opensource.org/licenses/MIT" target="_blank">MIT License</a>, documentation under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
+    </div>
 </footer>
-</body>
 
+</body>
 </html>
