@@ -6,6 +6,8 @@ Image Faker is a web app built to generate images dynamically, using simple urls
 http://example.org/6d3353/300x150.png
 ```
 
+Are you interested? [Test Image Faker][] by yourself!
+
 ### Parameters
 
 **Image size**
@@ -70,8 +72,9 @@ This project is inspired in [Dynamic Dummy Image Generator][] by [Russell Heimli
 
 ### Author
 
-My name is Rober Martín. I'm a developer from Donostia / San Sebastián.
+My name is [Rober Martín][] ([@rmhdev][]). I'm a developer from Donostia / San Sebastián.
 
+[Test Image Faker]: http://image-faker.rmhdev.net/
 [Silex]: http://silex.sensiolabs.org/
 [Fabien Potencier]: http://fabien.potencier.org/
 [Igor Wiedler]: https://igor.io/
@@ -81,3 +84,5 @@ My name is Rober Martín. I'm a developer from Donostia / San Sebastián.
 [CC BY 3.0]: http://creativecommons.org/licenses/by/3.0/
 [Dynamic Dummy Image Generator]: http://dummyimage.com/
 [Russell Heimlich]: http://www.russellheimlich.com/blog/
+[Rober Martín]: http://rmhdev.net/
+[@rmhdev]: http://twitter.com/rmhdev
