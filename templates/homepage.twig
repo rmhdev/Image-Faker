@@ -24,18 +24,22 @@
             <dt>Image size</dt>
             <dd>You can define the width and height of the image in pixels, separated with <code>x</code>.
                 The maximum value for both is 1500.
-                <pre><a href="{{ urlWidthHeight }}">{{ urlWidthHeight }}</a></pre></dd>
+                <pre><a href="{{ urlWidthHeight }}">{{ urlWidthHeight }}</a></pre>
+            </dd>
 
             <dd>Height is optional. If not defined, it will be equal to width.
-                <pre><a href="{{ urlWidth }}">{{ urlWidth }}</a></pre></dd>
+                <pre><a href="{{ urlWidth }}">{{ urlWidth }}</a></pre>
+            </dd>
 
             <dt>Extension</dt>
             <dd>It can be <code>jpg</code>, <code>png</code> or <code>gif</code>.
-                <pre><a href="{{ urlExtension }}">{{ urlExtension }}</a></pre></dd>
+                <pre><a href="{{ urlExtension }}">{{ urlExtension }}</a></pre>
+            </dd>
 
             <dt>Background color</dt>
             <dd>Optional. Hexadecimal code, 6 (or 3) characters. The default color is <code>000000</code> (black).
-                <pre><a href="{{ urlBackground }}">{{ urlBackground }}</a></pre></dd>
+                <pre><a href="{{ urlBackground }}">{{ urlBackground }}</a></pre>
+            </dd>
         </dl>
     </section>
 
@@ -43,9 +47,33 @@
         <div class="page-header">
             <h1>Code</h1>
         </div>
-        <p>You can fork this project on GitHub</p>
-        <p>Image Faker uses <a href="http://silex.sensiolabs.org/">Silex</a>, a PHP microframework created by <a href="http://fabien.potencier.org/">Fabien Potencier</a> and <a href="https://igor.io/">Igor Wiedler</a>.
-            The images are generated using <a href="http://imagine.readthedocs.org/">Imagine</a>, a PHP library for image manipulation created by <a href="http://avalanche123.com/">Bulat Shakirzyanov</a>.</p>
+        <p>I started this project with some goals in mind:</p>
+        <ul>
+            <li>Practice <a href="http://c2.com/cgi/wiki?TestDrivenDevelopment">TDD</a>.</li>
+            <li>Play with <a href="http://getcomposer.org/">Composer</a> and <a href="http://git-scm.com/">Git</a>.</li>
+            <li>Try to create good code ;-)</li>
+        </ul>
+
+        <p>Image Faker uses <a href="http://silex.sensiolabs.org/">Silex</a>, a PHP microframework created by
+            <a href="http://fabien.potencier.org/">Fabien Potencier</a> and
+            <a href="https://igor.io/">Igor Wiedler</a>.
+            The images are generated using <a href="http://imagine.readthedocs.org/">Imagine</a>, a PHP library for
+            image manipulation created by <a href="http://avalanche123.com/">Bulat Shakirzyanov</a>.</p>
+
+    </section>
+
+    <section id="license">
+        <div class="page-header">
+            <h1>License</h1>
+        </div>
+
+        <p>Image Faker's code is under the open-source
+            <a href="http://opensource.org/licenses/MIT">MIT License</a>. The documentation is under Creative Commons
+            Attribution 3.0 Unported (<a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>).
+        </p>
+
+        <p>This project is inspired in <a href="http://dummyimage.com/">Dynamic Dummy Image Generator</a> by
+            <a href="http://www.russellheimlich.com/blog/">Russell Heimlich</a>.</p>
     </section>
 
     <section id="change-log">
@@ -54,11 +82,7 @@
         </div>
 
         <ul>
-            <li>V1.0.0 (Juny 8, 2013): initial release
-                <ul>
-                    <li>Testing</li>
-                </ul>
-            </li>
+            <li><code>1.0.0</code> (Juny 8, 2013): initial release.</li>
         </ul>
     </section>
 
@@ -72,7 +96,9 @@
             <li>Personalize default values in a config file.</li>
             <li>Work with <code>Imagick</code> and <code>Gmagick</code> (actually only works with <code>GD</code>).</li>
             <li>Use the HTTP cache.</li>
-            <li>Default image sizes: <abbr class="initialism" title="bla">NTSC</abbr>, <abbr class="initialism" title="bla">PAL</abbr>, ...</li>
+            <li>Default image sizes: <abbr class="initialism" title="bla">NTSC</abbr>,
+                <abbr class="initialism" title="bla">PAL</abbr>, ...
+            </li>
         </ul>
     </section>
 
