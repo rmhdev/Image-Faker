@@ -1,37 +1,41 @@
 ## Image-Faker
 
-
 Image Faker is a web app built to generate images dynamically, using simple urls.
 
 ```
-http://localhost:8000/6d3353/300x150.png
+http://example.org/6d3353/300x150.png
 ```
 
 ### Parameters
 
-*Image size*
+**Image size**
 
 You can define the width and height of the image in pixels, separated with x. The maximum value for both is 1500.
+
 ```
-http://localhost:8000/300x150.png
+http://example.org/300x150.png
 ```
 
 Height is optional. If not defined, it will be equal to width.
+
 ```
-http://localhost:8000/300.png
+http://example.org/300.png
 ```
 
-*Extension*
+**Extension**
+
 It can be jpg, png or gif.
+
 ```
-http://localhost:8000/300.jpg
+http://example.org/300.jpg
 ```
 
-*Background color*
+**Background color**
 
 Optional. Hexadecimal code, 6 (or 3) characters. The default color is 000000 (black).
+
 ```
-http://localhost:8000/6d3353/300x150.png
+http://example.org/6d3353/300x150.png
 ```
 
 ### Code
@@ -42,17 +46,19 @@ I started this project with some goals in mind:
 * Play with Composer and Git.
 * Try to create good code ;-)
 
-Image Faker uses Silex, a PHP microframework created by Fabien Potencier and Igor Wiedler. The images are generated using Imagine, a PHP library for image manipulation created by Bulat Shakirzyanov.
+Image Faker uses [Silex][], a PHP microframework created by [Fabien Potencier][] and [Igor Wiedler][]. 
+The images are generated using [Imagine][], a PHP library for image manipulation created by [Bulat Shakirzyanov][].
 
 ### License
 
-Image Faker's code is under the open-source MIT License. The documentation is under Creative Commons Attribution 3.0 Unported (CC BY 3.0).
+Image Faker's code is under the open-source [MIT License][]. 
+The documentation is under Creative Commons Attribution 3.0 Unported ([CC BY 3.0][]).
 
-This project is inspired in Dynamic Dummy Image Generator by Russell Heimlich.
+This project is inspired in [Dynamic Dummy Image Generator][] by [Russell Heimlich][].
 
 ### Change log
 
-* 1.0.0 (Juny 8, 2013): initial release.
+* 1.0.0 (Juny 9, 2013): initial release.
 
 ### Road map
 
@@ -65,3 +71,13 @@ This project is inspired in Dynamic Dummy Image Generator by Russell Heimlich.
 ### Author
 
 My name is Rober Martín. I'm a developer from Donostia / San Sebastián.
+
+[Silex]: http://silex.sensiolabs.org/
+[Fabien Potencier]: http://fabien.potencier.org/
+[Igor Wiedler]: https://igor.io/
+[Imagine]: http://imagine.readthedocs.org/
+[Bulat Shakirzyanov]: http://avalanche123.com/
+[MIT License]: http://opensource.org/licenses/MIT
+[CC BY 3.0]: http://creativecommons.org/licenses/by/3.0/
+[Dynamic Dummy Image Generator]: http://dummyimage.com/
+[Russell Heimlich]: http://www.russellheimlich.com/blog/
