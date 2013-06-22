@@ -12,6 +12,12 @@ use Symfony\Component\BrowserKit\Cookie;
 class ImageConfig
 {
 
+    public static $defaultSizes = array(
+        "ntsc"  => "720x480",
+        "pal"   => "768x576",
+        "hd720" => "1280x720",
+    );
+
     protected
         $width,
         $height,
@@ -50,8 +56,8 @@ class ImageConfig
             $height = $width;
         } else {
             $size = strtolower($size);
-            if (in_array($size, array("ntsc", "pal", "hd720"))) {
-                $size = ($size === "ntsc") ? "720x480" : (($size === "pal") ? "768x576" : "1280x720");
+            if (array_key_exists($size, self::$defaultSizes)) {
+                $size = self::$defaultSizes[$size];
             }
             $widthHeight = explode("x", $size);
             if ($this->isInvalidArgument($widthHeight)) {
