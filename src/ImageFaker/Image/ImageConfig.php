@@ -11,7 +11,9 @@ use Symfony\Component\BrowserKit\Cookie;
 
 class ImageConfig
 {
-    const MAX_SIZE = 2000;
+    const
+        MAX_SIZE = 2000,
+        DEFAULT_BACKGROUND_COLOR = "000000";
 
     public static $defaultSizes = array(
         "ntsc"  => "720x480",
@@ -107,7 +109,7 @@ class ImageConfig
     protected function processAttributes($attributes = array())
     {
         if (!isset($attributes['background-color'])) {
-            $attributes['background-color'] = "000000";
+            $attributes['background-color'] = self::DEFAULT_BACKGROUND_COLOR;
         }
         $this->backgroundColor  = new Color($attributes['background-color']);
 
