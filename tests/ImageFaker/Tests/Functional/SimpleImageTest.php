@@ -18,15 +18,20 @@ class SimpleImageTest extends WebTestCase
     public function getCreateSimpleImageTestProvider()
     {
         return array(
-            array("/100x100.jpg", 100   , 100   , "image/jpeg"  , "#000000"),
-            array("/100x200.jpg", 100   , 200   , "image/jpeg"  , "#000000"),
-            array("/50x150.png" , 50    , 150   , "image/png"   , "#000000"),
-            array("/50x100.gif" , 50    , 100   , "image/gif"   , "#000000"),
-            array("/75.gif"     , 75    , 75    , "image/gif"   , "#000000"),
+            array("/100x100.jpg"        ,  100  ,  100  , "image/jpeg"  , "#000000"),
+            array("/100x200.jpg"        ,  100  ,  200  , "image/jpeg"  , "#000000"),
+            array("/50x150.png"         ,   50  ,  150  , "image/png"   , "#000000"),
+            array("/50x100.gif"         ,   50  ,  100  , "image/gif"   , "#000000"),
+            array("/75.gif"             ,   75  ,   75  , "image/gif"   , "#000000"),
 
-            array("/cccccc/60x70.png"   , 60    , 70    , "image/png"   , "#cccccc"),
-            array("/d7d7d7/123x321.gif" , 123   , 321   , "image/gif"   , "#d7d7d7"),
-            array("/fff/47x100.jpg"     , 47    , 100   , "image/jpeg"  , "#fff"),
+            array("/cccccc/60x70.png"   ,   60  ,   70  , "image/png"   , "#cccccc"),
+            array("/d7d7d7/123x321.gif" ,  123  ,  321  , "image/gif"   , "#d7d7d7"),
+            array("/fff/47x100.jpg"     ,   47  ,  100  , "image/jpeg"  , "#fff"),
+
+            array("/ntsc.png"           ,  720  ,  480  , "image/png"   , "#000000"),
+            array("/pal.jpg"            ,  768  ,  576  , "image/jpeg"  , "#000000"),
+            array("/hd720.gif"          , 1280  ,  720  , "image/gif"   , "#000000"),
+            array("/hd1080.gif"         , 1920  , 1080  , "image/gif"   , "#000000"),
         );
     }
 
