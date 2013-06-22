@@ -50,8 +50,8 @@ class ImageConfig
             $height = $width;
         } else {
             $size = strtolower($size);
-            if ($size === "ntsc") {
-                $size = "720x480";
+            if (in_array($size, array("ntsc", "pal"))) {
+                $size = ($size === "ntsc") ? "720x480" : "768x576";
             }
             $widthHeight = explode("x", $size);
             if ($this->isInvalidArgument($widthHeight)) {

@@ -276,4 +276,12 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(480, $request->getHeight());
     }
 
+    public function testImagePAL()
+    {
+        $request = new ImageConfig("pal", "png");
+
+        $this->assertEquals(768, $request->getWidth());
+        $this->assertEquals(576, $request->getHeight());
+    }
+
 }
