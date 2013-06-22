@@ -271,9 +271,10 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     public function defaultSizesDataProvider()
     {
         return array(
-            array("ntsc"  ,  720, 480),
-            array("pal"   ,  768, 576),
-            array("hd720" , 1280, 720),
+            array("ntsc"    ,  720,  480),
+            array("pal"     ,  768,  576),
+            array("hd720"   , 1280,  720),
+            array("hd1080"  , 1920, 1080),
         );
     }
 
@@ -286,14 +287,6 @@ class RequestTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($width, $request->getWidth());
         $this->assertEquals($height, $request->getHeight());
-    }
-
-    public function testSizeHD1080()
-    {
-        $request = new ImageConfig("hd1080", "png");
-
-        $this->assertEquals(1920, $request->getWidth());
-        $this->assertEquals(1080, $request->getHeight());
     }
 
 }
