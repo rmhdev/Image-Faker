@@ -268,4 +268,12 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         ) / 1000;
     }
 
+    public function testImageNTSC()
+    {
+        $request = new ImageConfig("ntsc", "png");
+
+        $this->assertEquals(720, $request->getWidth());
+        $this->assertEquals(480, $request->getHeight());
+    }
+
 }

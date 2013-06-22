@@ -49,7 +49,13 @@ class ImageConfig
             $width = (int) $size;
             $height = $width;
         } else {
-            $widthHeight = explode("x", strtolower($size));
+            $size = strtolower($size);
+            if ($size === "ntsc") {
+                $widthHeight = array(720, 480);
+            } else {
+                $widthHeight = explode("x", $size);
+            }
+
             if ($this->isInvalidArgument($widthHeight)) {
                 throw new InvalidArgumentException();
             }
