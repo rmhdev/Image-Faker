@@ -6,7 +6,10 @@ use ImageFaker\Image\Image;
 
 $app->get("/", function () use ($app) {
     return new Response(
-        $app['twig']->render("homepage.twig", array()),
+        $app['twig']->render("homepage.twig", array(
+            "maxSize"       => ImageConfig::MAX_SIZE,
+            "defaultSizes"  => ImageConfig::$defaultSizes
+        )),
         200,
         array()
     );

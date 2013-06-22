@@ -5,6 +5,7 @@
 {% set urlWidth = url("simple", {size: "300", extension: "png"}) %}
 {% set urlExtension = url("simple", {size: "300", extension: "jpg"}) %}
 {% set urlBackground = url("background", {background: "6d3353", size: "300x150", extension: "png"}) %}
+{% set urlNtsc = url("simple", {size: "ntsc", extension: "jpg"}) %}
 
 {% block content %}
 
@@ -23,12 +24,16 @@
         <dl class="dl-horizontal">
             <dt>Image size</dt>
             <dd>You can define the width and height of the image in pixels, separated with <code>x</code>.
-                The maximum value for both is 1500.
+                The maximum value for both is {{ maxSize }}.
                 <pre><a href="{{ urlWidthHeight }}">{{ urlWidthHeight }}</a></pre>
             </dd>
 
             <dd>Height is optional. If not defined, it will be equal to width.
                 <pre><a href="{{ urlWidth }}">{{ urlWidth }}</a></pre>
+            </dd>
+
+            <dd>Some standard sizes are available (<code>{{ defaultSizes|keys|join(', ') }}</code>).
+                <pre><a href="{{ urlNtsc }}">{{ urlNtsc }}</a></pre>
             </dd>
 
             <dt>Extension</dt>
@@ -41,6 +46,13 @@
                 <pre><a href="{{ urlBackground }}">{{ urlBackground }}</a></pre>
             </dd>
         </dl>
+
+        <h2>Standard image sizes</h2>
+        <p>To ease image creation, some standard image sizes are available:</p>
+
+        <dl class="dl-horizontal">{% for key,value in defaultSizes %}
+            <dt>{{ key }}</dt><dd><code>{{ value }}</code></dd>
+        {% endfor %}</dl>
     </section>
 
     <section id="code">
@@ -82,6 +94,11 @@
         </div>
 
         <ul>
+            <li><code>1.1.0</code> (Juny 22, 2013): added first standard image sizes
+               (<abbr class="initialism" title="720x480">NTSC</abbr>,
+                <abbr class="initialism" title="768x576">PAL</abbr>,
+                <abbr class="initialism" title="1280x720">HD720</abbr> and
+                <abbr class="initialism" title="1920x1080">HD1080</abbr>).</li>
             <li><code>1.0.0</code> (Juny 9, 2013): initial release.</li>
         </ul>
     </section>
@@ -96,9 +113,6 @@
             <li>Personalize default values in a config file.</li>
             <li>Work with <code>Imagick</code> and <code>Gmagick</code> (actually only works with <code>GD</code>).</li>
             <li>Use the HTTP cache.</li>
-            <li>Default image sizes: <abbr class="initialism" title="bla">NTSC</abbr>,
-                <abbr class="initialism" title="bla">PAL</abbr>, ...
-            </li>
         </ul>
     </section>
 
