@@ -84,6 +84,7 @@ This project is inspired in [Dynamic Dummy Image Generator][] by [Russell Heimli
 * Personalize default values in a config file.
 * Work with `Imagick` and `Gmagick` (actually only works with `GD`).
 * Use the `HTTP` cache.
+* Draw an icon instead of text.
 
 ### Author
 
