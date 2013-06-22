@@ -268,28 +268,24 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         ) / 1000;
     }
 
-    public function testImageNTSC()
+    public function defaultSizesDataProvider()
     {
-        $request = new ImageConfig("ntsc", "png");
-
-        $this->assertEquals(720, $request->getWidth());
-        $this->assertEquals(480, $request->getHeight());
+        return array(
+            array("ntsc"  ,  720, 480),
+            array("pal"   ,  768, 576),
+            array("hd720" , 1280, 720),
+        );
     }
 
-    public function testImagePAL()
+    /**
+     * @dataProvider defaultSizesDataProvider
+     */
+    public function testDefaultSizes($name, $width, $height)
     {
-        $request = new ImageConfig("pal", "png");
+        $request = new ImageConfig($name, "png");
 
-        $this->assertEquals(768, $request->getWidth());
-        $this->assertEquals(576, $request->getHeight());
-    }
-
-    public function testImageHD720()
-    {
-        $request = new ImageConfig("hd720", "png");
-
-        $this->assertEquals(1280, $request->getWidth());
-        $this->assertEquals(720, $request->getHeight());
+        $this->assertEquals($width, $request->getWidth());
+        $this->assertEquals($height, $request->getHeight());
     }
 
 }
