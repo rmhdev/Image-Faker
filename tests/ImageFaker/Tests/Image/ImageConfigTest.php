@@ -284,4 +284,12 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(576, $request->getHeight());
     }
 
+    public function testImageHD720()
+    {
+        $request = new ImageConfig("hd720", "png");
+
+        $this->assertEquals(1280, $request->getWidth());
+        $this->assertEquals(720, $request->getHeight());
+    }
+
 }
