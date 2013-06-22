@@ -16,6 +16,11 @@ body {
     font-size: 24px;
 }
 
+section h2 {
+    font-size: 20px;
+    font-weight: normal;
+}
+
 pre {
     color: #555555;
 }

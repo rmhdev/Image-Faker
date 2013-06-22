@@ -12,7 +12,7 @@ Are you interested? [Test Image Faker][] by yourself!
 
 **Image size**
 
-You can define the width and height of the image in pixels, separated with `x`. The maximum value for both is 1500.
+You can define the width and height of the image in pixels, separated with `x`. The maximum value for both is 2000.
 
 ```
 http://example.org/300x150.png
@@ -22,6 +22,12 @@ Height is optional. If not defined, it will be equal to width.
 
 ```
 http://example.org/300.png
+```
+
+Some standard sizes are available (`ntsc`, `pal`, `hd720`, `hd1080`).
+
+```
+http://example.org/ntsc.png
 ```
 
 **Extension**
@@ -39,6 +45,15 @@ Optional. Hexadecimal code, 6 (or 3) characters. The default color is `000000` (
 ```
 http://example.org/6d3353/300x150.png
 ```
+
+#### Standard image sizes
+
+To ease image creation, some standard image sizes are available:
+
+* ntsc: `720x480`
+* pal: `768x576`
+* hd720: `1280x720`
+* hd1080: `1920x1080`
 
 ### Code
 
@@ -60,6 +75,7 @@ This project is inspired in [Dynamic Dummy Image Generator][] by [Russell Heimli
 
 ### Change log
 
+* `1.1.0` (Juny 22, 2013): added first standard image sizes (`NTSC`, `PAL`, `HD720` and `HD1080`).
 * `1.0.0` (Juny 9, 2013): initial release.
 
 ### Road map
@@ -68,7 +84,6 @@ This project is inspired in [Dynamic Dummy Image Generator][] by [Russell Heimli
 * Personalize default values in a config file.
 * Work with `Imagick` and `Gmagick` (actually only works with `GD`).
 * Use the `HTTP` cache.
-* Default image sizes: `NTSC`, `PAL`, ...
 
 ### Author
 
