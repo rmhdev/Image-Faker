@@ -11,6 +11,7 @@ use Symfony\Component\BrowserKit\Cookie;
 
 class ImageConfig
 {
+    const MAX_SIZE = 2000;
 
     public static $defaultSizes = array(
         "ntsc"  => "720x480",
@@ -87,7 +88,7 @@ class ImageConfig
         $min = min($width, $height);
         $max = max($width, $height);
 
-        return (($min < 1) or ($max > 2000)) ? true : false;
+        return (($min < 1) or ($max > self::MAX_SIZE)) ? true : false;
     }
 
     protected function processExtension($extension)
