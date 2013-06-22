@@ -87,8 +87,8 @@ class RequestTest extends \PHPUnit_Framework_TestCase
             array("0x10", "png"),
             array("10x0", "png"),
             array("-1x-10", "png"),
-            array("1501x200", "jpg"),
-            array("200x1501", "jpg"),
+            array("2001x200", "jpg"),
+            array("200x2001", "jpg"),
         );
     }
 
@@ -286,6 +286,14 @@ class RequestTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($width, $request->getWidth());
         $this->assertEquals($height, $request->getHeight());
+    }
+
+    public function testSizeHD1080()
+    {
+        $request = new ImageConfig("hd1080", "png");
+
+        $this->assertEquals(1920, $request->getWidth());
+        $this->assertEquals(1080, $request->getHeight());
     }
 
 }

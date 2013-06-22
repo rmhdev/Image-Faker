@@ -136,9 +136,9 @@ class SimpleImageTest extends WebTestCase
             array("/0x10.png"),
             array("/10x0.png"),
             array("/-1x-10.png"),
-            array("/1501x200.jpg"),
-            array("/200x1501.jpg"),
-            array("/1501.png"),
+            array("/2001x200.jpg"),
+            array("/200x2001.jpg"),
+            array("/2001.png"),
         );
     }
 

@@ -16,6 +16,7 @@ class ImageConfig
         "ntsc"  => "720x480",
         "pal"   => "768x576",
         "hd720" => "1280x720",
+        "hd1080" => "1920x1080",
     );
 
     protected
@@ -86,7 +87,7 @@ class ImageConfig
         $min = min($width, $height);
         $max = max($width, $height);
 
-        return (($min < 1) or ($max > 1500)) ? true : false;
+        return (($min < 1) or ($max > 2000)) ? true : false;
     }
 
     protected function processExtension($extension)
