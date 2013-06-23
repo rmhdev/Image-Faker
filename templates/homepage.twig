@@ -1,6 +1,6 @@
 {% extends 'layout.twig' %}
 
-{% set urlBasic = url("background", {background:"6d3353", size: "300x150", extension: "png"}) %}
+{% set urlBasic = url("background", {background:"6d3353", size: "250x100", extension: "png"}) %}
 {% set urlWidthHeight = url("simple", {size: "300x150", extension: "png"}) %}
 {% set urlWidth = url("simple", {size: "300", extension: "png"}) %}
 {% set urlExtension = url("simple", {size: "300", extension: "jpg"}) %}
@@ -14,8 +14,20 @@
         <div class="page-header">
             <h1>Description</h1>
         </div>
+
         <p>Image Faker is a web app built to generate images dynamically, using simple urls.</p>
-        <pre class="basic-example"><a href="{{ urlBasic }}">{{ urlBasic }}</a></pre>
+
+        <div class="row-fluid example">
+            <div class="span8">
+                <p>Example:</p>
+                <pre class="basic-example"><a href="{{ urlBasic }}">{{ urlBasic }}</a></pre>
+            </div>
+            <div class="span4">
+                <p>Result:</p>
+                <img class="" src="{{ urlBasic }}">
+            </div>
+        </div>
+
     </section>
 
     <section id="param">

@@ -16,6 +16,10 @@ body {
     font-size: 24px;
 }
 
+#description img {
+    float: right;
+}
+
 section h2 {
     font-size: 20px;
     font-weight: normal;
@@ -127,7 +131,17 @@ dd pre {
 
 /* Media Queries
 -------------------------------------------------- */
-
+@media (min-width:979px) {
+    pre.basic-example {
+        padding-bottom: 33px;
+        padding-top: 33px;
+    }
+}
+@media (max-width:979px) {
+    pre.basic-example {
+        font-size: 16px;
+    }
+}
 @media (max-width: 767px) {
   body {
     padding-right: 0;
@@ -140,13 +154,14 @@ dd pre {
   .header, .version {
     text-align: center;
   }
-
-  pre.basic-example {
-    font-size: 16px;
-  }
-
   dt {
-      margin-bottom: 5px;
+    margin-bottom: 5px;
+  }
+  #description img {
+    float: none;
+  }
+  #description .example {
+  text-align: center;
   }
 }
 
