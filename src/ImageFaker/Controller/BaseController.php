@@ -32,34 +32,28 @@ class BaseController
 
     public function fontAction(Request $request, Application $app)
     {
+        return $this->generateImageResponse($request);
+    }
+
+    public function backgroundAction(Request $request, Application $app)
+    {
+        return $this->generateImageResponse($request);
+    }
+
+    protected function generateImageResponse(Request $request)
+    {
         $imageConfig = new ImageConfig(
             $request->get("size"),
             $request->get("extension"),
             array(
+                'background-color' => $request->get("background"),
                 'color' => $request->get("color"),
-                'background-color' => $request->get("background")
             )
         );
         $image = new Image($imageConfig);
 
         return new Response($image->getContent(), 200, array(
             "Content-Type"  => $imageConfig->getMimeType()
-        ));
-    }
-
-    public function backgroundAction(Request $request, Application $app)
-    {
-        $imageConfig = new ImageConfig(
-            $request->get("size"),
-            $request->get("extension"),
-            array(
-                'background-color'  => $request->get("background")
-            )
-        );
-        $image = new Image($imageConfig);
-
-        return new Response($image->getContent(), 200, array(
-            'Content-Type'  => $imageConfig->getMimeType()
         ));
     }
 
