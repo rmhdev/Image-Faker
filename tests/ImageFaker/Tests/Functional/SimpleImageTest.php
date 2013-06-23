@@ -178,15 +178,21 @@ class SimpleImageTest extends WebTestCase
         $this->assertTrue($response->isClientError());
     }
 
-    public function testUnknownFontColor()
+    public function unknownFontColorUris()
     {
-        $response = $this->getResponse("/cc/000000/96.png");
-        $this->assertTrue($response->isClientError());
+        return array(
+            array("/cc/000000/96.png"),
+            array("/aaaaaaa/000000/96.jpg"),
+            array("/green/000000/96.jpg"),
+        );
+    }
 
-        $response = $this->getResponse("/aaaaaaa/000000/96.jpg");
-        $this->assertTrue($response->isClientError());
-
-        $response = $this->getResponse("/green/000000/96.jpg");
+    /**
+     * @dataProvider unknownFontColorUris
+     */
+    public function testUnknownFontColor($uri)
+    {
+        $response = $this->getResponse($uri);
         $this->assertTrue($response->isClientError());
     }
 
