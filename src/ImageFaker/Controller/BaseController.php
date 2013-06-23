@@ -3,6 +3,7 @@
 namespace ImageFaker\Controller;
 
 use ImageFaker\Image\ImageConfig;
+use ImageFaker\Image\Image;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,6 +28,23 @@ class BaseController
             200,
             array()
         );
+    }
+
+    public function fontAction(Request $request, Application $app)
+    {
+        $imageConfig = new ImageConfig(
+            $request->get("size"),
+            $request->get("extension"),
+            array(
+                'color' => $request->get("color"),
+                'background-color' => $request->get("background")
+            )
+        );
+        $image = new Image($imageConfig);
+
+        return new Response($image->getContent(), 200, array(
+            "Content-Type"  => $imageConfig->getMimeType()
+        ));
     }
 
 }

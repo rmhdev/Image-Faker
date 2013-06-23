@@ -4,17 +4,11 @@ use Symfony\Component\HttpFoundation\Response;
 use ImageFaker\Image\ImageConfig;
 use ImageFaker\Image\Image;
 
-$app->get("/", 'ImageFaker\Controller\BaseController::indexAction')->bind("homepage");
+$app->get("/",
+    'ImageFaker\Controller\BaseController::indexAction')->bind("homepage");
 
-$app->get("/{color}/{background}/{size}.{extension}", function ($color, $background, $size, $extension)  use ($app) {
-
-    $imageConfig = new ImageConfig($size, $extension, array('color' => $color, 'background-color' => $background));
-    $image = new Image($imageConfig);
-
-    return new Response($image->getContent(), 200, array(
-        "Content-Type"  => $imageConfig->getMimeType()
-    ));
-})->bind("font");
+$app->get("/{color}/{background}/{size}.{extension}",
+    'ImageFaker\Controller\BaseController::fontAction')->bind("font");
 
 $app->get("/{background}/{size}.{extension}", function ($background, $size, $extension) use ($app) {
     $imageConfig = new ImageConfig($size, $extension, array('background-color' => $background));
