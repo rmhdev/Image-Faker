@@ -34,7 +34,7 @@ class SimpleImageTest extends WebTestCase
             array("/hd1080.gif"             , 1920  , 1080  , "image/gif"   , "#000000"),
 
             array("/555/fff/90.jpg"         ,   90  ,   90  , "image/jpeg"  , "#fff"),
-            array("/fffddd/111111/93.gif"   ,   93  ,   93  , "image/gif"  , "#111111"),
+            array("/fffddd/111111/93.gif"   ,   93  ,   93  , "image/gif"   , "#111111"),
         );
     }
 
@@ -175,6 +175,18 @@ class SimpleImageTest extends WebTestCase
     public function testUnknownBackgroundColorUris($uri)
     {
         $response = $this->getResponse($uri);
+        $this->assertTrue($response->isClientError());
+    }
+
+    public function testUnknownFontColor()
+    {
+        $response = $this->getResponse("/cc/000000/96.png");
+        $this->assertTrue($response->isClientError());
+
+        $response = $this->getResponse("/aaaaaaa/000000/96.jpg");
+        $this->assertTrue($response->isClientError());
+
+        $response = $this->getResponse("/green/000000/96.jpg");
         $this->assertTrue($response->isClientError());
     }
 
