@@ -47,4 +47,20 @@ class BaseController
         ));
     }
 
+    public function backgroundAction(Request $request, Application $app)
+    {
+        $imageConfig = new ImageConfig(
+            $request->get("size"),
+            $request->get("extension"),
+            array(
+                'background-color'  => $request->get("background")
+            )
+        );
+        $image = new Image($imageConfig);
+
+        return new Response($image->getContent(), 200, array(
+            'Content-Type'  => $imageConfig->getMimeType()
+        ));
+    }
+
 }

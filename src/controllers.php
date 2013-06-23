@@ -10,14 +10,8 @@ $app->get("/",
 $app->get("/{color}/{background}/{size}.{extension}",
     'ImageFaker\Controller\BaseController::fontAction')->bind("font");
 
-$app->get("/{background}/{size}.{extension}", function ($background, $size, $extension) use ($app) {
-    $imageConfig = new ImageConfig($size, $extension, array('background-color' => $background));
-    $image = new Image($imageConfig);
-
-    return new Response($image->getContent(), 200, array(
-        "Content-Type" => $imageConfig->getMimeType()
-    ));
-})->bind("background");
+$app->get("/{background}/{size}.{extension}",
+    'ImageFaker\Controller\BaseController::backgroundAction')->bind("background");
 
 $app->get("/{size}.{extension}", function ($size, $extension) use ($app) {
 
