@@ -32,6 +32,9 @@ class SimpleImageTest extends WebTestCase
             array("/pal.jpg"            ,  768  ,  576  , "image/jpeg"  , "#000000"),
             array("/hd720.gif"          , 1280  ,  720  , "image/gif"   , "#000000"),
             array("/hd1080.gif"         , 1920  , 1080  , "image/gif"   , "#000000"),
+
+            array("/555/fff/90.jpg"     ,   90  ,   90  , "image/jpeg"  , "#fff"),
+            array("/fffddd/111111/93.gif" ,   93  ,   93  , "image/gif"  , "#111111"),
         );
     }
 
@@ -173,13 +176,6 @@ class SimpleImageTest extends WebTestCase
     {
         $response = $this->getResponse($uri);
         $this->assertTrue($response->isClientError());
-    }
-
-
-    public function testPersonalizedFontColor()
-    {
-        $response = $this->getResponse("/555555/ffffff/90.jpg");
-        $this->assertTrue($response->isSuccessful());
     }
 
 }

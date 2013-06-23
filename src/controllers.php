@@ -15,9 +15,14 @@ $app->get("/", function () use ($app) {
     );
 })->bind("homepage");
 
-$app->get("/{color}/{background}/{size}.{extension}", function () {
+$app->get("/{color}/{background}/{size}.{extension}", function ($color, $background, $size, $extension)  use ($app) {
 
-    return new Response("ok", 200);
+    $imageConfig = new ImageConfig($size, $extension, array('color' => $color, 'background-color' => $background));
+    $image = new Image($imageConfig);
+
+    return new Response($image->getContent(), 200, array(
+        "Content-Type"  => $imageConfig->getMimeType()
+    ));
 });
 
 $app->get("/{background}/{size}.{extension}", function ($background, $size, $extension) use ($app) {
