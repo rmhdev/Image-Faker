@@ -4,16 +4,7 @@ use Symfony\Component\HttpFoundation\Response;
 use ImageFaker\Image\ImageConfig;
 use ImageFaker\Image\Image;
 
-$app->get("/", function () use ($app) {
-    return new Response(
-        $app['twig']->render("homepage.twig", array(
-            "maxSize"       => ImageConfig::MAX_SIZE,
-            "defaultSizes"  => ImageConfig::$defaultSizes
-        )),
-        200,
-        array()
-    );
-})->bind("homepage");
+$app->get("/", 'ImageFaker\Controller\BaseController::indexAction')->bind("homepage");
 
 $app->get("/{color}/{background}/{size}.{extension}", function ($color, $background, $size, $extension)  use ($app) {
 
