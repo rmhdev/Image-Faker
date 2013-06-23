@@ -15,6 +15,11 @@ $app->get("/", function () use ($app) {
     );
 })->bind("homepage");
 
+$app->get("/{color}/{background}/{size}.{extension}", function () {
+
+    return new Response("ok", 200);
+});
+
 $app->get("/{background}/{size}.{extension}", function ($background, $size, $extension) use ($app) {
     $imageConfig = new ImageConfig($size, $extension, array('background-color' => $background));
     $image = new Image($imageConfig);

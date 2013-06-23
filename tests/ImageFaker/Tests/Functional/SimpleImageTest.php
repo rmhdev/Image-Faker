@@ -175,4 +175,11 @@ class SimpleImageTest extends WebTestCase
         $this->assertTrue($response->isClientError());
     }
 
+
+    public function testPersonalizedFontColor()
+    {
+        $response = $this->getResponse("/555555/ffffff/90.jpg");
+        $this->assertTrue($response->isSuccessful());
+    }
+
 }
