@@ -1,29 +1,18 @@
 <?php
 
 use Symfony\Component\HttpFoundation\Response;
-use ImageFaker\Image\ImageConfig;
-use ImageFaker\Image\Image;
 
 $app->get("/",
     'ImageFaker\Controller\BaseController::indexAction')->bind("homepage");
 
 $app->get("/{color}/{background}/{size}.{extension}",
-    'ImageFaker\Controller\BaseController::fontAction')->bind("font");
+    'ImageFaker\Controller\BaseController::imageAction')->bind("font");
 
 $app->get("/{background}/{size}.{extension}",
-    'ImageFaker\Controller\BaseController::backgroundAction')->bind("background");
+    'ImageFaker\Controller\BaseController::imageAction')->bind("background");
 
-$app->get("/{size}.{extension}", function ($size, $extension) use ($app) {
-
-    $imageConfig = new ImageConfig($size, $extension);
-    $image = new Image($imageConfig);
-
-    $response = new Response($image->getContent(), 200, array(
-        "Content-Type" => $imageConfig->getMimeType()
-    ));
-
-    return $response;
-})->bind("simple");
+$app->get("/{size}.{extension}",
+    'ImageFaker\Controller\BaseController::imageAction')->bind("simple");
 
 $app->error(function (\Exception $e, $code) use ($app) {
     if ($app['debug']) {

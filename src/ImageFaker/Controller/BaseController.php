@@ -30,12 +30,7 @@ class BaseController
         );
     }
 
-    public function fontAction(Request $request, Application $app)
-    {
-        return $this->generateImageResponse($request);
-    }
-
-    public function backgroundAction(Request $request, Application $app)
+    public function imageAction(Request $request)
     {
         return $this->generateImageResponse($request);
     }
