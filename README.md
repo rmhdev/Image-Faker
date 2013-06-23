@@ -46,6 +46,14 @@ Optional. Hexadecimal code, 6 (or 3) characters. The default color is `000000` (
 http://example.org/6d3353/300x150.png
 ```
 
+**Font color**
+
+Optional. Hexadecimal code, 6 (or 3) characters. If not defined, is automatically calculated to contrast with the background color.
+
+```
+http://example.org/ffff00/555555/300x150.png
+```
+
 #### Standard image sizes
 
 To ease image creation, some standard image sizes are available:
@@ -75,6 +83,7 @@ This project is inspired in [Dynamic Dummy Image Generator][] by [Russell Heimli
 
 ### Change log
 
+* `1.2.0` (Juny 23, 2013): font color can be indicated.
 * `1.1.0` (Juny 22, 2013): added first standard image sizes (`NTSC`, `PAL`, `HD720` and `HD1080`).
 * `1.0.0` (Juny 9, 2013): initial release.
 

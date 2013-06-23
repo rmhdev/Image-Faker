@@ -23,7 +23,7 @@ $app->get("/{color}/{background}/{size}.{extension}", function ($color, $backgro
     return new Response($image->getContent(), 200, array(
         "Content-Type"  => $imageConfig->getMimeType()
     ));
-});
+})->bind("font");
 
 $app->get("/{background}/{size}.{extension}", function ($background, $size, $extension) use ($app) {
     $imageConfig = new ImageConfig($size, $extension, array('background-color' => $background));
