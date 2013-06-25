@@ -48,7 +48,8 @@ class BaseController
         $image = new Image($imageConfig);
 
         return new Response($image->getContent(), 200, array(
-            "Content-Type"  => $imageConfig->getMimeType()
+            "Content-Type"  => $imageConfig->getMimeType(),
+            'Cache-Control' => 's-maxage=10'
         ));
     }
 

@@ -196,4 +196,11 @@ class SimpleImageTest extends WebTestCase
         $this->assertTrue($response->isClientError());
     }
 
+    public function testCachedCall()
+    {
+        $response1 = $this->getResponse("/600.jpg");
+        $this->assertTrue($response1->isSuccessful());
+        $this->assertTrue($response1->isCacheable());
+    }
+
 }
