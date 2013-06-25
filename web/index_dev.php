@@ -4,4 +4,4 @@
 
 $app = require __DIR__.'/../src/development.php';
 
-$app[]->run();
+$app->run();

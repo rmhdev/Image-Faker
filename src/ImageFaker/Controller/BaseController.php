@@ -47,10 +47,14 @@ class BaseController
         );
         $image = new Image($imageConfig);
 
-        return new Response($image->getContent(), 200, array(
+        $response = new Response($image->getContent(), 200, array(
             "Content-Type"  => $imageConfig->getMimeType(),
-            'Cache-Control' => 's-maxage=10'
+            "Cache-Control" => "public, max-age=3600"
         ));
+        $response->setEtag(md5($response->getContent()));
+        $response->isNotModified($request);
+
+        return $response;
     }
 
 }

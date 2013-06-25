@@ -201,6 +201,8 @@ class SimpleImageTest extends WebTestCase
         $response1 = $this->getResponse("/600.jpg");
         $this->assertTrue($response1->isSuccessful());
         $this->assertTrue($response1->isCacheable());
+        $this->assertEquals(3600, $response1->getMaxAge());
+        $this->assertTrue($response1->isValidateable());
     }
 
 }
