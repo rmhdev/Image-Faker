@@ -49,10 +49,10 @@ class BaseController
 
         $response = new Response($image->getContent(), 200, array(
             "Content-Type"  => $imageConfig->getMimeType(),
-            "Cache-Control" => "public, max-age=3600, s-maxage=3600" // TODO: test s-max-age
+            "Cache-Control" => "public, max-age=3600, s-maxage=3600"
         ));
-        $response->setEtag(md5($response->getContent()));
         $response->isNotModified($request);
+        $response->setEtag(md5($response->getContent()));
 
         return $response;
     }
