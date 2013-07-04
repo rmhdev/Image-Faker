@@ -63,6 +63,10 @@ To ease image creation, some standard image sizes are available:
 * hd720: `1280x720`
 * hd1080: `1920x1080`
 
+#### HTTP cache
+
+Creating images dinamically is an "complex" task executed by the server. If images are too big or a lot of requests are made at the same time, the overhead can become a problem. Luckily HTTP cache is here to help, storing responses temporarily and improving communication between users and server.
+
 ### Code
 
 I started this project with some goals in mind:
@@ -83,6 +87,7 @@ This project is inspired in [Dynamic Dummy Image Generator][] by [Russell Heimli
 
 ### Change log
 
+* `1.3.0` (July XX, 2013): use HTTP cache.
 * `1.2.0` (Juny 23, 2013): font color can be indicated.
 * `1.1.0` (Juny 22, 2013): added first standard image sizes (`NTSC`, `PAL`, `HD720` and `HD1080`).
 * `1.0.0` (Juny 9, 2013): initial release.
@@ -91,8 +96,8 @@ This project is inspired in [Dynamic Dummy Image Generator][] by [Russell Heimli
 
 * Personalize default values in a config file.
 * Work with `Imagick` and `Gmagick` (actually only works with `GD`).
-* Use the `HTTP` cache.
 * Draw an icon instead of text.
+* Info about colors when no image is requested.
 
 ### Author
 
