@@ -32,12 +32,16 @@
         <p>Image Faker is a web app built to generate images dynamically, using simple urls.</p>
 
         <div class="row-fluid example">
-            <div class="span8">
-                <p>Example:</p>
-                <pre class="basic-example">{{ faker.link_to_image("background", paramsBasic) }}</pre>
+            <div class="span2">
+                <p class="generates">The url:</p>
             </div>
             <div class="span4">
-                <p>Result:</p>
+                <pre class="basic-example">{{ faker.link_to_image("background", paramsBasic) }}</pre>
+            </div>
+            <div class="span1">
+                <p class="generates">generates</p>
+            </div>
+            <div class="span5">
                 <img class="" src="{{ url("background", paramsBasic) }}">
             </div>
         </div>

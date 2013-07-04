@@ -30,12 +30,15 @@ pre {
 }
 pre.basic-example {
     text-align: center;
-    font-size: 18px;
+    /*font-size: 18px;*/
     margin-bottom: 20px;
     line-height: 30px;
 }
 pre.basic-example abbr {
     color: #333333;
+}
+p.generates {
+
 }
 dd pre {
     margin-top: 5px;
@@ -131,15 +134,11 @@ dd pre {
 
 /* Media Queries
 -------------------------------------------------- */
-@media (min-width:979px) {
-    pre.basic-example {
+
+@media (min-width: 767px) {
+    pre.basic-example, p.generates {
         padding-bottom: 33px;
         padding-top: 33px;
-    }
-}
-@media (max-width:979px) {
-    pre.basic-example {
-        font-size: 16px;
     }
 }
 @media (max-width: 767px) {
@@ -157,14 +156,13 @@ dd pre {
   dt {
     margin-bottom: 5px;
   }
+  pre.basic-example {
+      font-size: 16px;
+  }
   #description img {
     float: none;
   }
   #description .example {
   text-align: center;
   }
-}
-
-@media (max-width: 480px) {
-
 }
