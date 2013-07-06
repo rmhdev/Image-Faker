@@ -15,6 +15,26 @@ class SimpleImageTest extends WebTestCase
         return require __DIR__ . "/../../../../src/production.php";
     }
 
+    public function setUp()
+    {
+        parent::setUp();
+        mkdir($this->getTempDir(), 0777, true);
+    }
+
+    public function tearDown()
+    {
+        foreach (glob($this->getTempDir() . "/*") as $tempFile) {
+            unlink($tempFile);
+        }
+        rmdir($this->getTempDir());
+        parent::tearDown();
+    }
+
+    protected function getTempDir()
+    {
+        return sys_get_temp_dir() . "/image-faker";
+    }
+
     public function getCreateSimpleImageTestProvider()
     {
         return array(
@@ -61,8 +81,6 @@ class SimpleImageTest extends WebTestCase
         // gif images have a slightly different background color (because of compression?)
         $colorTest = $image->getColorAt(new Point(0, 0));
         $this->assertLessThanOrEqual(10, $this->getColorDifference($expectedBackgroundColor, (string)$colorTest));
-
-        unlink($responseFileName);
     }
 
     /**
@@ -85,7 +103,7 @@ class SimpleImageTest extends WebTestCase
         } else {
             $fileName = $uriParts[0] . "-" . $uriParts[1];
         }
-        $responseFileName = sys_get_temp_dir() . $fileName;
+        $responseFileName = $this->getTempDir() . $fileName;
         file_put_contents($responseFileName, $response->getContent());
         chmod($responseFileName, 0777);
 
@@ -107,7 +125,6 @@ class SimpleImageTest extends WebTestCase
             (max($colorA->getGreen(), $colorB->getGreen())  - min($colorA->getGreen(), $colorB->getGreen())) +
             (max($colorA->getBlue(), $colorB->getBlue())    - min($colorA->getBlue(), $colorB->getBlue()));
     }
-
 
     public function testUrlShouldBeCaseInsensitive()
     {
