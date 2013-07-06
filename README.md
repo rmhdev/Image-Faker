@@ -2,6 +2,8 @@
 
 Image Faker is a web app built to generate images dynamically, using simple urls.
 
+[![Build Status](https://travis-ci.org/rmhdev/Image-Faker.png?branch=v1.4.0)](https://travis-ci.org/rmhdev/Image-Faker)
+
 ```
 http://example.org/6d3353/300x150.png
 ```
