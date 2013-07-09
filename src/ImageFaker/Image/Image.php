@@ -16,9 +16,14 @@ class Image
     public function __construct(ImageConfig $imageConfig)
     {
         $this->imageConfig = $imageConfig;
-        $this->imagine = new \Imagine\Gd\Imagine();
+        $this->imagine = $this->newImagine();
         $this->image = $this->createImage();
         $this->writeText();
+    }
+
+    protected function newImagine()
+    {
+        return new \Imagine\Gd\Imagine();
     }
 
     protected function createImage()
