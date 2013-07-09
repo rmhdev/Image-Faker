@@ -73,7 +73,7 @@ class SimpleImageTest extends WebTestCase
         $fileMimeType = $this->getMimeTypeFromFileName($responseFileName);
         $this->assertEquals($expectedMimeType, $fileMimeType);
 
-        $imagine = new \Imagine\GD\Imagine();
+        $imagine = $this->getImagine();
         $image = $imagine->open($responseFileName);
         $this->assertEquals($expectedWidth, $image->getSize()->getWidth());
         $this->assertEquals($expectedHeight, $image->getSize()->getHeight());
@@ -124,6 +124,11 @@ class SimpleImageTest extends WebTestCase
             (max($colorA->getRed(), $colorB->getRed())      - min($colorA->getRed(), $colorB->getRed())) +
             (max($colorA->getGreen(), $colorB->getGreen())  - min($colorA->getGreen(), $colorB->getGreen())) +
             (max($colorA->getBlue(), $colorB->getBlue())    - min($colorA->getBlue(), $colorB->getBlue()));
+    }
+
+    protected function getImagine()
+    {
+        return new \Imagine\GD\Imagine();
     }
 
     public function testUrlShouldBeCaseInsensitive()

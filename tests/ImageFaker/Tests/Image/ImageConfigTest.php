@@ -161,7 +161,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     {
         $imageConfig = new ImageConfig("100x100", "jpg");
         $fontColor = new \Imagine\Image\Color("CCCCCC", 0);
-        $font = new \Imagine\Gd\Font($this->getFontPath(), $imageConfig->getFontSize(), $fontColor);
+        $font = $this->getFont($imageConfig->getFontSize(), $fontColor);
 
         $this->assertInstanceOf("\Imagine\Image\Point", $imageConfig->calculateFontPoint(80, 20));
     }
@@ -171,7 +171,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $imageConfig = new ImageConfig("100x100", "jpg");
         $fontColor = new \Imagine\Image\Color("CCCCCC", 0);
 
-        $font = new \Imagine\Gd\Font($this->getFontPath(), $imageConfig->getFontSize(), $fontColor);
+        $font = $this->getFont($imageConfig->getFontSize(), $fontColor);
         $fontBox = $font->box($imageConfig->getText(), 0);
         $point = $imageConfig->calculateFontPoint($fontBox->getWidth(), $fontBox->getHeight());
 
@@ -186,7 +186,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     {
         $imageConfig = new ImageConfig("250x250", "jpg");
         $fontColor = new \Imagine\Image\Color("CCCCCC", 0);
-        $font = new \Imagine\Gd\Font($this->getFontPath(), $imageConfig->getFontSize(), $fontColor);
+        $font = $this->getFont($imageConfig->getFontSize(), $fontColor);
         $fontBox = $font->box($imageConfig->getText(), 0);
         $point = $imageConfig->calculateFontPoint($fontBox->getWidth(), $fontBox->getHeight());
 
@@ -195,6 +195,11 @@ class RequestTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($expectedY, $point->getY());
         $this->assertEquals($expectedX, $point->getX());
+    }
+
+    protected function getFont($size, $color)
+    {
+        return new \Imagine\Gd\Font($this->getFontPath(), $size, $color);
     }
 
     protected function getFontPath()

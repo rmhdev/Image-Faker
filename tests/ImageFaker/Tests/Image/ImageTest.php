@@ -4,7 +4,6 @@ namespace ImageFaker\Tests;
 
 use ImageFaker\Image\ImageConfig;
 use ImageFaker\Image\Image;
-use Imagine\Gd\Font;
 use Imagine\Gd\Imagine;
 
 class ImageTest extends \PHPUnit_Framework_TestCase
@@ -86,9 +85,12 @@ class ImageTest extends \PHPUnit_Framework_TestCase
 
     protected function createTempImage($fileName)
     {
-        $imagine = new \Imagine\GD\Imagine();
+        return $this->getImagine()->open($fileName);
+    }
 
-        return $imagine->open($fileName);
+    protected function getImagine()
+    {
+        return new \Imagine\GD\Imagine();
     }
 
 }
