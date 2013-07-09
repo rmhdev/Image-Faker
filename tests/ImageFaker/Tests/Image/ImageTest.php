@@ -3,8 +3,7 @@
 namespace ImageFaker\Tests;
 
 use ImageFaker\Image\ImageConfig;
-use ImageFaker\Image\Image;
-use Imagine\Gd\Imagine;
+use ImageFaker\Gd\Image;
 
 class ImageTest extends \PHPUnit_Framework_TestCase
 {
@@ -12,7 +11,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     public function testNewImage()
     {
         $image = $this->createImage("120x120", "jpg");
-        $this->assertInstanceOf("ImageFaker\Image\Image", $image);
+        $this->assertInstanceOf("ImageFaker\Image\AbstractImage", $image);
         $this->assertObjectHasAttribute("imageConfig", $image);
         $this->assertAttributeInstanceOf("ImageFaker\Image\ImageConfig", "imageConfig", $image);
     }
@@ -56,7 +55,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
         $this->genericTestCreatedImage($this->createImage("2x4", "jpg"));
     }
 
-    protected function genericTestCreatedImage(\ImageFaker\Image\Image $image)
+    protected function genericTestCreatedImage(Image $image)
     {
         $fileName = sprintf("%s/%s.%s",
             sys_get_temp_dir(),

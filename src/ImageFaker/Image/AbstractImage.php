@@ -4,9 +4,9 @@ namespace ImageFaker\Image;
 
 use ImageFaker\Image\ImageConfig;
 use Imagine\Image\Box;
-use Imagine\Image\Color;
+use Imagine\Image\ImagineInterface;
 
-class Image
+abstract class AbstractImage
 {
     protected
         $imageConfig,
@@ -21,10 +21,10 @@ class Image
         $this->writeText();
     }
 
-    protected function newImagine()
-    {
-        return new \Imagine\Gd\Imagine();
-    }
+    /**
+     * @return ImagineInterface
+     */
+    abstract protected function newImagine();
 
     protected function createImage()
     {
