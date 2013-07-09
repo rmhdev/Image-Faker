@@ -2,6 +2,7 @@
 
 namespace ImageFaker\Tests;
 
+use Imagine\Exception\RuntimeException;
 use Imagine\Image\Color;
 use Imagine\Image\Point;
 use Silex\WebTestCase;
@@ -128,7 +129,14 @@ class SimpleImageTest extends WebTestCase
 
     protected function getImagine()
     {
-        return new \Imagine\GD\Imagine();
+        $imagine = NULL;
+        try {
+            $imagine = new \Imagine\Gd\Imagine();
+        } catch (RuntimeException $e) {
+            $this->markTestSkipped($e->getMessage());
+        }
+
+        return $imagine;
     }
 
     public function testUrlShouldBeCaseInsensitive()
