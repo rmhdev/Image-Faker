@@ -212,7 +212,10 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $fontPath = ImageConfig::getFontPath();
         $this->assertFileExists($fontPath);
         $this->assertTrue(is_file($fontPath));
-        $this->assertEquals("application/x-font-ttf", finfo_file(finfo_open(FILEINFO_MIME_TYPE), $fontPath));
+        $this->assertContains(
+            finfo_file(finfo_open(FILEINFO_MIME_TYPE), $fontPath),
+            array("application/x-font-ttf", "application/octet-stream")
+        );
     }
 
     public function testDefaultColors()
