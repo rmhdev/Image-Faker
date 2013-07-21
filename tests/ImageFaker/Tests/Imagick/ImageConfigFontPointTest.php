@@ -17,10 +17,8 @@ class ImageConfigFontPointTest extends AbstractImageConfigFontPointTest
         }
     }
 
-    protected function getFont($size, $color)
+    protected function getImagine()
     {
-        $imagine = new Imagine();
-
-        return $imagine->font(ImageConfig::getFontPath(), $size, $color);
+        return new Imagine();
     }
 }

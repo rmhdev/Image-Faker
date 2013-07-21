@@ -4,6 +4,7 @@ namespace ImageFaker\Tests\Image;
 
 use Imagine\Image\Color;
 use Imagine\Image\AbstractFont;
+use Imagine\Image\ImagineInterface;
 use ImageFaker\Image\ImageConfig;
 
 
@@ -46,6 +47,16 @@ abstract class AbstractImageConfigFontPointTest extends \PHPUnit_Framework_TestC
      * @param Color $color
      * @return AbstractFont
      */
-    abstract protected function getFont($size, $color);
+    protected function getFont($size, $color)
+    {
+        $imagine = $this->getImagine();
+
+        return $imagine->font(ImageConfig::getFontPath(), $size, $color);
+    }
+
+    /**
+     * @return ImagineInterface
+     */
+    abstract protected function getImagine();
 
 }
