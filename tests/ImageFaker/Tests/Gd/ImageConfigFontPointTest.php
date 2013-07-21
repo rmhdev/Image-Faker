@@ -2,10 +2,11 @@
 
 namespace ImageFaker\Tests\Gd;
 
-use ImageFaker\Tests\Image\AbstractImageConfigTest;
+use ImageFaker\Image\ImageConfig;
+use ImageFaker\Tests\Image\AbstractImageConfigFontPointTest;
 use Imagine\Gd\Font;
 
-class ImageConfigTest extends AbstractImageConfigTest
+class ImageConfigFontPointTest extends AbstractImageConfigFontPointTest
 {
     public function setUp()
     {
@@ -18,6 +19,6 @@ class ImageConfigTest extends AbstractImageConfigTest
 
     protected function getFont($size, $color)
     {
-        return new Font($this->getFontPath(), $size, $color);
+        return new Font(ImageConfig::getFontPath(), $size, $color);
     }
 }
