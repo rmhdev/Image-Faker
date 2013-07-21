@@ -1,9 +1,9 @@
 <?php
 
-namespace ImageFaker\Tests\Gd;
+namespace ImageFaker\Tests\Imagick;
 
-use Imagine\Gd\Imagine;
-use ImageFaker\Gd\Image;
+use Imagine\Imagick\Imagine;
+use ImageFaker\Imagick\Image;
 use ImageFaker\Image\ImageConfig;
 use ImageFaker\Tests\Image\AbstractImageTest;
 
@@ -14,8 +14,8 @@ class ImageTest extends AbstractImageTest
     {
         parent::setUp();
 
-        if (!function_exists("gd_info")) {
-            $this->markTestSkipped("Gd is not installed");
+        if (!class_exists("imagick")) {
+            $this->markTestSkipped("Imagick is not installed");
         }
     }
 

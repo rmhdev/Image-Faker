@@ -47,9 +47,7 @@ abstract class AbstractImage
 
     protected function calculateFontSize()
     {
-        // In GD, resolution is 96 by default. Font size must be "hacked".
-        // See: https://github.com/avalanche123/Imagine/issues/32
-        return floor($this->getImageConfig()->getFontSize() *  (72 / 96));
+        return $this->getImageConfig()->getFontSize();
     }
 
     public function getImageConfig()
