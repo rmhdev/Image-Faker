@@ -1,11 +1,12 @@
 <?php
 
-namespace ImageFaker\Tests;
+namespace ImageFaker\Tests\Image;
 
 use ImageFaker\Image\ImageConfig;
 use Imagine\Image\Color;
+use Imagine\Image\AbstractFont;
 
-class ImageConfigTest extends \PHPUnit_Framework_TestCase
+abstract class AbstractImageConfigTest extends \PHPUnit_Framework_TestCase
 {
     public function testImage100x100Jpg()
     {
@@ -160,7 +161,7 @@ class ImageConfigTest extends \PHPUnit_Framework_TestCase
     public function testGetFontPointShouldReturnPoint()
     {
         $imageConfig = new ImageConfig("100x100", "jpg");
-        $fontColor = new \Imagine\Image\Color("CCCCCC", 0);
+        $fontColor = new Color("CCCCCC", 0);
         $font = $this->getFont($imageConfig->getFontSize(), $fontColor);
 
         $this->assertInstanceOf("\Imagine\Image\Point", $imageConfig->calculateFontPoint(80, 20));
@@ -169,7 +170,7 @@ class ImageConfigTest extends \PHPUnit_Framework_TestCase
     public function testGetFontPointFor100x100ShouldReturnCenteredPoint()
     {
         $imageConfig = new ImageConfig("100x100", "jpg");
-        $fontColor = new \Imagine\Image\Color("CCCCCC", 0);
+        $fontColor = new Color("CCCCCC", 0);
 
         $font = $this->getFont($imageConfig->getFontSize(), $fontColor);
         $fontBox = $font->box($imageConfig->getText(), 0);
@@ -185,7 +186,7 @@ class ImageConfigTest extends \PHPUnit_Framework_TestCase
     public function testGetFontPointFor250x250ShouldReturnCenteredPoint()
     {
         $imageConfig = new ImageConfig("250x250", "jpg");
-        $fontColor = new \Imagine\Image\Color("CCCCCC", 0);
+        $fontColor = new Color("CCCCCC", 0);
         $font = $this->getFont($imageConfig->getFontSize(), $fontColor);
         $fontBox = $font->box($imageConfig->getText(), 0);
         $point = $imageConfig->calculateFontPoint($fontBox->getWidth(), $fontBox->getHeight());
@@ -195,11 +196,6 @@ class ImageConfigTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($expectedY, $point->getY());
         $this->assertEquals($expectedX, $point->getX());
-    }
-
-    protected function getFont($size, $color)
-    {
-        return new \Imagine\Gd\Font($this->getFontPath(), $size, $color);
     }
 
     protected function getFontPath()
@@ -296,5 +292,12 @@ class ImageConfigTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($width, $request->getWidth());
         $this->assertEquals($height, $request->getHeight());
     }
+
+    /**
+     * @param integer $size
+     * @param Color $color
+     * @return AbstractFont
+     */
+    abstract protected function getFont($size, $color);
 
 }
