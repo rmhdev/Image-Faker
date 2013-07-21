@@ -4,8 +4,7 @@ namespace ImageFaker\Tests\Imagick;
 
 use ImageFaker\Image\ImageConfig;
 use ImageFaker\Tests\Image\AbstractImageConfigFontPointTest;
-use Imagine\Imagick\Font;
-use Imagick;
+use Imagine\Imagick\Imagine;
 
 class ImageConfigFontPointTest extends AbstractImageConfigFontPointTest
 {
@@ -20,6 +19,8 @@ class ImageConfigFontPointTest extends AbstractImageConfigFontPointTest
 
     protected function getFont($size, $color)
     {
-        return new Font(new Imagick(), ImageConfig::getFontPath(), $size, $color);
+        $imagine = new Imagine();
+
+        return $imagine->font(ImageConfig::getFontPath(), $size, $color);
     }
 }
