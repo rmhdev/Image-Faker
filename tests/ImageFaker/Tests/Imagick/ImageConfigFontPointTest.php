@@ -1,0 +1,25 @@
+<?php
+
+namespace ImageFaker\Tests\Imagick;
+
+use ImageFaker\Image\ImageConfig;
+use ImageFaker\Tests\Image\AbstractImageConfigFontPointTest;
+use Imagine\Imagick\Font;
+use Imagick;
+
+class ImageConfigFontPointTest extends AbstractImageConfigFontPointTest
+{
+    public function setUp()
+    {
+        parent::setUp();
+
+        if (!class_exists("imagick")) {
+            $this->markTestSkipped("Imagick is not installed");
+        }
+    }
+
+    protected function getFont($size, $color)
+    {
+        return new Font(new Imagick(), ImageConfig::getFontPath(), $size, $color);
+    }
+}
