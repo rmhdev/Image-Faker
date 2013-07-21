@@ -1,11 +1,12 @@
 <?php
 
-namespace ImageFaker\Tests;
+namespace ImageFaker\Tests\Image;
 
+use Imagine\Image\ImagineInterface;
 use ImageFaker\Image\ImageConfig;
-use ImageFaker\Gd\Image;
+use ImageFaker\Image\AbstractImage;
 
-class ImageTest extends \PHPUnit_Framework_TestCase
+abstract class AbstractImageTest extends \PHPUnit_Framework_TestCase
 {
 
     public function testNewImage()
@@ -55,7 +56,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
         $this->genericTestCreatedImage($this->createImage("2x4", "jpg"));
     }
 
-    protected function genericTestCreatedImage(Image $image)
+    protected function genericTestCreatedImage(AbstractImage $image)
     {
         $fileName = sprintf("%s/%s.%s",
             sys_get_temp_dir(),
@@ -79,7 +80,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     {
         $request = new ImageConfig($size, $extension);
 
-        return new Image($request);
+        return $this->getImage($request);
     }
 
     protected function createTempImage($fileName)
@@ -87,9 +88,15 @@ class ImageTest extends \PHPUnit_Framework_TestCase
         return $this->getImagine()->open($fileName);
     }
 
-    protected function getImagine()
-    {
-        return new \Imagine\GD\Imagine();
-    }
+    /**
+     * @param ImageConfig $config
+     * @return AbstractImage
+     */
+    abstract protected function getImage(ImageConfig $config);
+
+    /**
+     * @return ImagineInterface
+     */
+    abstract protected function getImagine();
 
 }
