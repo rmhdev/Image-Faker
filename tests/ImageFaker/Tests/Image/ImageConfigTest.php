@@ -5,7 +5,7 @@ namespace ImageFaker\Tests;
 use ImageFaker\Image\ImageConfig;
 use Imagine\Image\Color;
 
-class RequestTest extends \PHPUnit_Framework_TestCase
+class ImageConfigTest extends \PHPUnit_Framework_TestCase
 {
     public function testImage100x100Jpg()
     {
