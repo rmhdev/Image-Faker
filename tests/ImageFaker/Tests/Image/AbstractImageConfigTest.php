@@ -161,9 +161,6 @@ abstract class AbstractImageConfigTest extends \PHPUnit_Framework_TestCase
     public function testGetFontPointShouldReturnPoint()
     {
         $imageConfig = new ImageConfig("100x100", "jpg");
-        $fontColor = new Color("CCCCCC", 0);
-        $font = $this->getFont($imageConfig->getFontSize(), $fontColor);
-
         $this->assertInstanceOf("\Imagine\Image\Point", $imageConfig->calculateFontPoint(80, 20));
     }
 
