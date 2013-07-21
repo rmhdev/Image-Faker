@@ -1,5 +1,15 @@
 {
     "name": "rmhdev/image-faker",
+    "description": "Create images dinamically",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Rober Martín H",
+            "email": "rmh.dev@gmail.com",
+            "homepage": "http://rmhdev.net",
+            "role": "developer"
+        }
+    ],
     "license": "MIT",
     "require": {
         "php": ">=5.3.3",
