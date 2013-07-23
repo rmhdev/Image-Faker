@@ -5,7 +5,7 @@ use Symfony\Component\HttpFoundation\Response;
 $app->get("/",
     'ImageFaker\Controller\BaseController::indexAction')->bind("homepage");
 
-$app->get("/{color}/{background}/{size}.{extension}",
+$app->get("/{background}/{color}/{size}.{extension}",
     'ImageFaker\Controller\BaseController::imageAction')->bind("font");
 
 $app->get("/{background}/{size}.{extension}",
