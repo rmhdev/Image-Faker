@@ -50,10 +50,10 @@ http://example.org/6d3353/300x150.png
 
 **Font color**
 
-Optional. Hexadecimal code, 6 (or 3) characters. If not defined, is automatically calculated to contrast with the background color.
+Optional, defined after background color. Hexadecimal code, 6 (or 3) characters. If not defined, is automatically calculated to contrast with the background color.
 
 ```
-http://example.org/ffff00/555555/300x150.png
+http://example.org/555555/ffff00/300x150.png
 ```
 
 #### Standard image sizes
@@ -89,6 +89,7 @@ This project is inspired in [Dynamic Dummy Image Generator][] by [Russell Heimli
 
 ### Change log
 
+* `1.4.0` (July 5, 2013): work with `GD`, `Imagick` and `Gmagick`.
 * `1.3.0` (July 5, 2013): use HTTP cache.
 * `1.2.0` (Juny 23, 2013): font color can be indicated.
 * `1.1.0` (Juny 22, 2013): added first standard image sizes (`NTSC`, `PAL`, `HD720` and `HD1080`).
@@ -97,7 +98,6 @@ This project is inspired in [Dynamic Dummy Image Generator][] by [Russell Heimli
 ### Road map
 
 * Personalize default values in a config file.
-* Work with `Imagick` and `Gmagick` (actually only works with `GD`).
 * Draw an icon instead of text.
 * Info about colors when no image is requested.
 

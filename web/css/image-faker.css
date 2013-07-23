@@ -16,10 +16,6 @@ body {
     font-size: 24px;
 }
 
-#description img {
-    float: right;
-}
-
 section h2 {
     font-size: 20px;
     font-weight: normal;
@@ -30,9 +26,15 @@ pre {
 }
 pre.basic-example {
     text-align: center;
-    /*font-size: 18px;*/
+    font-size: 16px;
     margin-bottom: 20px;
     line-height: 30px;
+}
+.example {
+    text-align: center;
+}
+.example .thumbnail p {
+    color: #999999;
 }
 pre.basic-example abbr {
     color: #333333;
@@ -135,6 +137,11 @@ dd pre {
 /* Media Queries
 -------------------------------------------------- */
 
+@media (max-width: 979px) {
+    pre.basic-example {
+        font-size: 14px;
+    }
+}
 @media (min-width: 767px) {
     pre.basic-example, p.generates {
         padding-bottom: 33px;
@@ -156,13 +163,17 @@ dd pre {
   dt {
     margin-bottom: 5px;
   }
-  pre.basic-example {
-      font-size: 16px;
-  }
-  #description img {
+
+  #example img {
     float: none;
   }
-  #description .example {
-  text-align: center;
+  #example .example {
+    text-align: center;
+  }
+  .example .thumbnail p {
+    display: none;
+  }
+  .example .description {
+      margin-top: 10px;
   }
 }
