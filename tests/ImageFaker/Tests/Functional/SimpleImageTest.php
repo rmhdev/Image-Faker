@@ -54,8 +54,8 @@ class SimpleImageTest extends WebTestCase
             array("/hd720.gif"              , 1280  ,  720  , "image/gif"   , "#000000"),
             array("/hd1080.gif"             , 1920  , 1080  , "image/gif"   , "#000000"),
 
-            array("/555/fff/90.jpg"         ,   90  ,   90  , "image/jpeg"  , "#fff"),
-            array("/fffddd/111111/93.gif"   ,   93  ,   93  , "image/gif"   , "#111111"),
+            array("/fff/555/90.jpg"         ,   90  ,   90  , "image/jpeg"  , "#fff"),
+            array("/111111/fffddd/93.gif"   ,   93  ,   93  , "image/gif"   , "#111111"),
         );
     }
 
@@ -211,9 +211,9 @@ class SimpleImageTest extends WebTestCase
     public function unknownFontColorUris()
     {
         return array(
-            array("/cc/000000/96.png"),
-            array("/aaaaaaa/000000/96.jpg"),
-            array("/green/000000/96.jpg"),
+            array("/000000/cc/96.png"),
+            array("/000000/aaaaaaa/96.jpg"),
+            array("/000000/green/96.jpg"),
         );
     }
 
