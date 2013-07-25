@@ -89,7 +89,7 @@ This project is inspired in [Dynamic Dummy Image Generator][] by [Russell Heimli
 
 ### Change log
 
-* `1.4.0` (July 5, 2013): work with `GD`, `Imagick` and `Gmagick`.
+* `1.4.0` (July 23, 2013): work with `GD`, `Imagick` and `Gmagick`.
 * `1.3.0` (July 5, 2013): use HTTP cache.
 * `1.2.0` (Juny 23, 2013): font color can be indicated.
 * `1.1.0` (Juny 22, 2013): added first standard image sizes (`NTSC`, `PAL`, `HD720` and `HD1080`).
