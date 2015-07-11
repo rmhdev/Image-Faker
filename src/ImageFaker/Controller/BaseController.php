@@ -3,7 +3,7 @@
 namespace ImageFaker\Controller;
 
 use ImageFaker\Image\ImageConfig;
-use ImageFaker\Gd\Image;
+use ImageFaker\Imagick\Image;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
