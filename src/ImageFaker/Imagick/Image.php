@@ -7,10 +7,8 @@ use Imagine\Imagick\Imagine;
 
 class Image extends AbstractImage
 {
-
     protected function newImagine()
     {
         return new Imagine();
     }
-
 }

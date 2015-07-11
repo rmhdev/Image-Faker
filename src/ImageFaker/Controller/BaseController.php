@@ -17,7 +17,6 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class BaseController
 {
-
     public function indexAction(Request $request, Application $app)
     {
         return new Response(
@@ -46,7 +45,6 @@ class BaseController
             )
         );
         $image = new Image($imageConfig);
-
         $response = new Response($image->getContent(), 200, array(
             "Content-Type"  => $imageConfig->getMimeType(),
             "Cache-Control" => "public, max-age=3600, s-maxage=3600"
@@ -56,5 +54,4 @@ class BaseController
 
         return $response;
     }
-
 }

@@ -7,7 +7,6 @@ use Imagine\Gd\Imagine;
 
 class Image extends AbstractImage
 {
-
     protected function newImagine()
     {
         return new Imagine();
@@ -19,5 +18,4 @@ class Image extends AbstractImage
         // See: https://github.com/avalanche123/Imagine/issues/32
         return floor($this->getImageConfig()->getFontSize() *  (72 / 96));
     }
-
 }

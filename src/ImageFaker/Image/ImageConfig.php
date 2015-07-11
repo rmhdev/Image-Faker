@@ -10,9 +10,8 @@ use Imagine\Image\Point;
 
 class ImageConfig
 {
-    const
-        MAX_SIZE = 2000,
-        DEFAULT_BACKGROUND_COLOR = "000000";
+    const MAX_SIZE = 2000;
+    const DEFAULT_BACKGROUND_COLOR = "000000";
 
     public static $defaultSizes = array(
         "ntsc"  => "720x480",
@@ -21,15 +20,14 @@ class ImageConfig
         "hd1080" => "1920x1080",
     );
 
-    protected
-        $width,
-        $height,
-        $extension,
-        $mimeType,
-        $text,
-        $fontSize,
-        $backgroundColor,
-        $fontColor;
+    protected $width;
+    protected $height;
+    protected $extension;
+    protected $mimeType;
+    protected $text;
+    protected $fontSize;
+    protected $backgroundColor;
+    protected $fontColor;
 
     public function __construct($size, $extension = "png", $attributes = array())
     {
@@ -52,8 +50,8 @@ class ImageConfig
     protected function extractWidthHeight($size)
     {
         // todo: improve this
-        $width = NULL;
-        $height = NULL;
+        $width = null;
+        $height = null;
         if (is_numeric($size)) {
             $width = (int) $size;
             $height = $width;
@@ -96,10 +94,17 @@ class ImageConfig
     {
         $extension = strtolower($extension);
         switch ($extension) {
-            case "jpg";     $mimeType = "image/jpeg"; break;
-            case "png";     $mimeType = "image/png"; break;
-            case "gif";     $mimeType = "image/gif"; break;
-            default:        throw new InvalidArgumentException();
+            case "jpg";
+                $mimeType = "image/jpeg";
+                break;
+            case "png";
+                $mimeType = "image/png";
+                break;
+            case "gif";
+                $mimeType = "image/gif";
+                break;
+            default:
+                throw new InvalidArgumentException();
         }
         $this->extension = $extension;
         $this->mimeType = $mimeType;
