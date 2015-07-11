@@ -81,7 +81,6 @@ class ImageConfigTest extends \PHPUnit_Framework_TestCase
         new ImageConfig($size, $extension);
     }
 
-
     public function outOfBoundsImageSizesTestProvider()
     {
         return array(
@@ -110,8 +109,6 @@ class ImageConfigTest extends \PHPUnit_Framework_TestCase
         new ImageConfig("9x9", "txt");
     }
 
-
-
     public function textForImageTestProvider()
     {
         return array(
@@ -129,8 +126,6 @@ class ImageConfigTest extends \PHPUnit_Framework_TestCase
         $imageConfig = new ImageConfig($size, $extension);
         $this->assertEquals($expectedText, $imageConfig->getText());
     }
-
-
 
     public function fontSizeForImageTestProvider()
     {
@@ -157,14 +152,11 @@ class ImageConfigTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expectedFontSize, $imageConfig->getFontSize());
     }
 
-
     public function testGetFontPointShouldReturnPoint()
     {
         $imageConfig = new ImageConfig("100x100", "jpg");
         $this->assertInstanceOf("\Imagine\Image\Point", $imageConfig->calculateFontPoint(80, 20));
     }
-
-
 
     public static function getFontPath()
     {
@@ -206,7 +198,6 @@ class ImageConfigTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("#555555", (string)$imageConfig->getFontColor());
     }
 
-
     public function defaultFontColorContrastDataProvider()
     {
         return array(
@@ -223,12 +214,14 @@ class ImageConfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testDefaultFontColorShouldHaveEnoughContrast($size, $extension, $backgroundColor)
     {
-        $palette                = new Palette();
-        $imageConfig            = new ImageConfig($size, $extension, array("background-color" => $backgroundColor));
-        $fontColor              = $palette->color((string)$imageConfig->getFontColor());
-        $backgroundColor        = $imageConfig->getBackgroundColor();
+        $palette            = new Palette();
+        $imageConfig        = new ImageConfig($size, $extension, array("background-color" => $backgroundColor));
+        $fontColor          = $palette->color((string)$imageConfig->getFontColor());
+        $backgroundColor    = $imageConfig->getBackgroundColor();
         /* @var $fontColor Color */
-        $brightnessDifference   = abs($this->calculateBrightness($backgroundColor) - $this->calculateBrightness($fontColor));
+        $brightnessDifference   = abs(
+            $this->calculateBrightness($backgroundColor) - $this->calculateBrightness($fontColor)
+        );
         $this->assertGreaterThanOrEqual(125, $brightnessDifference);
     }
 
@@ -262,5 +255,4 @@ class ImageConfigTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($width, $request->getWidth());
         $this->assertEquals($height, $request->getHeight());
     }
-
 }

@@ -3,6 +3,7 @@
 namespace ImageFaker\Tests;
 
 use Imagine\Exception\RuntimeException;
+use Imagine\Gd\Imagine;
 use Imagine\Image\Palette\Color\RGB as Color;
 use Imagine\Image\Palette\RGB as Palette;
 use Imagine\Image\Point;
@@ -11,7 +12,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class SimpleImageTest extends WebTestCase
 {
-
     public function createApplication()
     {
         return require __DIR__ . "/../../../../src/production.php";
@@ -63,8 +63,13 @@ class SimpleImageTest extends WebTestCase
     /**
      * @dataProvider getCreateSimpleImageTestProvider
      */
-    public function testCreateSimpleImage($uri, $expectedWidth, $expectedHeight, $expectedMimeType, $expectedBackgroundColor)
-    {
+    public function testCreateSimpleImage(
+        $uri,
+        $expectedWidth,
+        $expectedHeight,
+        $expectedMimeType,
+        $expectedBackgroundColor
+    ) {
         $response = $this->getResponse($uri);
         $this->assertTrue($response->isSuccessful());
         $this->assertEquals($expectedMimeType, $response->headers->get("Content-Type"));
@@ -100,10 +105,9 @@ class SimpleImageTest extends WebTestCase
     protected function getTempFileFromResponse(Response $response, $uri)
     {
         $uriParts = explode("/", $uri);
-        if (sizeof($uriParts) == 1){
-            $fileName = $uriParts[0];
-        } else {
-            $fileName = $uriParts[0] . "-" . $uriParts[1];
+        $fileName = $uriParts[0];
+        if (sizeof($uriParts) > 1) {
+            $fileName .= "-" . $uriParts[1];
         }
         $responseFileName = $this->getTempDir() . $fileName;
         file_put_contents($responseFileName, $response->getContent());
@@ -133,9 +137,9 @@ class SimpleImageTest extends WebTestCase
 
     protected function getImagine()
     {
-        $imagine = NULL;
+        $imagine = null;
         try {
-            $imagine = new \Imagine\Gd\Imagine();
+            $imagine = new Imagine();
         } catch (RuntimeException $e) {
             $this->markTestSkipped($e->getMessage());
         }
@@ -238,5 +242,4 @@ class SimpleImageTest extends WebTestCase
         $this->assertEquals(3600, $response1->getMaxAge());
         $this->assertTrue($response1->isValidateable());
     }
-
 }

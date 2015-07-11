@@ -9,11 +9,9 @@ use ImageFaker\Tests\Image\AbstractImageTest;
 
 class ImageTest extends AbstractImageTest
 {
-
     public function setUp()
     {
         parent::setUp();
-
         if (!class_exists("gmagick")) {
             $this->markTestSkipped("Gmagick is not installed");
         }
@@ -28,5 +26,4 @@ class ImageTest extends AbstractImageTest
     {
         return new Imagine();
     }
-
 }

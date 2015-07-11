@@ -13,7 +13,6 @@ class ImageTest extends AbstractImageTest
     public function setUp()
     {
         parent::setUp();
-
         if (!class_exists("imagick")) {
             $this->markTestSkipped("Imagick is not installed");
         }
@@ -28,5 +27,4 @@ class ImageTest extends AbstractImageTest
     {
         return new Imagine();
     }
-
 }

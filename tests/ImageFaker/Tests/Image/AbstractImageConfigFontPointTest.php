@@ -8,10 +8,8 @@ use Imagine\Image\AbstractFont;
 use Imagine\Image\ImagineInterface;
 use ImageFaker\Image\ImageConfig;
 
-
 abstract class AbstractImageConfigFontPointTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testGetFontPointFor100x100ShouldReturnCenteredPoint()
     {
         $imageConfig = new ImageConfig("100x100", "jpg");
@@ -61,5 +59,4 @@ abstract class AbstractImageConfigFontPointTest extends \PHPUnit_Framework_TestC
      * @return ImagineInterface
      */
     abstract protected function getImagine();
-
 }

@@ -8,26 +8,25 @@ use ImageFaker\Image\AbstractImage;
 
 abstract class AbstractImageTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testNewImage()
     {
         $image = $this->createImage("120x120", "jpg");
-        $this->assertInstanceOf("ImageFaker\Image\AbstractImage", $image);
+        $this->assertInstanceOf('ImageFaker\Image\AbstractImage', $image);
         $this->assertObjectHasAttribute("imageConfig", $image);
-        $this->assertAttributeInstanceOf("ImageFaker\Image\ImageConfig", "imageConfig", $image);
+        $this->assertAttributeInstanceOf('ImageFaker\Image\ImageConfig', "imageConfig", $image);
     }
 
     public function testImagineImageAttributeShouldBeCreated()
     {
         $image = $this->createImage("10x40", "gif");
         $this->assertObjectHasAttribute("image", $image);
-        $this->assertAttributeInstanceOf("Imagine\Image\ImageInterface", "image", $image);
+        $this->assertAttributeInstanceOf('Imagine\Image\ImageInterface', "image", $image);
     }
 
     public function testImageSize()
     {
         $image = $this->createImage("12x15", "png");
-        $this->assertInstanceOf("\Imagine\Image\BoxInterface", $image->getSize());
+        $this->assertInstanceOf('\Imagine\Image\BoxInterface', $image->getSize());
         $size = $image->getSize();
         $this->assertEquals(12, $size->getWidth());
         $this->assertEquals(15, $size->getHeight());
@@ -58,7 +57,8 @@ abstract class AbstractImageTest extends \PHPUnit_Framework_TestCase
 
     protected function genericTestCreatedImage(AbstractImage $image)
     {
-        $fileName = sprintf("%s/%s.%s",
+        $fileName = sprintf(
+            "%s/%s.%s",
             sys_get_temp_dir(),
             uniqid("image-test-"),
             $image->getImageConfig()->getExtension()
@@ -98,5 +98,4 @@ abstract class AbstractImageTest extends \PHPUnit_Framework_TestCase
      * @return ImagineInterface
      */
     abstract protected function getImagine();
-
 }
