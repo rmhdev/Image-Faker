@@ -13,21 +13,27 @@
     "license": "MIT",
     "require": {
         "php": ">=5.3.3",
-        "silex/silex": "1.1.*@dev",
-        "symfony/browser-kit": ">=2.3,<2.4-dev",
-        "imagine/imagine": "v0.4.1",
-        "monolog/monolog": ">=1.0.0",
-        "twig/twig": "1.*",
-        "symfony/css-selector": ">=2.3,<2.4-dev",
-        "symfony/twig-bridge": ">=2.3,<2.4-dev"
+        "silex/silex": "~2.0@dev",
+        "symfony/browser-kit": "~2.6",
+        "symfony/css-selector": "~2.6",
+        "symfony/twig-bridge": "~2.6",
+        "symfony/monolog-bridge": "~2.6",
+        "imagine/imagine": "~0.5"
     },
     "require-dev": {
-        "phpunit/phpunit": "3.7.*"
+        "phpunit/phpunit": "~4.7"
     },
     "autoload" : {
-        "psr-0": {
-            "ImageFaker": "src/"
+        "psr-4": {
+            "ImageFaker\\": "src/ImageFaker"
         }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ImageFaker\\Tests\\": "tests/ImageFaker"
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
     }
-
 }
