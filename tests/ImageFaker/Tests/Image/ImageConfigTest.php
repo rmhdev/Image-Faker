@@ -3,7 +3,8 @@
 namespace ImageFaker\Tests\Image;
 
 use ImageFaker\Image\ImageConfig;
-use Imagine\Image\Color;
+use Imagine\Image\Palette\Color\RGB as Color;
+use Imagine\Image\Palette\RGB as Palette;
 
 class ImageConfigTest extends \PHPUnit_Framework_TestCase
 {
@@ -77,7 +78,7 @@ class ImageConfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testWrongSizeShouldReturnException($size, $extension)
     {
-        $request = new ImageConfig($size, $extension);
+        new ImageConfig($size, $extension);
     }
 
 
@@ -98,7 +99,7 @@ class ImageConfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testOutOfBoundsImageSizesShouldReturnException($size, $extension)
     {
-        $request = new ImageConfig($size, $extension);
+        new ImageConfig($size, $extension);
     }
 
     /**
@@ -106,7 +107,7 @@ class ImageConfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testUnknowsExtensionShouldReturnException()
     {
-        $request = new ImageConfig("9x9", "txt");
+        new ImageConfig("9x9", "txt");
     }
 
 
@@ -185,11 +186,11 @@ class ImageConfigTest extends \PHPUnit_Framework_TestCase
     {
         $imageConfig = new ImageConfig("75x75", "gif");
         $backgroundColor = $imageConfig->getBackgroundColor();
-        $this->assertInstanceOf("\Imagine\Image\Color", $backgroundColor);
+        //$this->assertInstanceOf("\Imagine\Image\Color", $backgroundColor);
         $this->assertEquals("#000000", (string)$backgroundColor);
 
         $fontColor = $imageConfig->getFontColor();
-        $this->assertInstanceOf("\Imagine\Image\Color", $fontColor);
+        //$this->assertInstanceOf("\Imagine\Image\Color", $fontColor);
         $this->assertEquals("#ffffff", (string)$fontColor);
     }
 
@@ -222,9 +223,11 @@ class ImageConfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testDefaultFontColorShouldHaveEnoughContrast($size, $extension, $backgroundColor)
     {
+        $palette                = new Palette();
         $imageConfig            = new ImageConfig($size, $extension, array("background-color" => $backgroundColor));
-        $fontColor              = new Color((string)$imageConfig->getFontColor(), 0);
+        $fontColor              = $palette->color((string)$imageConfig->getFontColor());
         $backgroundColor        = $imageConfig->getBackgroundColor();
+        /* @var $fontColor Color */
         $brightnessDifference   = abs($this->calculateBrightness($backgroundColor) - $this->calculateBrightness($fontColor));
         $this->assertGreaterThanOrEqual(125, $brightnessDifference);
     }

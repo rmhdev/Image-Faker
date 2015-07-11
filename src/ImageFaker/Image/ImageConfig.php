@@ -4,10 +4,9 @@ namespace ImageFaker\Image;
 
 use ImageFaker\Exception\InvalidArgumentException;
 use ImageFaker\Exception\OutOfBoundsException;
+use Imagine\Image\Palette\Color\RGB as Color;
+use Imagine\Image\Palette\RGB as Palette;
 use Imagine\Image\Point;
-use Imagine\Image\Color;
-use Symfony\Component\BrowserKit\Cookie;
-
 
 class ImageConfig
 {
@@ -111,14 +110,15 @@ class ImageConfig
         if (!isset($attributes['background-color'])) {
             $attributes['background-color'] = self::DEFAULT_BACKGROUND_COLOR;
         }
-        $this->backgroundColor  = new Color($attributes['background-color']);
+        $palette = new Palette();
+        $this->backgroundColor = $palette->color($attributes['background-color']);
 
         if (isset($attributes['color'])) {
             $fontColor = $attributes['color'];
         } else {
             $fontColor = $this->calculateDefaultRGBFontColor();
         }
-        $this->fontColor = new Color($fontColor, 0);
+        $this->fontColor = $palette->color($fontColor);
     }
 
     protected function calculateDefaultRGBFontColor()

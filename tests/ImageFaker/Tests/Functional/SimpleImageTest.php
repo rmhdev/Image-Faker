@@ -3,7 +3,8 @@
 namespace ImageFaker\Tests;
 
 use Imagine\Exception\RuntimeException;
-use Imagine\Image\Color;
+use Imagine\Image\Palette\Color\RGB as Color;
+use Imagine\Image\Palette\RGB as Palette;
 use Imagine\Image\Point;
 use Silex\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
@@ -91,7 +92,7 @@ class SimpleImageTest extends WebTestCase
     protected function getResponse($uri)
     {
         $client = $this->createClient();
-        $crawler = $client->request("GET", $uri);
+        $client->request("GET", $uri);
 
         return $client->getResponse();
     }
@@ -118,8 +119,11 @@ class SimpleImageTest extends WebTestCase
 
     protected function getColorDifference($hexColorA, $hexColorB)
     {
-        $colorA = new Color($hexColorA);
-        $colorB = new Color($hexColorB);
+        $palette = new Palette();
+        /* @var $colorA Color */
+        /* @var $colorB Color */
+        $colorA = $palette->color($hexColorA);
+        $colorB = $palette->color($hexColorB);
 
         return
             (max($colorA->getRed(), $colorB->getRed())      - min($colorA->getRed(), $colorB->getRed())) +

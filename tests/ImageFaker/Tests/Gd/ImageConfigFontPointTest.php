@@ -2,7 +2,6 @@
 
 namespace ImageFaker\Tests\Gd;
 
-use ImageFaker\Image\ImageConfig;
 use ImageFaker\Tests\Image\AbstractImageConfigFontPointTest;
 use Imagine\Gd\Imagine;
 
