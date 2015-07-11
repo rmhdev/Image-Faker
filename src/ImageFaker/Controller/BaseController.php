@@ -8,7 +8,6 @@ use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-
 /**
  * Based on https://igor.io/2012/11/09/scaling-silex.html
  *

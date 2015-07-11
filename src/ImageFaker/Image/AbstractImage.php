@@ -40,8 +40,7 @@ abstract class AbstractImage
             $this->image->draw()->text(
                 $this->getImageConfig()->getText(),
                 $font,
-                $this->createFontPoint($font),
-                0
+                $this->createFontPoint($font)
             );
         }
     }
