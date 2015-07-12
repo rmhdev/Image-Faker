@@ -115,15 +115,22 @@ class ImageConfig
         if (!isset($attributes['background-color'])) {
             $attributes['background-color'] = self::DEFAULT_BACKGROUND_COLOR;
         }
-        $palette = new Palette();
-        $this->backgroundColor = $palette->color($attributes['background-color']);
+        $this->backgroundColor = $this->createColor($attributes['background-color']);
 
-        if (isset($attributes['color'])) {
-            $fontColor = $attributes['color'];
-        } else {
-            $fontColor = $this->calculateDefaultRGBFontColor();
+        if (!isset($attributes['color'])) {
+            $attributes['color'] = $this->calculateDefaultRGBFontColor();
         }
-        $this->fontColor = $palette->color($fontColor);
+        $this->fontColor = $this->createColor($attributes['color']);
+    }
+
+    private function createColor($value)
+    {
+        //$path = 'vendor/imagine/imagine/lib/Imagine/resources/Adobe/RGB/AdobeRGB1998.icc';
+        //$profile = Profile::fromPath(__DIR__ . '/../../../' . $path);
+        $palette = new Palette();
+        //$palette->useProfile($profile);
+
+        return $palette->color($value);
     }
 
     protected function calculateDefaultRGBFontColor()

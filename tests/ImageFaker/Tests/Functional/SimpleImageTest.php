@@ -34,7 +34,7 @@ class SimpleImageTest extends WebTestCase
 
     protected function getTempDir()
     {
-        return sys_get_temp_dir() . "/image-faker";
+        return sys_get_temp_dir() . "/image-faker/";
     }
 
     public function getCreateSimpleImageTestProvider()
@@ -104,11 +104,7 @@ class SimpleImageTest extends WebTestCase
 
     protected function getTempFileFromResponse(Response $response, $uri)
     {
-        $uriParts = explode("/", $uri);
-        $fileName = $uriParts[0];
-        if (sizeof($uriParts) > 1) {
-            $fileName .= "-" . $uriParts[1];
-        }
+        $fileName = str_replace("/", "-", $uri);
         $responseFileName = $this->getTempDir() . $fileName;
         file_put_contents($responseFileName, $response->getContent());
         chmod($responseFileName, 0777);
