@@ -3,7 +3,7 @@
 namespace ImageFaker\Controller;
 
 use ImageFaker\Image\ImageConfig;
-use ImageFaker\Gd\Image;
+use ImageFaker\Image\ImageFactory;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -43,7 +43,7 @@ class BaseController
                 'color' => $request->get("color"),
             )
         );
-        $image = new Image($imageConfig);
+        $image = ImageFactory::create($imageConfig);
         $response = new Response($image->getContent(), 200, array(
             "Content-Type"  => $imageConfig->getMimeType(),
             "Cache-Control" => "public, max-age=3600, s-maxage=3600"
