@@ -44,4 +44,12 @@ class ImageFactoryText extends AbstractTestCase
     {
         return new ImageConfig("100x200", "jpg");
     }
+
+    /**
+     * @expectedException \ImageFaker\Exception\InvalidArgumentException
+     */
+    public function testInvalidLibraryNameShouldThrowException()
+    {
+        ImageFactory::create($this->createImageConfig(), "lorem");
+    }
 }
