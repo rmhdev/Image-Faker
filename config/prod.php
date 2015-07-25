@@ -2,13 +2,11 @@
 
 /* @var $app \Silex\Application */
 
-$app->register(new Silex\Provider\RoutingServiceProvider());
+$app['twig.path'] = array(__DIR__.'/../templates');
+$app['twig.options'] = array('cache' => __DIR__.'/../var/cache/twig');
 
-$app->register(new Silex\Provider\TwigServiceProvider(), array(
-    'twig.path' => __DIR__ . "/../templates/"
-));
 $app->register(new Silex\Provider\HttpCacheServiceProvider(), array(
-    'http_cache.cache_dir'  => __DIR__ . '/../cache/',
+    'http_cache.cache_dir'  => __DIR__ . '/../var/cache/',
     'http_cache.esi'        => null,
 ));
 

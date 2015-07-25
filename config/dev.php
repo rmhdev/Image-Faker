@@ -9,6 +9,6 @@ $app["debug"] = true;
 $app->register(
     new Silex\Provider\MonologServiceProvider(),
     array(
-        "monolog.logfile" => __DIR__ . "/../logs/dev.log"
+        "monolog.logfile" => __DIR__ . "/../var/logs/dev.log"
     )
 );
