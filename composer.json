@@ -12,12 +12,13 @@
     ],
     "license": "MIT",
     "require": {
-        "php": ">=5.5",
+        "php": ">=5.5.9",
         "silex/silex": "~2.0@dev",
         "symfony/browser-kit": "~2.6",
         "symfony/css-selector": "~2.6",
         "symfony/twig-bridge": "~2.6",
         "symfony/monolog-bridge": "~2.6",
+        "symfony/debug": "~2.6",
         "imagine/imagine": "0.4.1"
     },
     "require-dev": {

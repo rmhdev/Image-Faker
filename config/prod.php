@@ -1,9 +1,6 @@
 <?php
 
-require_once __DIR__.'/../vendor/autoload.php';
-
 /* @var $app \Silex\Application */
-$app = require __DIR__.'/app.php';
 
 $app->register(new Silex\Provider\RoutingServiceProvider());
 
@@ -15,6 +12,4 @@ $app->register(new Silex\Provider\HttpCacheServiceProvider(), array(
     'http_cache.esi'        => null,
 ));
 
-require __DIR__.'/controllers.php';
-
-return $app;
+require __DIR__ . '/../src/controllers.php';
