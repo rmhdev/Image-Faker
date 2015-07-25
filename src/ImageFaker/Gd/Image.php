@@ -3,9 +3,10 @@
 namespace ImageFaker\Gd;
 
 use ImageFaker\Image\AbstractImage;
+use ImageFaker\Image\ImageInterface;
 use Imagine\Gd\Imagine;
 
-class Image extends AbstractImage
+class Image extends AbstractImage implements ImageInterface
 {
     protected function newImagine()
     {

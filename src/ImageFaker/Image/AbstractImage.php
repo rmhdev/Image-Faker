@@ -6,7 +6,7 @@ use Imagine\Image\Box;
 use Imagine\Image\FontInterface;
 use Imagine\Image\ImagineInterface;
 
-abstract class AbstractImage
+abstract class AbstractImage implements ImageInterface
 {
     protected $imageConfig;
     protected $imagine;
@@ -50,19 +50,25 @@ abstract class AbstractImage
         return $this->getImageConfig()->getFontSize();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getImageConfig()
     {
         return $this->imageConfig;
     }
 
     /**
-     * @return \Imagine\Image\BoxInterface
+     * {@inheritdoc}
      */
     public function getSize()
     {
         return $this->image->getSize();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getContent()
     {
         return $this->image->get($this->imageConfig->getExtension());
