@@ -13,7 +13,7 @@ class SimpleImageTest extends WebTestCase
 {
     public function createApplication()
     {
-        return require __DIR__ . "/../../../../src/production.php";
+        return require __DIR__ . "/app.php";
     }
 
     public function setUp()
