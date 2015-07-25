@@ -6,7 +6,7 @@ use Imagine\Image\ImagineInterface;
 use ImageFaker\Image\ImageConfig;
 use ImageFaker\Image\AbstractImage;
 
-abstract class AbstractImageTest extends \PHPUnit_Framework_TestCase
+abstract class AbstractImageTest extends AbstractTestCase
 {
     public function testNewImage()
     {

@@ -4,8 +4,7 @@ namespace ImageFaker\Tests;
 
 use Imagine\Exception\RuntimeException;
 use Imagine\Gd\Imagine;
-use Imagine\Image\Palette\Color\RGB as Color;
-use Imagine\Image\Palette\RGB as Palette;
+use Imagine\Image\Color;
 use Imagine\Image\Point;
 use Silex\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
@@ -119,16 +118,18 @@ class SimpleImageTest extends WebTestCase
 
     protected function getColorDifference($hexColorA, $hexColorB)
     {
-        $palette = new Palette();
-        /* @var $colorA Color */
-        /* @var $colorB Color */
-        $colorA = $palette->color($hexColorA);
-        $colorB = $palette->color($hexColorB);
+        $colorA = $this->createColor($hexColorA);
+        $colorB = $this->createColor($hexColorB);
 
         return
             (max($colorA->getRed(), $colorB->getRed())      - min($colorA->getRed(), $colorB->getRed())) +
             (max($colorA->getGreen(), $colorB->getGreen())  - min($colorA->getGreen(), $colorB->getGreen())) +
             (max($colorA->getBlue(), $colorB->getBlue())    - min($colorA->getBlue(), $colorB->getBlue()));
+    }
+
+    protected function createColor($value)
+    {
+        return new Color($value);
     }
 
     protected function getImagine()

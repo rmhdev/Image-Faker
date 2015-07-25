@@ -2,19 +2,15 @@
 
 namespace ImageFaker\Tests\Image;
 
-use Imagine\Image\Palette\Color\ColorInterface;
-use Imagine\Image\Palette\RGB as Palette;
-use Imagine\Image\AbstractFont;
 use Imagine\Image\ImagineInterface;
 use ImageFaker\Image\ImageConfig;
 
-abstract class AbstractImageConfigFontPointTest extends \PHPUnit_Framework_TestCase
+abstract class AbstractImageConfigFontPointTest extends AbstractTestCase
 {
     public function testGetFontPointFor100x100ShouldReturnCenteredPoint()
     {
         $imageConfig = new ImageConfig("100x100", "jpg");
-        $palette = new Palette();
-        $fontColor = $palette->color("CCCCCC");
+        $fontColor = $this->createColor("CCCCCC");
 
         $font = $this->getFont($imageConfig->getFontSize(), $fontColor);
         $fontBox = $font->box($imageConfig->getText(), 0);
@@ -30,9 +26,7 @@ abstract class AbstractImageConfigFontPointTest extends \PHPUnit_Framework_TestC
     public function testGetFontPointFor250x250ShouldReturnCenteredPoint()
     {
         $imageConfig = new ImageConfig("250x250", "jpg");
-        $palette = new Palette();
-        $fontColor = $palette->color("CCCCCC");
-        $font = $this->getFont($imageConfig->getFontSize(), $fontColor);
+        $font = $this->getFont($imageConfig->getFontSize(), $this->createColor("CCCCCC"));
         $fontBox = $font->box($imageConfig->getText(), 0);
         $point = $imageConfig->calculateFontPoint($fontBox->getWidth(), $fontBox->getHeight());
 
@@ -43,11 +37,6 @@ abstract class AbstractImageConfigFontPointTest extends \PHPUnit_Framework_TestC
         $this->assertEquals($expectedX, $point->getX());
     }
 
-    /**
-     * @param integer $size
-     * @param ColorInterface $color
-     * @return AbstractFont
-     */
     protected function getFont($size, $color)
     {
         $imagine = $this->getImagine();

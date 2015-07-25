@@ -3,10 +3,8 @@
 namespace ImageFaker\Tests\Image;
 
 use ImageFaker\Image\ImageConfig;
-use Imagine\Image\Palette\Color\RGB as Color;
-use Imagine\Image\Palette\RGB as Palette;
 
-class ImageConfigTest extends \PHPUnit_Framework_TestCase
+class ImageConfigTest extends AbstractTestCase
 {
     public function testImage100x100Jpg()
     {
@@ -214,25 +212,13 @@ class ImageConfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testDefaultFontColorShouldHaveEnoughContrast($size, $extension, $backgroundColor)
     {
-        $palette            = new Palette();
         $imageConfig        = new ImageConfig($size, $extension, array("background-color" => $backgroundColor));
-        $fontColor          = $palette->color((string)$imageConfig->getFontColor());
+        $fontColor          = $this->createColor((string)$imageConfig->getFontColor());
         $backgroundColor    = $imageConfig->getBackgroundColor();
-        /* @var $fontColor Color */
         $brightnessDifference   = abs(
             $this->calculateBrightness($backgroundColor) - $this->calculateBrightness($fontColor)
         );
         $this->assertGreaterThanOrEqual(125, $brightnessDifference);
-    }
-
-    protected function calculateBrightness(Color $color)
-    {
-        // Algorithm to calculate brightness: http://www.w3.org/TR/AERT
-        return (
-            $color->getRed() * 299 +
-            $color->getGreen() * 587 +
-            $color->getBlue() * 114
-        ) / 1000;
     }
 
     public function defaultSizesDataProvider()

@@ -4,8 +4,7 @@ namespace ImageFaker\Image;
 
 use ImageFaker\Exception\InvalidArgumentException;
 use ImageFaker\Exception\OutOfBoundsException;
-use Imagine\Image\Palette\Color\RGB as Color;
-use Imagine\Image\Palette\RGB as Palette;
+use Imagine\Image\Color;
 use Imagine\Image\Point;
 
 class ImageConfig
@@ -125,12 +124,7 @@ class ImageConfig
 
     private function createColor($value)
     {
-        //$path = 'vendor/imagine/imagine/lib/Imagine/resources/Adobe/RGB/AdobeRGB1998.icc';
-        //$profile = Profile::fromPath(__DIR__ . '/../../../' . $path);
-        $palette = new Palette();
-        //$palette->useProfile($profile);
-
-        return $palette->color($value);
+        return new Color($value);
     }
 
     protected function calculateDefaultRGBFontColor()
