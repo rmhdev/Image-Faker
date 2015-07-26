@@ -11,6 +11,8 @@ class ImageConfig
 {
     const MAX_SIZE = 2000;
     const DEFAULT_BACKGROUND_COLOR = "000000";
+    const DEFAULT_HEX_COLOR_DARK = 0;
+    const DEFAULT_HEX_COLOR_BRIGHT = 255;
 
     public static $defaultSizes = array(
         "ntsc"  => "720x480",
@@ -27,6 +29,7 @@ class ImageConfig
     protected $fontSize;
     protected $backgroundColor;
     protected $fontColor;
+    protected $default;
 
     public function __construct($size, $extension = "png", $attributes = array())
     {
@@ -111,8 +114,29 @@ class ImageConfig
 
     protected function processAttributes($attributes = array())
     {
+        $this->processDefaultAttributes($attributes);
+        $this->processCustomAttributes($attributes);
+    }
+
+    protected function processDefaultAttributes($attributes = array())
+    {
+        $default = array();
+        if (isset($attributes['default'])) {
+            $default = $attributes['default'];
+        }
+        if (!isset($default['background-color'])) {
+            $default['background-color'] = self::DEFAULT_BACKGROUND_COLOR;
+        }
+        if (!isset($default['color'])) {
+            $default['color'] = null;
+        }
+        $this->default = $default;
+    }
+
+    protected function processCustomAttributes($attributes = array())
+    {
         if (!isset($attributes['background-color'])) {
-            $attributes['background-color'] = self::DEFAULT_BACKGROUND_COLOR;
+            $attributes['background-color'] = $this->getDefaultBackgroundColor();
         }
         $this->backgroundColor = $this->createColor($attributes['background-color']);
 
@@ -122,6 +146,16 @@ class ImageConfig
         $this->fontColor = $this->createColor($attributes['color']);
     }
 
+    protected function getDefaultBackgroundColor()
+    {
+        return $this->default['background-color'];
+    }
+
+    protected function getDefaultColor()
+    {
+        return $this->default['color'];
+    }
+
     private function createColor($value)
     {
         return new Color($value);
@@ -129,13 +163,18 @@ class ImageConfig
 
     protected function calculateDefaultRGBFontColor()
     {
+        if ($this->getDefaultColor()) {
+            return $this->getDefaultColor();
+        }
         // Algorithm to calculate brightness: http://www.w3.org/TR/AERT
         $brightness = (
             $this->getBackgroundColor()->getRed() * 299 +
             $this->getBackgroundColor()->getGreen() * 587 +
             $this->getBackgroundColor()->getBlue() * 114
         ) / 1000;
-        $contrastColor = ($brightness >= 125) ? 0 : 255;
+        $contrastColor = ($brightness >= 125) ?
+            self::DEFAULT_HEX_COLOR_DARK :
+            self::DEFAULT_HEX_COLOR_BRIGHT;
 
         return array($contrastColor, $contrastColor, $contrastColor);
     }

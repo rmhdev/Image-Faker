@@ -184,6 +184,22 @@ class ImageConfigTest extends AbstractTestCase
         $this->assertEquals("#ffffff", (string)$fontColor);
     }
 
+    public function testCustomDefaultColors()
+    {
+        $attributes = array(
+            "default" => array(
+                "background-color"  => "#f0f0f0",
+                "color"             => "#d3d3d3",
+            ),
+        );
+        $imageConfig = new ImageConfig("87x87", "png", $attributes);
+        $backgroundColor = $imageConfig->getBackgroundColor();
+        $this->assertEquals("#f0f0f0", (string)$backgroundColor);
+
+        $fontColor = $imageConfig->getFontColor();
+        $this->assertEquals("#d3d3d3", (string)$fontColor);
+    }
+
     public function testPersonalizedBackgroundColor()
     {
         $imageConfig = new ImageConfig("80x80", "jpg", array("background-color" => "FFFFFF"));
