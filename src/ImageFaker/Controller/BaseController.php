@@ -18,9 +18,11 @@ class BaseController
 {
     public function indexAction(Request $request, Application $app)
     {
+        $config = new ImageConfig("1x1");
+
         return new Response(
             $app['twig']->render("homepage.twig", array(
-                "maxSize"       => ImageConfig::MAX_SIZE,
+                "config"        => $config,
                 "defaultSizes"  => ImageConfig::$defaultSizes
             )),
             200,

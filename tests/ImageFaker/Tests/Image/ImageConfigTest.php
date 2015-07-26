@@ -70,6 +70,20 @@ class ImageConfigTest extends AbstractTestCase
         );
     }
 
+    public function testGetMaxWidthShouldReturnValue()
+    {
+        $imageConfig = new ImageConfig("100x100", "png");
+
+        $this->assertEquals(2000, $imageConfig->getMaxWidth());
+    }
+
+    public function testGetMaxHeightShouldReturnValue()
+    {
+        $imageConfig = new ImageConfig("100x100", "png");
+
+        $this->assertEquals(2000, $imageConfig->getMaxHeight());
+    }
+
     /**
      * @dataProvider wrongUrlTestProvider
      * @expectedException \ImageFaker\Exception\InvalidArgumentException

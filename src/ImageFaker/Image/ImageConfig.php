@@ -9,7 +9,8 @@ use Imagine\Image\Point;
 
 class ImageConfig
 {
-    const MAX_SIZE = 2000;
+    const MAX_WIDTH = 2000;
+    const MAX_HEIGHT = 2000;
     const DEFAULT_BACKGROUND_COLOR = "000000";
     const DEFAULT_HEX_COLOR_DARK = 0;
     const DEFAULT_HEX_COLOR_BRIGHT = 255;
@@ -87,9 +88,21 @@ class ImageConfig
     protected function isOutOfBounds($width, $height)
     {
         $min = min($width, $height);
-        $max = max($width, $height);
+        if ($min < 1) {
+            return true;
+        }
 
-        return (($min < 1) or ($max > self::MAX_SIZE)) ? true : false;
+        return ($width > $this->getMaxWidth()) || ($height > $this->getMaxHeight());
+    }
+
+    public function getMaxWidth()
+    {
+        return self::MAX_WIDTH;
+    }
+
+    public function getMaxHeight()
+    {
+        return self::MAX_HEIGHT;
     }
 
     protected function processExtension($extension)
