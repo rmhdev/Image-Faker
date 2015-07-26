@@ -9,8 +9,8 @@ use Imagine\Image\Point;
 
 class ImageConfig
 {
-    const MAX_WIDTH = 2000;
-    const MAX_HEIGHT = 2000;
+    const DEFAULT_MAX_WIDTH = 2000;
+    const DEFAULT_MAX_HEIGHT = 2000;
     const DEFAULT_BACKGROUND_COLOR = "000000";
     const DEFAULT_HEX_COLOR_DARK = 0;
     const DEFAULT_HEX_COLOR_BRIGHT = 255;
@@ -34,9 +34,9 @@ class ImageConfig
 
     public function __construct($size, $extension = "png", $attributes = array())
     {
+        $this->processAttributes($attributes);
         $this->processSize($size);
         $this->processExtension($extension);
-        $this->processAttributes($attributes);
         $this->processText();
     }
 
@@ -97,12 +97,12 @@ class ImageConfig
 
     public function getMaxWidth()
     {
-        return self::MAX_WIDTH;
+        return $this->default["max-width"];
     }
 
     public function getMaxHeight()
     {
-        return self::MAX_HEIGHT;
+        return $this->default["max-height"];
     }
 
     protected function processExtension($extension)
@@ -142,6 +142,12 @@ class ImageConfig
         }
         if (!isset($default['color'])) {
             $default['color'] = null;
+        }
+        if (!isset($default['max-width'])) {
+            $default['max-width'] = self::DEFAULT_MAX_WIDTH;
+        }
+        if (!isset($default['max-height'])) {
+            $default['max-height'] = self::DEFAULT_MAX_HEIGHT;
         }
         $this->default = $default;
     }

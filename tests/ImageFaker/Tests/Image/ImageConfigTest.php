@@ -214,6 +214,20 @@ class ImageConfigTest extends AbstractTestCase
         $this->assertEquals("#d3d3d3", (string)$fontColor);
     }
 
+    public function testCustomMaxSizes()
+    {
+        $attributes = array(
+            "default" => array(
+                "max-width"  => 1500,
+                "max-height" => 1700,
+            ),
+        );
+        $imageConfig = new ImageConfig("87x87", "png", $attributes);
+
+        $this->assertEquals(1500, $imageConfig->getMaxWidth());
+        $this->assertEquals(1700, $imageConfig->getMaxHeight());
+    }
+
     public function testPersonalizedBackgroundColor()
     {
         $imageConfig = new ImageConfig("80x80", "jpg", array("background-color" => "FFFFFF"));
