@@ -7,20 +7,20 @@ use ImageFaker\Exception\OutOfBoundsException;
 use Imagine\Image\Color;
 use Imagine\Image\Point;
 
-class Config
+final class Config
 {
     const DEFAULT_BACKGROUND_COLOR = "000000";
     const DEFAULT_HEX_COLOR_DARK = 0;
     const DEFAULT_HEX_COLOR_BRIGHT = 255;
 
-    protected $size;
-    protected $extension;
-    protected $mimeType;
-    protected $text;
-    protected $fontSize;
-    protected $backgroundColor;
-    protected $fontColor;
-    protected $default;
+    private $size;
+    private $extension;
+    private $mimeType;
+    private $text;
+    private $fontSize;
+    private $backgroundColor;
+    private $fontColor;
+    private $default;
 
     public function __construct(Size $size, $extension = "png", $attributes = array())
     {
@@ -38,7 +38,7 @@ class Config
         return $this->size;
     }
 
-    protected function processExtension($extension)
+    private function processExtension($extension)
     {
         $extension = strtolower($extension);
         switch ($extension) {
@@ -58,13 +58,13 @@ class Config
         $this->mimeType = $mimeType;
     }
 
-    protected function processAttributes($attributes = array())
+    private function processAttributes($attributes = array())
     {
         $this->processDefaultAttributes($attributes);
         $this->processCustomAttributes($attributes);
     }
 
-    protected function processDefaultAttributes($attributes = array())
+    private function processDefaultAttributes($attributes = array())
     {
         $default = array();
         if (isset($attributes['default'])) {
@@ -79,7 +79,7 @@ class Config
         $this->default = $default;
     }
 
-    protected function processCustomAttributes($attributes = array())
+    private function processCustomAttributes($attributes = array())
     {
         if (!isset($attributes['background-color'])) {
             $attributes['background-color'] = $this->getDefaultBackgroundColor();
@@ -92,12 +92,12 @@ class Config
         $this->fontColor = $this->createColor($attributes['color']);
     }
 
-    protected function getDefaultBackgroundColor()
+    private function getDefaultBackgroundColor()
     {
         return $this->default['background-color'];
     }
 
-    protected function getDefaultColor()
+    private function getDefaultColor()
     {
         return $this->default['color'];
     }
@@ -107,7 +107,7 @@ class Config
         return new Color($value);
     }
 
-    protected function calculateDefaultRGBFontColor()
+    private function calculateDefaultRGBFontColor()
     {
         if ($this->getDefaultColor()) {
             return $this->getDefaultColor();
@@ -125,13 +125,13 @@ class Config
         return array($contrastColor, $contrastColor, $contrastColor);
     }
 
-    protected function processText()
+    private function processText()
     {
         $this->text = (string)$this->getSize();
         $this->fontSize = $this->calculateFontSize();
     }
 
-    protected function calculateFontSize()
+    private function calculateFontSize()
     {
         $length = strlen($this->size->getWidth())*2 + 1;
         $fontSize = floor($this->size->getWidth()*0.8*1.618 / $length);
