@@ -22,6 +22,11 @@ final class Size
      */
     private $options;
 
+    /**
+     * @param int $width
+     * @param int $height
+     * @param array $options
+     */
     public function __construct($width, $height, $options = array())
     {
         $this->width = $this->processValue($width);
@@ -71,26 +76,41 @@ final class Size
         return $options;
     }
 
+    /**
+     * @return int
+     */
     public function getWidth()
     {
         return $this->width;
     }
 
+    /**
+     * @return int
+     */
     public function getHeight()
     {
         return $this->height;
     }
 
+    /**
+     * @return int
+     */
     public function getMaxWidth()
     {
         return $this->options["max-width"];
     }
 
+    /**
+     * @return int
+     */
     public function getMaxHeight()
     {
         return $this->options["max-height"];
     }
 
+    /**
+     * @return bool
+     */
     public function isOutOfBounds()
     {
         return
