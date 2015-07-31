@@ -37,7 +37,7 @@ final class Size
         $value = (int)$value;
         if ($value <= 0) {
             throw new \UnexpectedValueException(
-                sprintf("Size must greater thn zero, %s received", $value)
+                sprintf("Size must greater than zero, %s received", $value)
             );
         }
 
@@ -49,9 +49,11 @@ final class Size
         if (!isset($options['max-width'])) {
             $options['max-width'] = self::DEFAULT_MAX_WIDTH;
         }
+        $options['max-width'] = $this->processValue($options['max-width']);
         if (!isset($options['max-height'])) {
             $options['max-height'] = self::DEFAULT_MAX_HEIGHT;
         }
+        $options['max-height'] = $this->processValue($options['max-height']);
 
         return $options;
     }
