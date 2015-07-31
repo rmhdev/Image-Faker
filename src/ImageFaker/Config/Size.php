@@ -5,13 +5,21 @@ namespace ImageFaker\Config;
 final class Size
 {
     const DEFAULT_MAX_WIDTH = 2000;
-
     const DEFAULT_MAX_HEIGHT = 2000;
 
+    /**
+     * @var int
+     */
     private $width;
 
+    /**
+     * @var int
+     */
     private $height;
 
+    /**
+     * @var array()
+     */
     private $options;
 
     public function __construct($width, $height, $options = array())
@@ -46,6 +54,11 @@ final class Size
 
     private function processOptions($options)
     {
+        if (!is_array($options)) {
+            throw new \UnexpectedValueException(
+                "Options must be defined in an array"
+            );
+        }
         if (!isset($options['max-width'])) {
             $options['max-width'] = self::DEFAULT_MAX_WIDTH;
         }

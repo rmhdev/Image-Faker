@@ -96,4 +96,12 @@ class SizeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1500, $size->getMaxWidth());
         $this->assertEquals(1700, $size->getMaxHeight());
     }
+
+    /**
+     * @expectedException \UnexpectedValueException
+     */
+    public function testUnexpectedOptionsValueShouldThrowException()
+    {
+        new Size(100, 130, "hello");
+    }
 }
