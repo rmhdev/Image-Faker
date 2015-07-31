@@ -4,6 +4,7 @@ namespace ImageFaker\Controller;
 
 use ImageFaker\Config\Config;
 use ImageFaker\Config\Size;
+use ImageFaker\Config\SizeFactory;
 use ImageFaker\Image\ImageFactory;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,7 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class BaseController
 {
-    public function indexAction(Request $request, Application $app)
+    public function indexAction(Application $app)
     {
         $config = new Config(new Size(1, 1));
 
@@ -39,7 +40,7 @@ class BaseController
     protected function generateImageResponse(Request $request)
     {
         $imageConfig = new Config(
-            $request->get("size"),
+            SizeFactory::create($request->get("size")),
             $request->get("extension"),
             array(
                 'background-color' => $request->get("background"),
