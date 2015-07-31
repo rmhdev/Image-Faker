@@ -3,7 +3,7 @@
 namespace ImageFaker\Tests\Image;
 
 use Imagine\Image\ImagineInterface;
-use ImageFaker\Image\ImageConfig;
+use ImageFaker\Config\ImageConfig;
 use ImageFaker\Image\AbstractImage;
 
 abstract class AbstractImageTest extends AbstractTestCase
@@ -13,7 +13,7 @@ abstract class AbstractImageTest extends AbstractTestCase
         $image = $this->createImage("120x120", "jpg");
         $this->assertInstanceOf('ImageFaker\Image\AbstractImage', $image);
         $this->assertObjectHasAttribute("imageConfig", $image);
-        $this->assertAttributeInstanceOf('ImageFaker\Image\ImageConfig', "imageConfig", $image);
+        $this->assertAttributeInstanceOf('ImageFaker\Config\ImageConfig', "imageConfig", $image);
     }
 
     public function testImagineImageAttributeShouldBeCreated()

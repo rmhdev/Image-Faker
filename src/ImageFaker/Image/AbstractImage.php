@@ -2,6 +2,7 @@
 
 namespace ImageFaker\Image;
 
+use ImageFaker\Config\ImageConfig;
 use Imagine\Image\Box;
 use Imagine\Image\FontInterface;
 use Imagine\Image\ImagineInterface;

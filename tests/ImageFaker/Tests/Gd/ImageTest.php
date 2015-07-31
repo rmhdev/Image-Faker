@@ -4,7 +4,7 @@ namespace ImageFaker\Tests\Gd;
 
 use Imagine\Gd\Imagine;
 use ImageFaker\Gd\Image;
-use ImageFaker\Image\ImageConfig;
+use ImageFaker\Config\ImageConfig;
 use ImageFaker\Tests\Image\AbstractImageTest;
 
 class ImageTest extends AbstractImageTest

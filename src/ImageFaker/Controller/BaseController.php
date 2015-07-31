@@ -2,7 +2,7 @@
 
 namespace ImageFaker\Controller;
 
-use ImageFaker\Image\ImageConfig;
+use ImageFaker\Config\ImageConfig;
 use ImageFaker\Image\ImageFactory;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;

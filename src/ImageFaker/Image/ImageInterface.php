@@ -10,6 +10,7 @@
 
 namespace ImageFaker\Image;
 
+use ImageFaker\Config\ImageConfig;
 use Imagine\Image\BoxInterface;
 
 interface ImageInterface

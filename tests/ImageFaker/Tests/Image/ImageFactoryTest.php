@@ -2,7 +2,7 @@
 
 namespace ImageFaker\Tests\Image;
 
-use ImageFaker\Image\ImageConfig;
+use ImageFaker\Config\ImageConfig;
 use ImageFaker\Image\ImageFactory;
 
 class ImageFactoryText extends AbstractTestCase

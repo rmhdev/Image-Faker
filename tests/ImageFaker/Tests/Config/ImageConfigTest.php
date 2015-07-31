@@ -1,8 +1,9 @@
 <?php
 
-namespace ImageFaker\Tests\Image;
+namespace ImageFaker\Tests\Config;
 
-use ImageFaker\Image\ImageConfig;
+use ImageFaker\Config\ImageConfig;
+use ImageFaker\Tests\Image\AbstractTestCase;
 
 class ImageConfigTest extends AbstractTestCase
 {

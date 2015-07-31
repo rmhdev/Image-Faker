@@ -1,6 +1,6 @@
 <?php
 
-namespace ImageFaker\Image;
+namespace ImageFaker\Config;
 
 use ImageFaker\Exception\InvalidArgumentException;
 use ImageFaker\Exception\OutOfBoundsException;

@@ -3,6 +3,7 @@
 namespace ImageFaker\Image;
 
 use ImageFaker\Exception\InvalidArgumentException;
+use ImageFaker\Config\ImageConfig;
 
 final class ImageFactory
 {

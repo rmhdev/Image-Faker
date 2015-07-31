@@ -3,7 +3,7 @@
 namespace ImageFaker\Tests\Image;
 
 use Imagine\Image\ImagineInterface;
-use ImageFaker\Image\ImageConfig;
+use ImageFaker\Config\ImageConfig;
 
 abstract class AbstractImageConfigFontPointTest extends AbstractTestCase
 {
