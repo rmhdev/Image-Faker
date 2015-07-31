@@ -9,8 +9,6 @@ use Imagine\Image\Point;
 
 class Config
 {
-//    const DEFAULT_MAX_WIDTH = 2000;
-//    const DEFAULT_MAX_HEIGHT = 2000;
     const DEFAULT_BACKGROUND_COLOR = "000000";
     const DEFAULT_HEX_COLOR_DARK = 0;
     const DEFAULT_HEX_COLOR_BRIGHT = 255;
@@ -23,8 +21,6 @@ class Config
     );
 
     protected $size;
-//    protected $width;
-//    protected $height;
     protected $extension;
     protected $mimeType;
     protected $text;
@@ -40,7 +36,6 @@ class Config
         }
         $this->size = $size;
         $this->processAttributes($attributes);
-        //$this->processSize($size);
         $this->processExtension($extension);
         $this->processText();
     }
@@ -49,71 +44,6 @@ class Config
     {
         return $this->size;
     }
-
-//    protected function processSize($size)
-//    {
-//        list($width, $height) = $this->extractWidthHeight($size);
-//        if ($this->isOutOfBounds($width, $height)) {
-//            throw new OutOfBoundsException();
-//        }
-//        $this->width = $width;
-//        $this->height = $height;
-//    }
-//
-//    protected function extractWidthHeight($size)
-//    {
-//        // todo: improve this
-//        $width = null;
-//        $height = null;
-//        if (is_numeric($size)) {
-//            $width = (int) $size;
-//            $height = $width;
-//        } else {
-//            $size = strtolower($size);
-//            if (array_key_exists($size, self::$defaultSizes)) {
-//                $size = self::$defaultSizes[$size];
-//            }
-//            $widthHeight = explode("x", $size);
-//            if ($this->isInvalidArgument($widthHeight)) {
-//                throw new InvalidArgumentException();
-//            }
-//            $width = (int) $widthHeight[0];
-//            $height = (int) $widthHeight[1];
-//        }
-//
-//        return array($width, $height);
-//    }
-//
-//    protected function isInvalidArgument($widthHeight = array())
-//    {
-//        return (
-//            sizeof($widthHeight) != 2) or
-//            ($widthHeight[0] === "") or
-//            ($widthHeight[1] === "") or
-//            (!is_numeric($widthHeight[0])) or
-//            (!is_numeric($widthHeight[1])
-//        ) ? true : false;
-//    }
-
-//    protected function isOutOfBounds($width, $height)
-//    {
-//        $min = min($width, $height);
-//        if ($min < 1) {
-//            return true;
-//        }
-//
-//        return ($width > $this->getMaxWidth()) || ($height > $this->getMaxHeight());
-//    }
-
-//    public function getMaxWidth()
-//    {
-//        return $this->default["max-width"];
-//    }
-//
-//    public function getMaxHeight()
-//    {
-//        return $this->default["max-height"];
-//    }
 
     protected function processExtension($extension)
     {
@@ -153,12 +83,6 @@ class Config
         if (!isset($default['color'])) {
             $default['color'] = null;
         }
-//        if (!isset($default['max-width'])) {
-//            $default['max-width'] = self::DEFAULT_MAX_WIDTH;
-//        }
-//        if (!isset($default['max-height'])) {
-//            $default['max-height'] = self::DEFAULT_MAX_HEIGHT;
-//        }
         $this->default = $default;
     }
 
@@ -210,7 +134,7 @@ class Config
 
     protected function processText()
     {
-        $this->text = sprintf("%dx%d", $this->size->getWidth(), $this->size->getHeight());
+        $this->text = (string)$this->getSize();
         $this->fontSize = $this->calculateFontSize();
     }
 
@@ -222,16 +146,6 @@ class Config
 
         return min($fontSize, $maxFontSize);
     }
-
-//    public function getWidth()
-//    {
-//        return $this->width;
-//    }
-//
-//    public function getHeight()
-//    {
-//        return $this->height;
-//    }
 
     public function getExtension()
     {

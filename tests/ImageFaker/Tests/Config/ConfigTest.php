@@ -43,14 +43,13 @@ class ConfigTest extends AbstractTestCase
         $this->assertEquals("image/gif", $config->getMimeType());
     }
 
-//    public function testShouldBeCaseInsensitive()
-//    {
-//        $config = new Config("55X105", "PNG");
-//        $this->assertEquals(55, $config->getWidth());
-//        $this->assertEquals(105, $config->getHeight());
-//        $this->assertEquals("png", $config->getExtension());
-//        $this->assertEquals("image/png", $config->getMimeType());
-//    }
+    public function testShouldBeCaseInsensitive()
+    {
+        $config = new Config(new Size(55, 105), "PNG");
+
+        $this->assertEquals("png", $config->getExtension());
+        $this->assertEquals("image/png", $config->getMimeType());
+    }
 
     public function testEmptyExtensionShouldDefineDefaultImageFormat()
     {
@@ -60,27 +59,6 @@ class ConfigTest extends AbstractTestCase
         $this->assertEquals("png", $config->getExtension());
         $this->assertEquals("image/png", $config->getMimeType());
     }
-
-//    public function wrongUrlTestProvider()
-//    {
-//        return array(
-//            array("20x", "jpg"),
-//            array("x20", "jpg"),
-//            array("nopx20", "jpg"),
-//            array("20xnop", "jpg"),
-//            array("nopxnop", "gif")
-//        );
-//    }
-//
-//    /**
-//     * @dataProvider wrongUrlTestProvider
-//     * @expectedException \ImageFaker\Exception\InvalidArgumentException
-//     */
-//    public function testWrongSizeShouldReturnException($size, $extension)
-//    {
-//        new Config($size, $extension);
-//    }
-//
 
     public function outOfBoundsImageSizesTestProvider()
     {
@@ -108,23 +86,23 @@ class ConfigTest extends AbstractTestCase
         new Config($size, "txt");
     }
 
-//    public function textForImageTestProvider()
-//    {
-//        return array(
-//            array("10x10", "jpg", "10x10"),
-//            array("31x31", "png", "31x31"),
-//            array("41X45", "GIF", "41x45"),
-//        );
-//    }
-//
-//    /**
-//     * @dataProvider textForImageTestProvider
-//     */
-//    public function testTextForImage($size, $extension, $expectedText)
-//    {
-//        $imageConfig = new Config($size, $extension);
-//        $this->assertEquals($expectedText, $imageConfig->getText());
-//    }
+    public function textForImageTestProvider()
+    {
+        return array(
+            array(new Size(10, 10), "10x10"),
+            array(new Size(31, 31), "31x31"),
+            array(new Size(41, 45), "41x45"),
+        );
+    }
+
+    /**
+     * @dataProvider textForImageTestProvider
+     */
+    public function testTextForImage($size, $expectedText)
+    {
+        $imageConfig = new Config($size);
+        $this->assertEquals($expectedText, $imageConfig->getText());
+    }
 
     public function fontSizeForImageTestProvider()
     {
@@ -206,21 +184,6 @@ class ConfigTest extends AbstractTestCase
         $fontColor = $imageConfig->getFontColor();
         $this->assertEquals("#d3d3d3", (string)$fontColor);
     }
-
-//    public function testCustomMaxSizes()
-//    {
-//        $attributes = array(
-//            "default" => array(
-//                "max-width"  => 1500,
-//                "max-height" => 1700,
-//            ),
-//        );
-//        $size = new Size(87, 87);
-//        $imageConfig = new Config($size, "png", $attributes);
-//
-//        $this->assertEquals(1500, $imageConfig->getMaxWidth());
-//        $this->assertEquals(1700, $imageConfig->getMaxHeight());
-//    }
 
     public function testPersonalizedBackgroundColor()
     {
