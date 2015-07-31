@@ -41,10 +41,14 @@ abstract class AbstractImage implements ImageInterface
         $fontSize = $this->calculateFontSize();
         if ($fontSize > 0) {
             $font = $this->createFont($fontSize);
+            $point = $this->createFontPoint($font);
+            if (!$point->in($this->image->getSize())) {
+                return;
+            }
             $this->image->draw()->text(
                 $this->getImageConfig()->getText(),
                 $font,
-                $this->createFontPoint($font)
+                $point
             );
         }
     }
