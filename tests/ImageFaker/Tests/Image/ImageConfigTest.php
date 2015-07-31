@@ -8,55 +8,55 @@ class ImageConfigTest extends AbstractTestCase
 {
     public function testImage100x100Jpg()
     {
-        $request = new ImageConfig("100x100", "jpg");
+        $config = new ImageConfig("100x100", "jpg");
 
-        $this->assertEquals(100, $request->getWidth());
-        $this->assertEquals(100, $request->getHeight());
-        $this->assertEquals("jpg", $request->getExtension());
-        $this->assertEquals("image/jpeg", $request->getMimeType());
+        $this->assertEquals(100, $config->getWidth());
+        $this->assertEquals(100, $config->getHeight());
+        $this->assertEquals("jpg", $config->getExtension());
+        $this->assertEquals("image/jpeg", $config->getMimeType());
     }
 
     public function testImage100x200Jpg()
     {
-        $request = new ImageConfig("100x200", "jpg");
-        $this->assertEquals(100, $request->getWidth());
-        $this->assertEquals(200, $request->getHeight());
-        $this->assertEquals("jpg", $request->getExtension());
-        $this->assertEquals("image/jpeg", $request->getMimeType());
+        $config = new ImageConfig("100x200", "jpg");
+        $this->assertEquals(100, $config->getWidth());
+        $this->assertEquals(200, $config->getHeight());
+        $this->assertEquals("jpg", $config->getExtension());
+        $this->assertEquals("image/jpeg", $config->getMimeType());
     }
 
     public function testImage50x150Png()
     {
-        $request = new ImageConfig("50x150", "png");
-        $this->assertEquals(50, $request->getWidth());
-        $this->assertEquals(150, $request->getHeight());
-        $this->assertEquals("png", $request->getExtension());
-        $this->assertEquals("image/png", $request->getMimeType());
+        $config = new ImageConfig("50x150", "png");
+        $this->assertEquals(50, $config->getWidth());
+        $this->assertEquals(150, $config->getHeight());
+        $this->assertEquals("png", $config->getExtension());
+        $this->assertEquals("image/png", $config->getMimeType());
     }
 
     public function testImage50x100Gif()
     {
-        $request = new ImageConfig("50x100", "gif");
-        $this->assertEquals(50, $request->getWidth());
-        $this->assertEquals(100, $request->getHeight());
-        $this->assertEquals("gif", $request->getExtension());
-        $this->assertEquals("image/gif", $request->getMimeType());
+        $config = new ImageConfig("50x100", "gif");
+        $this->assertEquals(50, $config->getWidth());
+        $this->assertEquals(100, $config->getHeight());
+        $this->assertEquals("gif", $config->getExtension());
+        $this->assertEquals("image/gif", $config->getMimeType());
     }
 
     public function testShouldBeCaseInsensitive()
     {
-        $request = new ImageConfig("55X105", "PNG");
-        $this->assertEquals(55, $request->getWidth());
-        $this->assertEquals(105, $request->getHeight());
-        $this->assertEquals("png", $request->getExtension());
-        $this->assertEquals("image/png", $request->getMimeType());
+        $config = new ImageConfig("55X105", "PNG");
+        $this->assertEquals(55, $config->getWidth());
+        $this->assertEquals(105, $config->getHeight());
+        $this->assertEquals("png", $config->getExtension());
+        $this->assertEquals("image/png", $config->getMimeType());
     }
 
     public function testEmptyExtensionShouldDefineDefaultImageFormat()
     {
-        $request = new ImageConfig("66X66");
-        $this->assertEquals("png", $request->getExtension());
-        $this->assertEquals("image/png", $request->getMimeType());
+        $config = new ImageConfig("66X66");
+        $this->assertEquals("png", $config->getExtension());
+        $this->assertEquals("image/png", $config->getMimeType());
     }
 
     public function wrongUrlTestProvider()
@@ -280,9 +280,9 @@ class ImageConfigTest extends AbstractTestCase
      */
     public function testDefaultSizes($name, $width, $height)
     {
-        $request = new ImageConfig($name, "png");
+        $config = new ImageConfig($name, "png");
 
-        $this->assertEquals($width, $request->getWidth());
-        $this->assertEquals($height, $request->getHeight());
+        $this->assertEquals($width, $config->getWidth());
+        $this->assertEquals($height, $config->getHeight());
     }
 }
