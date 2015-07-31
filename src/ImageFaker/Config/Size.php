@@ -12,10 +12,25 @@ final class Size
 
     private $height;
 
-    public function __construct($width, $height)
+    private $options;
+
+    public function __construct($width, $height, $options = array())
     {
         $this->width = (int)$width;
         $this->height = (int)$height;
+        $this->options = $this->processOptions($options);
+    }
+
+    private function processOptions($options)
+    {
+        if (!isset($options['max-width'])) {
+            $options['max-width'] = self::DEFAULT_MAX_WIDTH;
+        }
+        if (!isset($options['max-height'])) {
+            $options['max-height'] = self::DEFAULT_MAX_HEIGHT;
+        }
+
+        return $options;
     }
 
     public function getWidth()
@@ -30,12 +45,12 @@ final class Size
 
     public function getMaxWidth()
     {
-        return self::DEFAULT_MAX_WIDTH;
+        return $this->options["max-width"];
     }
 
     public function getMaxHeight()
     {
-        return self::DEFAULT_MAX_HEIGHT;
+        return $this->options["max-height"];
     }
 
     public function isOutOfBounds()

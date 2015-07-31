@@ -66,5 +66,15 @@ class SizeTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($size->isOutOfBounds());
     }
 
+    public function testCustomMaxSizes()
+    {
+        $attributes = array(
+            "max-width"  => 1500,
+            "max-height" => 1700,
+        );
+        $size = new Size(200, 250, $attributes);
 
+        $this->assertEquals(1500, $size->getMaxWidth());
+        $this->assertEquals(1700, $size->getMaxHeight());
+    }
 }
