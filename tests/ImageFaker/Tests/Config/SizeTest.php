@@ -37,4 +37,34 @@ class SizeTest extends \PHPUnit_Framework_TestCase
             array(75, "\t75\n"),
         );
     }
+
+    public function testGetMaxWidthShouldReturnDefaultMaxWidth()
+    {
+        $size = new Size(100, 150);
+
+        $this->assertEquals(2000, $size->getMaxWidth());
+    }
+
+    public function testGetMaxHeightShouldReturnDefaultMaxHeight()
+    {
+        $size = new Size(100, 150);
+
+        $this->assertEquals(2000, $size->getMaxHeight());
+    }
+
+    public function testIsOutOfBoundsShouldBeTrueIfWidthIsGreaterThanMax()
+    {
+        $size = new Size(2001, 200);
+
+        $this->assertTrue($size->isOutOfBounds());
+    }
+
+    public function testIsOutOfBoundsShouldBeTrueIfHeightIsGreaterThanMax()
+    {
+        $size = new Size(200, 2001);
+
+        $this->assertTrue($size->isOutOfBounds());
+    }
+
+
 }
