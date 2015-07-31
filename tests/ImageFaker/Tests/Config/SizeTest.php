@@ -38,6 +38,25 @@ class SizeTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+     * @expectedException \UnexpectedValueException
+     * @dataProvider unexpectedValues
+     */
+    public function testUnexpectedValuesShouldReturnException($value)
+    {
+        new Size($value, $value);
+    }
+
+    public function unexpectedValues()
+    {
+        return array(
+            array(new \DateTime("now")),
+            array("hello"),
+            array(-1),
+            array(0),
+        );
+    }
+
     public function testGetMaxWidthShouldReturnDefaultMaxWidth()
     {
         $size = new Size(100, 150);

@@ -16,9 +16,32 @@ final class Size
 
     public function __construct($width, $height, $options = array())
     {
-        $this->width = (int)$width;
-        $this->height = (int)$height;
+        $this->width = $this->processValue($width);
+        $this->height = $this->processValue($height);
         $this->options = $this->processOptions($options);
+    }
+
+    private function processValue($value)
+    {
+        if (is_object($value)) {
+            throw new \UnexpectedValueException(
+                sprintf("Expected a numeric value, object %s received", get_class($value))
+            );
+        }
+        $value = trim((string)$value);
+        if (!is_numeric($value)) {
+            throw new \UnexpectedValueException(
+                sprintf("Expected a numeric value, %s received", $value)
+            );
+        }
+        $value = (int)$value;
+        if ($value <= 0) {
+            throw new \UnexpectedValueException(
+                sprintf("Size must greater thn zero, %s received", $value)
+            );
+        }
+
+        return $value;
     }
 
     private function processOptions($options)
