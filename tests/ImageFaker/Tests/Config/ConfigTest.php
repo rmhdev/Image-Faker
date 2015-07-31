@@ -5,7 +5,7 @@ namespace ImageFaker\Tests\Config;
 use ImageFaker\Config\Config;
 use ImageFaker\Tests\Image\AbstractTestCase;
 
-class ImageConfigTest extends AbstractTestCase
+class ConfigTest extends AbstractTestCase
 {
     public function testImage100x100Jpg()
     {
