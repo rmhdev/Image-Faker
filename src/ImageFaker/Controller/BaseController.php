@@ -25,7 +25,7 @@ class BaseController
         return new Response(
             $app['twig']->render("homepage.twig", array(
                 "config"        => $config,
-                "defaultSizes"  => Config::$defaultSizes
+                "defaultSizes"  => SizeFactory::$defaultSizes
             )),
             200,
             array()

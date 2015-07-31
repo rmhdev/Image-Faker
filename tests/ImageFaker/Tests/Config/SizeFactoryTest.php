@@ -23,4 +23,25 @@ class SizeFactoryTest extends \PHPUnit_Framework_TestCase
             array(new Size(150, 150), "150"),
         );
     }
+
+    /**
+     * @dataProvider defaultSizes
+     */
+    public function testDefaultSizes($name, $width, $height)
+    {
+        $size = SizeFactory::create($name);
+
+        $this->assertEquals($width, $size->getWidth());
+        $this->assertEquals($height, $size->getHeight());
+    }
+
+    public function defaultSizes()
+    {
+        return array(
+            array("ntsc"    ,  720,  480),
+            array("pal"     ,  768,  576),
+            array("hd720"   , 1280,  720),
+            array("hd1080"  , 1920, 1080),
+        );
+    }
 }

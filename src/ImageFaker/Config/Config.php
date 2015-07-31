@@ -13,13 +13,6 @@ class Config
     const DEFAULT_HEX_COLOR_DARK = 0;
     const DEFAULT_HEX_COLOR_BRIGHT = 255;
 
-    public static $defaultSizes = array(
-        "ntsc"  => "720x480",
-        "pal"   => "768x576",
-        "hd720" => "1280x720",
-        "hd1080" => "1920x1080",
-    );
-
     protected $size;
     protected $extension;
     protected $mimeType;
