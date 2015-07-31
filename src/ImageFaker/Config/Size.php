@@ -10,8 +10,8 @@ final class Size
 
     public function __construct($width, $height)
     {
-        $this->width = $width;
-        $this->height = $height;
+        $this->width = (int)$width;
+        $this->height = (int)$height;
     }
 
     public function getWidth()
