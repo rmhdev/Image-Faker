@@ -2,6 +2,7 @@
 
 namespace ImageFaker\Tests\Image;
 
+use ImageFaker\Config\Size;
 use Imagine\Image\ImagineInterface;
 use ImageFaker\Config\Config;
 use ImageFaker\Image\AbstractImage;
@@ -10,7 +11,7 @@ abstract class AbstractImageTest extends AbstractTestCase
 {
     public function testNewImage()
     {
-        $image = $this->createImage("120x120", "jpg");
+        $image = $this->createImage(120, "jpg");
         $this->assertInstanceOf('ImageFaker\Image\AbstractImage', $image);
         $this->assertObjectHasAttribute("imageConfig", $image);
         $this->assertAttributeInstanceOf('ImageFaker\Config\Config', "imageConfig", $image);
@@ -18,41 +19,41 @@ abstract class AbstractImageTest extends AbstractTestCase
 
     public function testImagineImageAttributeShouldBeCreated()
     {
-        $image = $this->createImage("10x40", "gif");
+        $image = $this->createImage(10, "gif");
         $this->assertObjectHasAttribute("image", $image);
         $this->assertAttributeInstanceOf('Imagine\Image\ImageInterface', "image", $image);
     }
 
     public function testImageSize()
     {
-        $image = $this->createImage("12x15", "png");
+        $image = $this->createImage(19, "png");
         $this->assertInstanceOf('\Imagine\Image\BoxInterface', $image->getSize());
         $size = $image->getSize();
-        $this->assertEquals(12, $size->getWidth());
-        $this->assertEquals(15, $size->getHeight());
+        $this->assertEquals(19, $size->getWidth());
+        $this->assertEquals(19, $size->getHeight());
     }
 
     public function testCreatedImage21x21Jpg()
     {
-        $this->genericTestCreatedImage($this->createImage("21x21", "jpg"));
+        $this->genericTestCreatedImage($this->createImage(21, "jpg"));
     }
 
     public function testCreatedImage22x22Png()
     {
-        $this->genericTestCreatedImage($this->createImage("22x22", "png"));
+        $this->genericTestCreatedImage($this->createImage(22, "png"));
     }
 
     public function testCreatedImage23x23Gif()
     {
-        $this->genericTestCreatedImage($this->createImage("23x23", "gif"));
+        $this->genericTestCreatedImage($this->createImage(23, "gif"));
     }
 
     public function testCreateTinyImageShouldNotWriteText()
     {
-        $this->genericTestCreatedImage($this->createImage("2x2", "jpg"));
-        $this->genericTestCreatedImage($this->createImage("1x1", "gif"));
-        $this->genericTestCreatedImage($this->createImage("1x2", "jpg"));
-        $this->genericTestCreatedImage($this->createImage("2x4", "jpg"));
+        $this->genericTestCreatedImage($this->createImage(2, "jpg"));
+        $this->genericTestCreatedImage($this->createImage(1, "gif"));
+        $this->genericTestCreatedImage($this->createImage(3, "jpg"));
+        $this->genericTestCreatedImage($this->createImage(4, "jpg"));
     }
 
     protected function genericTestCreatedImage(AbstractImage $image)
@@ -70,15 +71,15 @@ abstract class AbstractImageTest extends AbstractTestCase
         $this->assertEquals($image->getImageConfig()->getMimeType(), $mimeType);
 
         $tempImage = $this->createTempImage($fileName);
-        $this->assertEquals($image->getImageConfig()->getWidth(), $tempImage->getSize()->getWidth());
-        $this->assertEquals($image->getImageConfig()->getHeight(), $tempImage->getSize()->getHeight());
+        $this->assertEquals($image->getImageConfig()->getSize()->getWidth(), $tempImage->getSize()->getWidth());
+        $this->assertEquals($image->getImageConfig()->getSize()->getHeight(), $tempImage->getSize()->getHeight());
 
         unlink($fileName);
     }
 
     protected function createImage($size, $extension)
     {
-        $request = new Config($size, $extension);
+        $request = new Config(new Size($size, $size), $extension);
 
         return $this->getImage($request);
     }

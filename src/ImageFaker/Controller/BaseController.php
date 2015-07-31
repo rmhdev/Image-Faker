@@ -3,6 +3,7 @@
 namespace ImageFaker\Controller;
 
 use ImageFaker\Config\Config;
+use ImageFaker\Config\Size;
 use ImageFaker\Image\ImageFactory;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,7 +19,7 @@ class BaseController
 {
     public function indexAction(Request $request, Application $app)
     {
-        $config = new Config("1x1");
+        $config = new Config(new Size(1, 1));
 
         return new Response(
             $app['twig']->render("homepage.twig", array(

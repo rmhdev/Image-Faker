@@ -28,7 +28,10 @@ abstract class AbstractImage implements ImageInterface
 
     protected function createImage()
     {
-        $imageSize = new Box($this->getImageConfig()->getWidth(), $this->getImageConfig()->getHeight());
+        $imageSize = new Box(
+            $this->getImageConfig()->getSize()->getWidth(),
+            $this->getImageConfig()->getSize()->getHeight()
+        );
 
         return $this->imagine->create($imageSize, $this->getImageConfig()->getBackgroundColor());
     }
