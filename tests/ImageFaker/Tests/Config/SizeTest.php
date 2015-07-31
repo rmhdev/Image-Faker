@@ -104,4 +104,11 @@ class SizeTest extends \PHPUnit_Framework_TestCase
     {
         new Size(100, 130, "hello");
     }
+
+    public function testToStringShouldReturnFormattedSize()
+    {
+        $size = new Size(123, 456);
+
+        $this->assertEquals("123x456", (string)$size);
+    }
 }

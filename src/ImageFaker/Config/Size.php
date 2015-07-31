@@ -76,6 +76,12 @@ final class Size
         return $options;
     }
 
+    public function __toString()
+    {
+        return sprintf("%dx%d", $this->getWidth(), $this->getHeight());
+    }
+
+
     /**
      * @return int
      */
