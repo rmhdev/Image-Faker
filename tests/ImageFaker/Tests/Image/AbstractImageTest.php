@@ -3,7 +3,7 @@
 namespace ImageFaker\Tests\Image;
 
 use Imagine\Image\ImagineInterface;
-use ImageFaker\Config\ImageConfig;
+use ImageFaker\Config\Config;
 use ImageFaker\Image\AbstractImage;
 
 abstract class AbstractImageTest extends AbstractTestCase
@@ -13,7 +13,7 @@ abstract class AbstractImageTest extends AbstractTestCase
         $image = $this->createImage("120x120", "jpg");
         $this->assertInstanceOf('ImageFaker\Image\AbstractImage', $image);
         $this->assertObjectHasAttribute("imageConfig", $image);
-        $this->assertAttributeInstanceOf('ImageFaker\Config\ImageConfig', "imageConfig", $image);
+        $this->assertAttributeInstanceOf('ImageFaker\Config\Config', "imageConfig", $image);
     }
 
     public function testImagineImageAttributeShouldBeCreated()
@@ -78,7 +78,7 @@ abstract class AbstractImageTest extends AbstractTestCase
 
     protected function createImage($size, $extension)
     {
-        $request = new ImageConfig($size, $extension);
+        $request = new Config($size, $extension);
 
         return $this->getImage($request);
     }
@@ -89,10 +89,10 @@ abstract class AbstractImageTest extends AbstractTestCase
     }
 
     /**
-     * @param ImageConfig $config
+     * @param Config $config
      * @return AbstractImage
      */
-    abstract protected function getImage(ImageConfig $config);
+    abstract protected function getImage(Config $config);
 
     /**
      * @return ImagineInterface

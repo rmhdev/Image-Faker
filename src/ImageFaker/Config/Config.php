@@ -7,7 +7,7 @@ use ImageFaker\Exception\OutOfBoundsException;
 use Imagine\Image\Color;
 use Imagine\Image\Point;
 
-class ImageConfig
+class Config
 {
     const DEFAULT_MAX_WIDTH = 2000;
     const DEFAULT_MAX_HEIGHT = 2000;

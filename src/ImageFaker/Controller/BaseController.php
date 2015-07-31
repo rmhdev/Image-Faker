@@ -2,7 +2,7 @@
 
 namespace ImageFaker\Controller;
 
-use ImageFaker\Config\ImageConfig;
+use ImageFaker\Config\Config;
 use ImageFaker\Image\ImageFactory;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,12 +18,12 @@ class BaseController
 {
     public function indexAction(Request $request, Application $app)
     {
-        $config = new ImageConfig("1x1");
+        $config = new Config("1x1");
 
         return new Response(
             $app['twig']->render("homepage.twig", array(
                 "config"        => $config,
-                "defaultSizes"  => ImageConfig::$defaultSizes
+                "defaultSizes"  => Config::$defaultSizes
             )),
             200,
             array()
@@ -37,7 +37,7 @@ class BaseController
 
     protected function generateImageResponse(Request $request)
     {
-        $imageConfig = new ImageConfig(
+        $imageConfig = new Config(
             $request->get("size"),
             $request->get("extension"),
             array(

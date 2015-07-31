@@ -4,7 +4,7 @@ namespace ImageFaker\Tests\Gd;
 
 use Imagine\Gd\Imagine;
 use ImageFaker\Gd\Image;
-use ImageFaker\Config\ImageConfig;
+use ImageFaker\Config\Config;
 use ImageFaker\Tests\Image\AbstractImageTest;
 
 class ImageTest extends AbstractImageTest
@@ -17,7 +17,7 @@ class ImageTest extends AbstractImageTest
         }
     }
 
-    protected function getImage(ImageConfig $config)
+    protected function getImage(Config $config)
     {
         return new Image($config);
     }

@@ -3,13 +3,13 @@
 namespace ImageFaker\Tests\Image;
 
 use Imagine\Image\ImagineInterface;
-use ImageFaker\Config\ImageConfig;
+use ImageFaker\Config\Config;
 
 abstract class AbstractImageConfigFontPointTest extends AbstractTestCase
 {
     public function testGetFontPointFor100x100ShouldReturnCenteredPoint()
     {
-        $imageConfig = new ImageConfig("100x100", "jpg");
+        $imageConfig = new Config("100x100", "jpg");
         $fontColor = $this->createColor("CCCCCC");
 
         $font = $this->getFont($imageConfig->getFontSize(), $fontColor);
@@ -25,7 +25,7 @@ abstract class AbstractImageConfigFontPointTest extends AbstractTestCase
 
     public function testGetFontPointFor250x250ShouldReturnCenteredPoint()
     {
-        $imageConfig = new ImageConfig("250x250", "jpg");
+        $imageConfig = new Config("250x250", "jpg");
         $font = $this->getFont($imageConfig->getFontSize(), $this->createColor("CCCCCC"));
         $fontBox = $font->box($imageConfig->getText(), 0);
         $point = $imageConfig->calculateFontPoint($fontBox->getWidth(), $fontBox->getHeight());
@@ -41,7 +41,7 @@ abstract class AbstractImageConfigFontPointTest extends AbstractTestCase
     {
         $imagine = $this->getImagine();
 
-        return $imagine->font(ImageConfig::getFontPath(), $size, $color);
+        return $imagine->font(Config::getFontPath(), $size, $color);
     }
 
     /**

@@ -10,13 +10,13 @@
 
 namespace ImageFaker\Image;
 
-use ImageFaker\Config\ImageConfig;
+use ImageFaker\Config\Config;
 use Imagine\Image\BoxInterface;
 
 interface ImageInterface
 {
     /**
-     * @return ImageConfig
+     * @return Config
      */
     public function getImageConfig();
 

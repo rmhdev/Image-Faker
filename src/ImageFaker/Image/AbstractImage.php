@@ -2,7 +2,7 @@
 
 namespace ImageFaker\Image;
 
-use ImageFaker\Config\ImageConfig;
+use ImageFaker\Config\Config;
 use Imagine\Image\Box;
 use Imagine\Image\FontInterface;
 use Imagine\Image\ImagineInterface;
@@ -13,7 +13,7 @@ abstract class AbstractImage implements ImageInterface
     protected $imagine;
     protected $image;
 
-    public function __construct(ImageConfig $imageConfig)
+    public function __construct(Config $imageConfig)
     {
         $this->imageConfig = $imageConfig;
         $this->imagine = $this->newImagine();
@@ -82,7 +82,7 @@ abstract class AbstractImage implements ImageInterface
     private function createFont($fontSize)
     {
         return $this->imagine->font(
-            ImageConfig::getFontPath(),
+            Config::getFontPath(),
             $fontSize,
             $this->getImageConfig()->getFontColor()
         );

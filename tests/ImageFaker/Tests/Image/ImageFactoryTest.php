@@ -2,7 +2,7 @@
 
 namespace ImageFaker\Tests\Image;
 
-use ImageFaker\Config\ImageConfig;
+use ImageFaker\Config\Config;
 use ImageFaker\Image\ImageFactory;
 
 class ImageFactoryText extends AbstractTestCase
@@ -42,7 +42,7 @@ class ImageFactoryText extends AbstractTestCase
 
     private function createImageConfig()
     {
-        return new ImageConfig("100x200", "jpg");
+        return new Config("100x200", "jpg");
     }
 
     /**

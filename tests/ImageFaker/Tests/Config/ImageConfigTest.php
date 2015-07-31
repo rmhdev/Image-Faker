@@ -2,14 +2,14 @@
 
 namespace ImageFaker\Tests\Config;
 
-use ImageFaker\Config\ImageConfig;
+use ImageFaker\Config\Config;
 use ImageFaker\Tests\Image\AbstractTestCase;
 
 class ImageConfigTest extends AbstractTestCase
 {
     public function testImage100x100Jpg()
     {
-        $config = new ImageConfig("100x100", "jpg");
+        $config = new Config("100x100", "jpg");
 
         $this->assertEquals(100, $config->getWidth());
         $this->assertEquals(100, $config->getHeight());
@@ -19,7 +19,7 @@ class ImageConfigTest extends AbstractTestCase
 
     public function testImage100x200Jpg()
     {
-        $config = new ImageConfig("100x200", "jpg");
+        $config = new Config("100x200", "jpg");
         $this->assertEquals(100, $config->getWidth());
         $this->assertEquals(200, $config->getHeight());
         $this->assertEquals("jpg", $config->getExtension());
@@ -28,7 +28,7 @@ class ImageConfigTest extends AbstractTestCase
 
     public function testImage50x150Png()
     {
-        $config = new ImageConfig("50x150", "png");
+        $config = new Config("50x150", "png");
         $this->assertEquals(50, $config->getWidth());
         $this->assertEquals(150, $config->getHeight());
         $this->assertEquals("png", $config->getExtension());
@@ -37,7 +37,7 @@ class ImageConfigTest extends AbstractTestCase
 
     public function testImage50x100Gif()
     {
-        $config = new ImageConfig("50x100", "gif");
+        $config = new Config("50x100", "gif");
         $this->assertEquals(50, $config->getWidth());
         $this->assertEquals(100, $config->getHeight());
         $this->assertEquals("gif", $config->getExtension());
@@ -46,7 +46,7 @@ class ImageConfigTest extends AbstractTestCase
 
     public function testShouldBeCaseInsensitive()
     {
-        $config = new ImageConfig("55X105", "PNG");
+        $config = new Config("55X105", "PNG");
         $this->assertEquals(55, $config->getWidth());
         $this->assertEquals(105, $config->getHeight());
         $this->assertEquals("png", $config->getExtension());
@@ -55,7 +55,7 @@ class ImageConfigTest extends AbstractTestCase
 
     public function testEmptyExtensionShouldDefineDefaultImageFormat()
     {
-        $config = new ImageConfig("66X66");
+        $config = new Config("66X66");
         $this->assertEquals("png", $config->getExtension());
         $this->assertEquals("image/png", $config->getMimeType());
     }
@@ -73,14 +73,14 @@ class ImageConfigTest extends AbstractTestCase
 
     public function testGetMaxWidthShouldReturnValue()
     {
-        $imageConfig = new ImageConfig("100x100", "png");
+        $imageConfig = new Config("100x100", "png");
 
         $this->assertEquals(2000, $imageConfig->getMaxWidth());
     }
 
     public function testGetMaxHeightShouldReturnValue()
     {
-        $imageConfig = new ImageConfig("100x100", "png");
+        $imageConfig = new Config("100x100", "png");
 
         $this->assertEquals(2000, $imageConfig->getMaxHeight());
     }
@@ -91,7 +91,7 @@ class ImageConfigTest extends AbstractTestCase
      */
     public function testWrongSizeShouldReturnException($size, $extension)
     {
-        new ImageConfig($size, $extension);
+        new Config($size, $extension);
     }
 
     public function outOfBoundsImageSizesTestProvider()
@@ -111,7 +111,7 @@ class ImageConfigTest extends AbstractTestCase
      */
     public function testOutOfBoundsImageSizesShouldReturnException($size, $extension)
     {
-        new ImageConfig($size, $extension);
+        new Config($size, $extension);
     }
 
     /**
@@ -119,7 +119,7 @@ class ImageConfigTest extends AbstractTestCase
      */
     public function testUnknowsExtensionShouldReturnException()
     {
-        new ImageConfig("9x9", "txt");
+        new Config("9x9", "txt");
     }
 
     public function textForImageTestProvider()
@@ -136,7 +136,7 @@ class ImageConfigTest extends AbstractTestCase
      */
     public function testTextForImage($size, $extension, $expectedText)
     {
-        $imageConfig = new ImageConfig($size, $extension);
+        $imageConfig = new Config($size, $extension);
         $this->assertEquals($expectedText, $imageConfig->getText());
     }
 
@@ -161,13 +161,13 @@ class ImageConfigTest extends AbstractTestCase
      */
     public function testFontSizeForImage($size, $extension, $expectedFontSize)
     {
-        $imageConfig = new ImageConfig($size, $extension);
+        $imageConfig = new Config($size, $extension);
         $this->assertEquals($expectedFontSize, $imageConfig->getFontSize());
     }
 
     public function testGetFontPointShouldReturnPoint()
     {
-        $imageConfig = new ImageConfig("100x100", "jpg");
+        $imageConfig = new Config("100x100", "jpg");
         $this->assertInstanceOf("\Imagine\Image\Point", $imageConfig->calculateFontPoint(80, 20));
     }
 
@@ -178,7 +178,7 @@ class ImageConfigTest extends AbstractTestCase
 
     public function testGetFontPath()
     {
-        $fontPath = ImageConfig::getFontPath();
+        $fontPath = Config::getFontPath();
         $this->assertFileExists($fontPath);
         $this->assertTrue(is_file($fontPath));
         $this->assertContains(
@@ -189,7 +189,7 @@ class ImageConfigTest extends AbstractTestCase
 
     public function testDefaultColors()
     {
-        $imageConfig = new ImageConfig("75x75", "gif");
+        $imageConfig = new Config("75x75", "gif");
         $backgroundColor = $imageConfig->getBackgroundColor();
         //$this->assertInstanceOf("\Imagine\Image\Color", $backgroundColor);
         $this->assertEquals("#000000", (string)$backgroundColor);
@@ -207,7 +207,7 @@ class ImageConfigTest extends AbstractTestCase
                 "color"             => "#d3d3d3",
             ),
         );
-        $imageConfig = new ImageConfig("87x87", "png", $attributes);
+        $imageConfig = new Config("87x87", "png", $attributes);
         $backgroundColor = $imageConfig->getBackgroundColor();
         $this->assertEquals("#f0f0f0", (string)$backgroundColor);
 
@@ -223,7 +223,7 @@ class ImageConfigTest extends AbstractTestCase
                 "max-height" => 1700,
             ),
         );
-        $imageConfig = new ImageConfig("87x87", "png", $attributes);
+        $imageConfig = new Config("87x87", "png", $attributes);
 
         $this->assertEquals(1500, $imageConfig->getMaxWidth());
         $this->assertEquals(1700, $imageConfig->getMaxHeight());
@@ -231,13 +231,13 @@ class ImageConfigTest extends AbstractTestCase
 
     public function testPersonalizedBackgroundColor()
     {
-        $imageConfig = new ImageConfig("80x80", "jpg", array("background-color" => "FFFFFF"));
+        $imageConfig = new Config("80x80", "jpg", array("background-color" => "FFFFFF"));
         $this->assertEquals("#ffffff", (string)$imageConfig->getBackgroundColor());
     }
 
     public function testPersonalizedFontColor()
     {
-        $imageConfig = new ImageConfig("40x50", "gif", array("color" => "555555"));
+        $imageConfig = new Config("40x50", "gif", array("color" => "555555"));
         $this->assertEquals("#555555", (string)$imageConfig->getFontColor());
     }
 
@@ -257,7 +257,7 @@ class ImageConfigTest extends AbstractTestCase
      */
     public function testDefaultFontColorShouldHaveEnoughContrast($size, $extension, $backgroundColor)
     {
-        $imageConfig        = new ImageConfig($size, $extension, array("background-color" => $backgroundColor));
+        $imageConfig        = new Config($size, $extension, array("background-color" => $backgroundColor));
         $fontColor          = $this->createColor((string)$imageConfig->getFontColor());
         $backgroundColor    = $imageConfig->getBackgroundColor();
         $brightnessDifference   = abs(
@@ -281,7 +281,7 @@ class ImageConfigTest extends AbstractTestCase
      */
     public function testDefaultSizes($name, $width, $height)
     {
-        $config = new ImageConfig($name, "png");
+        $config = new Config($name, "png");
 
         $this->assertEquals($width, $config->getWidth());
         $this->assertEquals($height, $config->getHeight());

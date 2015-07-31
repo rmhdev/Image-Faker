@@ -3,17 +3,17 @@
 namespace ImageFaker\Image;
 
 use ImageFaker\Exception\InvalidArgumentException;
-use ImageFaker\Config\ImageConfig;
+use ImageFaker\Config\Config;
 
 final class ImageFactory
 {
     /**
-     * @param ImageConfig $imageConfig
+     * @param Config $imageConfig
      * @param string $library
      * @return ImageInterface
      * @throws InvalidArgumentException
      */
-    public static function create(ImageConfig $imageConfig, $library = "gd")
+    public static function create(Config $imageConfig, $library = "gd")
     {
         $className = sprintf('ImageFaker\%s\Image', ucfirst($library));
         if (!class_exists($className)) {
