@@ -11,10 +11,24 @@ abstract class AbstractImage implements ImageInterface
 {
     const MIN_FONT_SIZE = 5;
 
+    /**
+     * @var Config
+     */
     protected $imageConfig;
+
+    /**
+     * @var ImagineInterface
+     */
     protected $imagine;
+
+    /**
+     * @var \Imagine\Image\ImageInterface
+     */
     protected $image;
 
+    /**
+     * @param Config $imageConfig
+     */
     public function __construct(Config $imageConfig)
     {
         $this->imageConfig = $imageConfig;
@@ -51,7 +65,7 @@ abstract class AbstractImage implements ImageInterface
         }
     }
 
-    private function isDrawableFontSize($fontSize)
+    protected function isDrawableFontSize($fontSize)
     {
         return (self::MIN_FONT_SIZE <= $fontSize);
     }
