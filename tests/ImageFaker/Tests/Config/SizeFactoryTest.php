@@ -55,4 +55,17 @@ class SizeFactoryTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(new Size(123, 456), $size);
     }
+
+    public function testCustomOptionsShouldCreateSizeWithGivenOptions()
+    {
+        $size = SizeFactory::create("25x26", array(
+            "options" => array(
+                "max-width" => 1200,
+                "max-height" => 1500,
+            )
+        ));
+
+        $this->assertEquals(1200, $size->getMaxWidth());
+        $this->assertEquals(1500, $size->getMaxHeight());
+    }
 }
