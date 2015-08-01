@@ -16,6 +16,8 @@ class CustomizedImageTest extends AbstractWebTest
             "background-color"  => "#123456",
             "color"             => "#abcdef",
             "cache"             => 7200,
+            "max-width"         => 1000,
+            "max-height"        => 1100,
             "sizes" => array(
                 "lorem" => "432x234"
             ),
@@ -53,5 +55,17 @@ class CustomizedImageTest extends AbstractWebTest
 
         $this->assertEquals(432, $image->getSize()->getWidth());
         $this->assertEquals(234, $image->getSize()->getHeight());
+    }
+
+    public function testCustomMaxWidthShouldReturnClientError()
+    {
+        $response = $this->getResponse("/1001x300.png");
+        $this->assertTrue($response->isClientError());
+    }
+
+    public function testCustomMaxHeightShouldReturnClientError()
+    {
+        $response = $this->getResponse("/300x1101.png");
+        $this->assertTrue($response->isClientError());
     }
 }

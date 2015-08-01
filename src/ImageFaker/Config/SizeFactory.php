@@ -28,6 +28,10 @@ final class SizeFactory
         $width = $widthHeight[0];
         $height = $widthHeight[1];
 
-        return new Size($width, $height, isset($options["options"]) ? $options["options"] : array());
+        return new Size(
+            $width,
+            $height,
+            isset($options["options"]) ? $options["options"] : array()
+        );
     }
 }
