@@ -13,14 +13,12 @@ class CustomizedImageTest extends AbstractWebTest
     {
         $app = require __DIR__ . "/app.php";
         $app["image.faker"] = array(
-            "default" => array(
-                "background-color"  => "#123456",
-                "color"             => "#abcdef",
-            ),
+            "background-color"  => "#123456",
+            "color"             => "#abcdef",
+            "cache"             => 7200,
             "sizes" => array(
                 "lorem" => "432x234"
             ),
-            "cache" => 7200
         );
 
         return $app;

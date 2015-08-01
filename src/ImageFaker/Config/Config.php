@@ -20,7 +20,6 @@ final class Config
     private $fontSize;
     private $backgroundColor;
     private $fontColor;
-    private $default;
 
     public function __construct(Size $size, $extension = "png", $attributes = array())
     {
@@ -60,27 +59,6 @@ final class Config
 
     private function processAttributes($attributes = array())
     {
-        $this->processDefaultAttributes($attributes);
-        $this->processCustomAttributes($attributes);
-    }
-
-    private function processDefaultAttributes($attributes = array())
-    {
-        $default = array();
-        if (isset($attributes['default'])) {
-            $default = $attributes['default'];
-        }
-        if (!isset($default['background-color'])) {
-            $default['background-color'] = self::DEFAULT_BACKGROUND_COLOR;
-        }
-        if (!isset($default['color'])) {
-            $default['color'] = null;
-        }
-        $this->default = $default;
-    }
-
-    private function processCustomAttributes($attributes = array())
-    {
         if (!isset($attributes['background-color'])) {
             $attributes['background-color'] = $this->getDefaultBackgroundColor();
         }
@@ -94,12 +72,12 @@ final class Config
 
     private function getDefaultBackgroundColor()
     {
-        return $this->default['background-color'];
+        return self::DEFAULT_BACKGROUND_COLOR;
     }
 
     private function getDefaultColor()
     {
-        return $this->default['color'];
+        return null;
     }
 
     private function createColor($value)

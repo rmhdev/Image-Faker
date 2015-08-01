@@ -168,23 +168,6 @@ class ConfigTest extends AbstractTestCase
         $this->assertEquals("#ffffff", (string)$fontColor);
     }
 
-    public function testCustomDefaultColors()
-    {
-        $attributes = array(
-            "default" => array(
-                "background-color"  => "#f0f0f0",
-                "color"             => "#d3d3d3",
-            ),
-        );
-        $size = new Size(87, 87);
-        $imageConfig = new Config($size, "png", $attributes);
-        $backgroundColor = $imageConfig->getBackgroundColor();
-        $this->assertEquals("#f0f0f0", (string)$backgroundColor);
-
-        $fontColor = $imageConfig->getFontColor();
-        $this->assertEquals("#d3d3d3", (string)$fontColor);
-    }
-
     public function testPersonalizedBackgroundColor()
     {
         $size = new Size(80, 80);
@@ -226,25 +209,4 @@ class ConfigTest extends AbstractTestCase
         );
         $this->assertGreaterThanOrEqual(125, $brightnessDifference);
     }
-
-//    public function defaultSizesDataProvider()
-//    {
-//        return array(
-//            array("ntsc"    ,  720,  480),
-//            array("pal"     ,  768,  576),
-//            array("hd720"   , 1280,  720),
-//            array("hd1080"  , 1920, 1080),
-//        );
-//    }
-//
-//    /**
-//     * @dataProvider defaultSizesDataProvider
-//     */
-//    public function testDefaultSizes($name, $width, $height)
-//    {
-//        $config = new Config($name, "png");
-//
-//        $this->assertEquals($width, $config->getWidth());
-//        $this->assertEquals($height, $config->getHeight());
-//    }
 }
