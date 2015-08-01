@@ -17,6 +17,9 @@ class CustomizedImageTest extends AbstractWebTest
                 "background-color"  => "#123456",
                 "color"             => "#abcdef",
             ),
+            "sizes" => array(
+                "lorem" => "432x234"
+            ),
             "cache" => 7200
         );
 
@@ -40,5 +43,17 @@ class CustomizedImageTest extends AbstractWebTest
         $response = $this->getResponse("/600.jpg");
 
         $this->assertEquals(7200, $response->getMaxAge());
+    }
+
+    public function testCustomImageSizes()
+    {
+        $uri = "/lorem.png";
+        $response = $this->getResponse($uri);
+        $responseFileName = $this->getTempFileFromResponse($response, $uri);
+        $imagine = $this->getImagine();
+        $image = $imagine->open($responseFileName);
+
+        $this->assertEquals(432, $image->getSize()->getWidth());
+        $this->assertEquals(234, $image->getSize()->getHeight());
     }
 }

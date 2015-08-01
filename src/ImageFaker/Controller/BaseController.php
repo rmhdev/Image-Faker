@@ -55,9 +55,10 @@ class BaseController
     private function createConfig(Application $app, Request $request)
     {
         $default = $app["image.faker"]["default"];
+        $sizes = $app["image.faker"]["sizes"];
 
         return new Config(
-            SizeFactory::create($request->get("size")),
+            SizeFactory::create($request->get("size"), array("sizes" => $sizes)),
             $request->get("extension"),
             array(
                 'background-color'  => $request->get("background"),

@@ -11,13 +11,17 @@ final class SizeFactory
         "hd1080" => "1920x1080",
     );
 
-    public static function create($value)
+    public static function create($value, $options = array())
     {
         if (is_numeric($value)) {
             return new Size($value, $value);
         }
-        if (array_key_exists($value, self::$defaultSizes)) {
-            $value = self::$defaultSizes[$value];
+        $sizes = self::$defaultSizes;
+        if (isset($options["sizes"]) && $options["sizes"]) {
+            $sizes = array_merge($sizes, $options["sizes"]);
+        }
+        if (array_key_exists($value, $sizes)) {
+            $value = $sizes[$value];
         }
         $size = strtolower($value);
         $widthHeight = explode("x", $size);

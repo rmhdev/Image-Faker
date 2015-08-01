@@ -4,8 +4,9 @@
 
 $app["image.faker"] = array(
     "default" => array(
-        "background-color"  => \ImageFaker\Config\Config::DEFAULT_BACKGROUND_COLOR,
+        "background-color"  => null,
         "color"             => null,
     ),
-    "cache" => 3600
+    "cache" => 3600,
+    "sizes" => array(),
 );

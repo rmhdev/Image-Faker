@@ -44,4 +44,15 @@ class SizeFactoryTest extends \PHPUnit_Framework_TestCase
             array("hd1080"  , 1920, 1080),
         );
     }
+
+    public function testCustomImageSizeShouldCreateSizeObject()
+    {
+        $size = SizeFactory::create("lorem", array(
+            "sizes" => array(
+                "lorem" => "123x456"
+            )
+        ));
+
+        $this->assertEquals(new Size(123, 456), $size);
+    }
 }
