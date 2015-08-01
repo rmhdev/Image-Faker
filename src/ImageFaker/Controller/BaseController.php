@@ -32,29 +32,37 @@ class BaseController
         );
     }
 
-    public function imageAction(Request $request)
+    public function imageAction(Application $app, Request $request)
     {
-        return $this->generateImageResponse($request);
+        return $this->generateImageResponse($app, $request);
     }
 
-    protected function generateImageResponse(Request $request)
+    protected function generateImageResponse(Application $app, Request $request)
     {
-        $imageConfig = new Config(
-            SizeFactory::create($request->get("size")),
-            $request->get("extension"),
-            array(
-                'background-color' => $request->get("background"),
-                'color' => $request->get("color"),
-            )
-        );
-        $image = ImageFactory::create($imageConfig);
+        $config = $this->createConfig($app, $request);
+        $image = ImageFactory::create($config);
         $response = new Response($image->getContent(), 200, array(
-            "Content-Type"  => $imageConfig->getMimeType(),
+            "Content-Type"  => $config->getMimeType(),
             "Cache-Control" => "public, max-age=3600, s-maxage=3600"
         ));
         $response->isNotModified($request);
         $response->setEtag(md5($response->getContent()));
 
         return $response;
+    }
+
+    private function createConfig(Application $app, Request $request)
+    {
+        $default = $app["image.faker"]["default"];
+
+        return new Config(
+            SizeFactory::create($request->get("size")),
+            $request->get("extension"),
+            array(
+                'background-color'  => $request->get("background"),
+                'color'             => $request->get("color"),
+                'default'           => $default,
+            )
+        );
     }
 }
