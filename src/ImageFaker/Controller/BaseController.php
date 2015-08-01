@@ -39,11 +39,12 @@ class BaseController
 
     protected function generateImageResponse(Application $app, Request $request)
     {
+        $cache = $app["image.faker"]["cache"];
         $config = $this->createConfig($app, $request);
         $image = ImageFactory::create($config);
         $response = new Response($image->getContent(), 200, array(
             "Content-Type"  => $config->getMimeType(),
-            "Cache-Control" => "public, max-age=3600, s-maxage=3600"
+            "Cache-Control" => sprintf("public, max-age=%s, s-maxage=%s", $cache, $cache)
         ));
         $response->isNotModified($request);
         $response->setEtag(md5($response->getContent()));

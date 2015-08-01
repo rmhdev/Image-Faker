@@ -16,7 +16,8 @@ class CustomizedImageTest extends AbstractWebTest
             "default" => array(
                 "background-color"  => "#123456",
                 "color"             => "#abcdef",
-            )
+            ),
+            "cache" => 7200
         );
 
         return $app;
@@ -32,5 +33,12 @@ class CustomizedImageTest extends AbstractWebTest
         $colorTest = $image->getColorAt(new Point(0, 0));
 
         $this->assertLessThanOrEqual(10, $this->getColorDifference("#123456", (string)$colorTest));
+    }
+
+    public function testCustomCacheLife()
+    {
+        $response = $this->getResponse("/600.jpg");
+
+        $this->assertEquals(7200, $response->getMaxAge());
     }
 }
