@@ -9,6 +9,8 @@ use Imagine\Image\ImagineInterface;
 
 abstract class AbstractImage implements ImageInterface
 {
+    const MIN_FONT_SIZE = 5;
+
     protected $imageConfig;
     protected $imagine;
     protected $image;
@@ -18,7 +20,7 @@ abstract class AbstractImage implements ImageInterface
         $this->imageConfig = $imageConfig;
         $this->imagine = $this->newImagine();
         $this->image = $this->createImage();
-        $this->writeText();
+        $this->drawText();
     }
 
     /**
@@ -36,21 +38,22 @@ abstract class AbstractImage implements ImageInterface
         return $this->imagine->create($imageSize, $this->getImageConfig()->getBackgroundColor());
     }
 
-    protected function writeText()
+    protected function drawText()
     {
         $fontSize = $this->calculateFontSize();
-        if ($fontSize > 0) {
+        if ($this->isDrawableFontSize($fontSize)) {
             $font = $this->createFont($fontSize);
-            $point = $this->createFontPoint($font);
-            if (!$point->in($this->image->getSize())) {
-                return;
-            }
             $this->image->draw()->text(
                 $this->getImageConfig()->getText(),
                 $font,
-                $point
+                $this->createFontPoint($font)
             );
         }
+    }
+
+    private function isDrawableFontSize($fontSize)
+    {
+        return (self::MIN_FONT_SIZE <= $fontSize);
     }
 
     protected function calculateFontSize()
