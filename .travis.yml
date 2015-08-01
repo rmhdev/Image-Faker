@@ -1,7 +1,5 @@
 # Based on Imagine travis file
 
-sudo: false
-
 language: php
 
 env:
