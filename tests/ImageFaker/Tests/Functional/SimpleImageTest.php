@@ -19,16 +19,24 @@ class SimpleImageTest extends WebTestCase
     public function setUp()
     {
         parent::setUp();
+        if (file_exists($this->getTempDir())) {
+            $this->removeTempDir();
+        }
         mkdir($this->getTempDir(), 0777, true);
     }
 
     public function tearDown()
     {
+        $this->removeTempDir();
+        parent::tearDown();
+    }
+
+    private function removeTempDir()
+    {
         foreach (glob($this->getTempDir() . "/*") as $tempFile) {
             unlink($tempFile);
         }
         rmdir($this->getTempDir());
-        parent::tearDown();
     }
 
     protected function getTempDir()
