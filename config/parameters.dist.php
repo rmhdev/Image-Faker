@@ -3,6 +3,7 @@
 /* @var Silex\Application $app  */
 
 $app["image.faker"] = array(
+    "library"           => "gd",
     "background-color"  => null,
     "color"             => null,
     "cache"             => 3600,

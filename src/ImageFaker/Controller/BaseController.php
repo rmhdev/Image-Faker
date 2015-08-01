@@ -40,8 +40,9 @@ class BaseController
     protected function generateImageResponse(Application $app, Request $request)
     {
         $cache = $app["image.faker"]["cache"];
+        $library = $app["image.faker"]["library"];
         $config = $this->createConfig($app, $request);
-        $image = ImageFactory::create($config);
+        $image = ImageFactory::create($config, $library);
         $response = new Response($image->getContent(), 200, array(
             "Content-Type"  => $config->getMimeType(),
             "Cache-Control" => sprintf("public, max-age=%s, s-maxage=%s", $cache, $cache)
