@@ -4,7 +4,16 @@
 
 $app["image_faker.config"] = $app->protect(
     function ($values) use ($app) {
-        $custom = $app["image_faker.parameters"];
+        $custom = array_merge(
+            array(
+                "background-color" => null,
+                "color" => null,
+                "sizes" => null,
+                "max-width" => null,
+                "max-height" => null,
+            ),
+            $app["image_faker.parameters"]
+        );
         $size = \ImageFaker\Config\SizeFactory::create(
             $values["size"],
             array(
