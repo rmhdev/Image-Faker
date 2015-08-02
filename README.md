@@ -79,7 +79,7 @@ To ease image creation, some standard image sizes are available:
 * hd720: `1280x720`
 * hd1080: `1920x1080`
 
-You can [define your own sizes][#customization].
+You can [define your own sizes](#customization).
 
 ### HTTP cache
 
