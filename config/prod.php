@@ -12,4 +12,5 @@ $app->register(new Silex\Provider\HttpCacheServiceProvider(), array(
 
 require __DIR__ . '/parameters.dist.php';
 
+require __DIR__ . '/../src/services.php';
 require __DIR__ . '/../src/controllers.php';

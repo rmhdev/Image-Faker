@@ -53,27 +53,20 @@ class BaseController
         return $response;
     }
 
+    /**
+     * @param Application $app
+     * @param Request $request
+     * @return Config
+     */
     private function createConfig(Application $app, Request $request)
     {
-        $custom = $app["image.faker"];
-        $size = SizeFactory::create(
-            $request->get("size"),
-            array(
-                "sizes" => $custom["sizes"],
-                "options" => array(
-                    "max-width" => $custom["max-width"],
-                    "max-height" => $custom["max-height"],
-                ),
-            )
+        $values = array(
+            "size"              => $request->get("size"),
+            'background-color'  => $request->get("background"),
+            'color'             => $request->get("color"),
+            'extension'         => $request->get("extension"),
         );
 
-        return new Config(
-            $size,
-            $request->get("extension"),
-            array(
-                'background-color'  => $request->get("background", $custom["background-color"]),
-                'color'             => $request->get("color", $custom["color"]),
-            )
-        );
+        return $app["image_faker.config"]($values);
     }
 }
