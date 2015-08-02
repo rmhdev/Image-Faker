@@ -79,6 +79,8 @@ To ease image creation, some standard image sizes are available:
 * hd720: `1280x720`
 * hd1080: `1920x1080`
 
+You can [define your own sizes][#customization].
+
 ### HTTP cache
 
 Creating images dynamically is an "complex" task executed by the server. If images are too big or a lot of requests are made at the same time, the overhead can become a problem. Luckily HTTP cache is here to help, storing responses temporarily and improving communication between users and server.
@@ -90,7 +92,7 @@ Get the source code of the project from GitHub. You have two options:
 A. Clone it:
 
 ```bash
-git clone git@github.com:rmhdev/image-faker.git /YOUR/FOLDER
+git clone git@github.com:rmhdev/image-faker.git
 ```
 
 B. Download it:
@@ -108,14 +110,22 @@ php composer.phar update
 
 ### Server configuration
 
-You must configure your `vhost` and adjust the path to point to the `web/` folder.
+This project is built using [Silex][].
+The official docs will give you more information about [how to configure your server][]. Make sure that:
 
-Don't forget to set the proper permissions on the `cache` ans `logs` folder:
+- the **document root** points to the `image-faker/web/` directory.
+- folders in `image-faker/var/` must be **writable** by the web server.
+
+### Play with Image Faker
+
+If you are using PHP 5.4+, its built-in web server will help you to play with this project:
 
 ```bash
-chmod 777 var/cache/
-chmod 777 var/logs/
+cd image-faker/
+php -S localhost:8080 -t web web/index.php
 ```
+
+Easy, right? Just open a browser and enter `http://localhost:8080`
 
 ## Customization
 
@@ -124,13 +134,15 @@ The default values are:
 
 ```php
 $app["image_faker.parameters"] = array(
-    "library"           => "gd",
-    "background-color"  => null,
-    "color"             => null,
-    "cache_ttl"         => 3600,
-    "max-width"         => 2000,
-    "max-height"        => 2000,
-    "sizes"             => array(),
+    "library"           => "gd",    // choose between "gd", "imagick" and "gmagick"
+    "background-color"  => null,    // hexadecimal
+    "color"             => null,    // hexadecimal
+    "cache_ttl"         => 3600,    // seconds
+    "max-width"         => 2000,    // pixels
+    "max-height"        => 2000,    // pixels
+    "sizes"             => array(
+        // "lorem" => "300x400"
+    ), 
 );
 ```
 
@@ -171,6 +183,7 @@ My name is [Rober Martín][] ([@rmhdev][]). I'm a developer from Donostia / San 
 
 [Test Image Faker]: http://image-faker.rmhdev.net/
 [Silex]: http://silex.sensiolabs.org/
+[how to configure your server]: http://silex.sensiolabs.org/doc/web_servers.html
 [Fabien Potencier]: http://fabien.potencier.org/
 [Igor Wiedler]: https://igor.io/
 [Imagine]: http://imagine.readthedocs.org/
