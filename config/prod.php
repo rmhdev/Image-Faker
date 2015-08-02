@@ -11,6 +11,6 @@ $app->register(new Silex\Provider\HttpCacheServiceProvider(), array(
 ));
 
 require __DIR__ . '/parameters.dist.php';
-
-require __DIR__ . '/../src/services.php';
-require __DIR__ . '/../src/controllers.php';
+if (file_exists(__DIR__ . '/parameters.php')) {
+    require __DIR__ . '/parameters.php';
+}

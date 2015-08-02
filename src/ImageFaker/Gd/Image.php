@@ -13,10 +13,10 @@ class Image extends AbstractImage implements ImageInterface
         return new Imagine();
     }
 
-    protected function calculateFontSize()
-    {
-        // In GD, resolution is 96 by default. Font size must be "hacked".
-        // See: https://github.com/avalanche123/Imagine/issues/32
-        return floor($this->getImageConfig()->getFontSize() *  (72 / 96));
-    }
+//    protected function calculateFontSize()
+//    {
+//        // In GD, resolution is 96 by default. Font size must be "hacked".
+//        // See: https://github.com/avalanche123/Imagine/issues/32
+//        return floor($this->getImageConfig()->getFontSize() *  (72 / 96));
+//    }
 }
