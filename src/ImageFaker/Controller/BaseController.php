@@ -19,11 +19,9 @@ class BaseController
 {
     public function indexAction(Application $app)
     {
-        $config = new Config(new Size(1, 1));
-
         return new Response(
             $app['twig']->render("homepage.twig", array(
-                "config"        => $config,
+                "config"        => new Config(new Size(1, 1)),
                 "defaultSizes"  => SizeFactory::$defaultSizes
             )),
             200,
