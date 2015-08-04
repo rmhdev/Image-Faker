@@ -9,7 +9,12 @@ final class ImageType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add("width");
+        $builder
+            ->add("size")
+            ->add("extension")
+            ->add("background")
+            ->add("color")
+        ;
     }
 
     /**

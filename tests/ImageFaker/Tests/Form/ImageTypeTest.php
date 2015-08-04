@@ -8,25 +8,51 @@ use Symfony\Component\Form\Test\TypeTestCase;
 class ImageTypeTest extends TypeTestCase
 {
     /**
-     * @dataProvider validDataProvider
+     * @dataProvider validData
      */
-    public function testSubmitValidData($formData)
+    public function testSubmitValidData($data)
     {
         $type = new ImageType();
         $form = $this->factory->create($type);
-        $form->submit($formData);
+        $form->submit($data);
 
         $this->assertTrue($form->isSynchronized());
-        $this->assertEquals($formData, $form->getData());
+        $this->assertEquals($data, $form->getData());
+
+        $view = $form->createView();
+        $children = $view->children;
+
+        foreach (array_keys($data) as $key) {
+            $this->assertArrayHasKey($key, $children);
+        }
     }
 
-    public function validDataProvider()
+    public function validData()
     {
         return array(
             array(
                 "image" => array(
-                    'width' => '200'
-                ),
+                    'size' => '200',
+                    'extension' => "jpg",
+                    'background' => "#000000",
+                    'color' => "#ffffff",
+                )
+            ),
+            array(
+                "image" => array(
+                    'size' => '200',
+                    'extension' => "png",
+                    'background' => "",
+                    'color' => "",
+                )
+            ),
+            array(
+                "image" => array(
+                    'size' => '200x200',
+                    'extension' => "gif",
+                    'background' => "",
+                    'color' => "",
+                )
             )
         );
     }
