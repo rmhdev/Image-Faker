@@ -8,6 +8,7 @@ use ImageFaker\Config\SizeFactory;
 use ImageFaker\Form\ImageType;
 use Silex\Application;
 use Symfony\Component\Form\Form;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -23,9 +24,9 @@ class BaseController
     {
         $form = $this->createForm($app);
         if ($request->isMethod(Request::METHOD_POST)) {
-            return $app->redirect(
-                $app["url_generator"]->generate("homepage")
-            );
+            $form->handleRequest($request);
+
+            return $this->redirectToImage($app, $form);
         }
 
         return new Response(
@@ -36,6 +37,15 @@ class BaseController
             )),
             200,
             array()
+        );
+    }
+
+    private function redirectToImage(Application $app, FormInterface $form)
+    {
+        $data = $form->getData();
+
+        return $app->redirect(
+            $app["url_generator"]->generate("simple", $data)
         );
     }
 

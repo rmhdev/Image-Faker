@@ -35,9 +35,9 @@ class HomePageTest extends WebTestCase
         $form['image[size]'] = '200';
         $form['image[extension]'] = 'png';
         $client->submit($form);
-        $crawler = $client->followRedirect();
+        $client->followRedirect();
 
-        //$this->assertTrue($client->getResponse->isSuccessful());
-
+        $this->assertTrue($client->getResponse()->isSuccessful());
+        $this->assertEquals("image/png", $client->getResponse()->headers->get("Content-Type"));
     }
 }
