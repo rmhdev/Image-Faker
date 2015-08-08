@@ -2,10 +2,10 @@
 
 use Symfony\Component\HttpFoundation\Response;
 
-$app->get(
+$app->match(
     "/",
     'ImageFaker\Controller\BaseController::indexAction'
-)->bind("homepage");
+)->bind("homepage")->method("GET|POST");
 
 $app->get(
     "/{background}/{color}/{size}.{extension}",

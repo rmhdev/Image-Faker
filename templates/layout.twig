@@ -7,15 +7,15 @@
     <meta name="description" content="Create images dynamically">
     <meta name="author" content="Rober Martín H (rmhdev)">
 
-{% for asset in ['bootstrap.min.css', 'image-faker.css'] %}
-    <link rel="stylesheet" href="./css/{{ asset }}" type="text/css">
+{% for css in ['bootstrap.min.css', 'image-faker.css'] %}
+    <link rel="stylesheet" href="{{ asset("css/" ~ css) }}" type="text/css">
 {% endfor %}
 
     <!--[if lt IE 9]>
-    <script src="./js/html5shiv.js"></script>
+    <script src="{{ asset('js/html5shiv.js') }}"></script>
     <![endif]-->
 
-    <link rel="shortcut icon" href="./favicon.ico">
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
 
 </head>
 <body>

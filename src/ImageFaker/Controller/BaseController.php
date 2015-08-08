@@ -5,7 +5,9 @@ namespace ImageFaker\Controller;
 use ImageFaker\Config\Config;
 use ImageFaker\Config\Size;
 use ImageFaker\Config\SizeFactory;
+use ImageFaker\Form\ImageType;
 use Silex\Application;
+use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -17,16 +19,33 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class BaseController
 {
-    public function indexAction(Application $app)
+    public function indexAction(Application $app, Request $request)
     {
+        $form = $this->createForm($app);
+        if ($request->isMethod(Request::METHOD_POST)) {
+            return $app->redirect(
+                $app["url_generator"]->generate("homepage")
+            );
+        }
+
         return new Response(
             $app['twig']->render("homepage.twig", array(
                 "config"        => new Config(new Size(1, 1)),
-                "defaultSizes"  => SizeFactory::$defaultSizes
+                "defaultSizes"  => SizeFactory::$defaultSizes,
+                "form"          => $form->createView(),
             )),
             200,
             array()
         );
+    }
+
+    /**
+     * @param Application $app
+     * @return Form
+     */
+    private function createForm(Application $app)
+    {
+        return $app['form.factory']->createBuilder(new ImageType())->getForm();
     }
 
     public function imageAction(Application $app, Request $request)

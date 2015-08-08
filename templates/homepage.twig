@@ -44,6 +44,12 @@
         </div>
     </section>
 
+    <form action="{{ path('homepage') }}" method="post">
+        {{ form_widget(form) }}
+
+        <input type="submit" name="submit" />
+    </form>
+
     <section id="param">
         <div class="page-header">
             <h1>Parameters</h1>

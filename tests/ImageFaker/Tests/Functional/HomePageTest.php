@@ -19,7 +19,25 @@ class HomePageTest extends WebTestCase
         /* @var $response Response */
         $response = $client->getResponse();
 
+        //print_r($response->getContent()); die();
         $this->assertTrue($response->isSuccessful());
         $this->assertEquals(1, $crawler->filter('html:contains("Image Faker")')->count());
+    }
+
+    public function testSimpleSizeShouldGenerateImage()
+    {
+        $client = $this->createClient();
+        $crawler = $client->request("GET", "/");
+        /* @var $response Response */
+        //$response = $client->getResponse();
+
+        $form = $crawler->selectButton('submit')->form();
+        $form['image[size]'] = '200';
+        $form['image[extension]'] = 'png';
+        $client->submit($form);
+        $crawler = $client->followRedirect();
+
+        //$this->assertTrue($client->getResponse->isSuccessful());
+
     }
 }
