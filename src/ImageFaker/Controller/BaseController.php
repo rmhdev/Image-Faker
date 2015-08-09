@@ -47,6 +47,9 @@ class BaseController
         if ($data["background"]) {
             $route = "background";
         }
+        if ($data["color"]) {
+            $route = "font";
+        }
 
         return $app->redirect(
             $app["url_generator"]->generate($route, $data)
