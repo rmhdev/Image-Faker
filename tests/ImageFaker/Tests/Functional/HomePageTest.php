@@ -24,12 +24,10 @@ class HomePageTest extends WebTestCase
         $this->assertEquals(1, $crawler->filter('html:contains("Image Faker")')->count());
     }
 
-    public function testSimpleSizeShouldGenerateImage()
+    public function testPngWithSizeShouldGenerateImage()
     {
         $client = $this->createClient();
         $crawler = $client->request("GET", "/");
-        /* @var $response Response */
-        //$response = $client->getResponse();
 
         $form = $crawler->selectButton('submit')->form();
         $form['image[size]'] = '200';
@@ -37,7 +35,27 @@ class HomePageTest extends WebTestCase
         $client->submit($form);
         $client->followRedirect();
 
-        $this->assertTrue($client->getResponse()->isSuccessful());
-        $this->assertEquals("image/png", $client->getResponse()->headers->get("Content-Type"));
+        $this->assertEquals(
+            "/200.png",
+            $client->getRequest()->getRequestUri()
+        );
+    }
+
+    public function testJpgWithBackgroundColorShouldGenerateImage()
+    {
+        $client = $this->createClient();
+        $crawler = $client->request("GET", "/");
+
+        $form = $crawler->selectButton('submit')->form();
+        $form['image[size]'] = '300';
+        $form['image[extension]'] = 'jpg';
+        $form['image[background]'] = 'ff0000';
+        $client->submit($form);
+        $client->followRedirect();
+
+        $this->assertEquals(
+            "/ff0000/300.jpg",
+            $client->getRequest()->getRequestUri()
+        );
     }
 }

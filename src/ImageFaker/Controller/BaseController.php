@@ -42,10 +42,14 @@ class BaseController
 
     private function redirectToImage(Application $app, FormInterface $form)
     {
+        $route = "simple";
         $data = $form->getData();
+        if ($data["background"]) {
+            $route = "background";
+        }
 
         return $app->redirect(
-            $app["url_generator"]->generate("simple", $data)
+            $app["url_generator"]->generate($route, $data)
         );
     }
 
