@@ -19,43 +19,58 @@ class HomePageTest extends WebTestCase
         /* @var $response Response */
         $response = $client->getResponse();
 
-        //print_r($response->getContent()); die();
         $this->assertTrue($response->isSuccessful());
         $this->assertEquals(1, $crawler->filter('html:contains("Image Faker")')->count());
     }
 
-    public function testPngWithSizeShouldGenerateImage()
+    /**
+     * @dataProvider correctFormData
+     */
+    public function testCorrectlySubmittedDataShouldReturnImage($expectedUrl, $data)
     {
-        $client = $this->createClient();
-        $crawler = $client->request("GET", "/");
-
-        $form = $crawler->selectButton('submit')->form();
-        $form['image[size]'] = '200';
-        $form['image[extension]'] = 'png';
-        $client->submit($form);
-        $client->followRedirect();
+        $client = $this->submitData($data);
 
         $this->assertEquals(
-            "/200.png",
+            $expectedUrl,
             $client->getRequest()->getRequestUri()
         );
     }
 
-    public function testJpgWithBackgroundColorShouldGenerateImage()
+    public function correctFormData()
+    {
+        return array(
+            array(
+                "/200.png",
+                array(
+                    "size" => 200,
+                    "extension" => "png",
+                )
+            ),
+            array(
+                "/ff0000/300.jpg",
+                array(
+                    "size" => 300,
+                    "extension" => "jpg",
+                    "background" => "ff0000",
+                )
+            )
+        );
+    }
+
+    /**
+     * @param array $data
+     * @return \Symfony\Component\HttpKernel\Client
+     */
+    private function submitData($data = array())
     {
         $client = $this->createClient();
         $crawler = $client->request("GET", "/");
-
-        $form = $crawler->selectButton('submit')->form();
-        $form['image[size]'] = '300';
-        $form['image[extension]'] = 'jpg';
-        $form['image[background]'] = 'ff0000';
+        $form = $crawler->selectButton('submit')->form(array(
+            "image" => $data
+        ));
         $client->submit($form);
         $client->followRedirect();
 
-        $this->assertEquals(
-            "/ff0000/300.jpg",
-            $client->getRequest()->getRequestUri()
-        );
+        return $client;
     }
 }
