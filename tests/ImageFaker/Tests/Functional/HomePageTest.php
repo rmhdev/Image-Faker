@@ -62,7 +62,15 @@ class HomePageTest extends WebTestCase
                     "color" => "123456",
                     "background" => "ff0000",
                 )
-            )
+            ),
+//            array(
+//                "/000000/123456/350.gif",
+//                array(
+//                    "size" => 350,
+//                    "extension" => "gif",
+//                    "color" => "123456",
+//                )
+//            )
         );
     }
 

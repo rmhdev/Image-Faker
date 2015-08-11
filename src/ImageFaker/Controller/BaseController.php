@@ -42,14 +42,17 @@ class BaseController
 
     private function redirectToImage(Application $app, FormInterface $form)
     {
-        $route = "simple";
         $data = $form->getData();
-        if ($data["background"]) {
+        $route = "simple";
+        if (isset($data["background"]) && $data["background"]) {
             $route = "background";
         }
         if ($data["color"]) {
             $route = "font";
         }
+        /* @var Config $config */
+//        $config = $app["image_faker.config"]($data);
+//        $data["size"] = (string)$config->getSize();
 
         return $app->redirect(
             $app["url_generator"]->generate($route, $data)
