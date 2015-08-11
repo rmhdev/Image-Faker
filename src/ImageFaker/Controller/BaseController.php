@@ -54,7 +54,6 @@ class BaseController
                 $data["background"] = str_replace("#", "", (string)$config->getBackgroundColor());
             }
         }
-//        $data["size"] = (string)$config->getSize();
 
         return $app->redirect(
             $app["url_generator"]->generate($route, $data)

@@ -70,6 +70,20 @@ class HomePageTest extends WebTestCase
                     "extension" => "gif",
                     "color" => "123456",
                 )
+            ),
+            array(
+                "/50x60.png",
+                array(
+                    "size" => "50x60",
+                    "extension" => "png",
+                )
+            ),
+            array(
+                "/ntsc.jpg",
+                array(
+                    "size" => "ntsc",
+                    "extension" => "jpg",
+                )
             )
         );
     }
