@@ -43,20 +43,39 @@ class BaseController
     private function redirectToImage(Application $app, FormInterface $form)
     {
         $data = $form->getData();
+        $config = $this->createConfig($app, $data);
         $route = "simple";
         if (isset($data["background"]) && $data["background"]) {
             $route = "background";
         }
         if ($data["color"]) {
             $route = "font";
+            if (!isset($data["background"])) {
+                $data["background"] = str_replace("#", "", (string)$config->getBackgroundColor());
+            }
         }
-        /* @var Config $config */
-//        $config = $app["image_faker.config"]($data);
 //        $data["size"] = (string)$config->getSize();
 
         return $app->redirect(
             $app["url_generator"]->generate($route, $data)
         );
+    }
+
+    /**
+     * @param Application $app
+     * @param array $data
+     * @return Config
+     */
+    private function createConfig(Application $app, $data = array())
+    {
+        $values = array(
+            "size"              => isset($data["size"]) ? $data["size"] : "",
+            'background-color'  => isset($data["background"]) ? $data["background"] : "",
+            'color'             => isset($data["color"]) ? $data["color"] : "",
+            'extension'         => isset($data["extension"]) ? $data["extension"] : "",
+        );
+
+        return $app["image_faker.config"]($values);
     }
 
     /**
@@ -70,13 +89,7 @@ class BaseController
 
     public function imageAction(Application $app, Request $request)
     {
-        $values = array(
-            "size"              => $request->get("size"),
-            'background-color'  => $request->get("background"),
-            'color'             => $request->get("color"),
-            'extension'         => $request->get("extension"),
-        );
-        $config = $app["image_faker.config"]($values);
+        $config = $this->createConfig($app, $request->attributes->get("_route_params"));
 
         return $app["image_faker.response"]($config, $request);
     }
