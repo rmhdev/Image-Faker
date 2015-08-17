@@ -45,6 +45,9 @@
     </section>
 
     <form action="{{ path('homepage') }}" method="post">
+        {% for message in app.session.getFlashBag.get('message') %}
+        <div class="alert">{{ message }}</div>
+        {% endfor %}
         {{ form_widget(form) }}
 
         <input type="submit" name="submit" />

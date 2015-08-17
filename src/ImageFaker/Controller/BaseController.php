@@ -25,8 +25,11 @@ class BaseController
         $form = $this->createForm($app);
         if ($request->isMethod(Request::METHOD_POST)) {
             $form->handleRequest($request);
-
-            return $this->redirectToImage($app, $form);
+            try {
+                return $this->redirectToImage($app, $form);
+            } catch (\Exception $e) {
+                $app['session']->getFlashBag()->add('message', 'Error');
+            }
         }
 
         return new Response(

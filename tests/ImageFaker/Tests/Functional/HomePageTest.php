@@ -104,4 +104,23 @@ class HomePageTest extends WebTestCase
 
         return $client;
     }
+
+    public function testInvalidSubmittedData()
+    {
+        $data = array(
+            "size" => "2001",
+            "extension" => "jpg",
+        );
+
+        $client = $this->createClient();
+        $crawler = $client->request("GET", "/");
+        $form = $crawler->selectButton('submit')->form(array(
+            "image" => $data
+        ));
+        $crawler = $client->submit($form);
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertEquals("/", $client->getRequest()->getRequestUri());
+        $this->assertEquals(1, $crawler->filter('.alert:contains("Error")')->count());
+    }
 }
