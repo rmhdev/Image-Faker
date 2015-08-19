@@ -1,0 +1,11 @@
+{% macro link_to_image(route, parameters) %}
+    {% set values = [] %}
+    {% if route in ["font", "background"] %}
+        {% set values = values|merge([ parameters.background ]) %}
+    {% endif %}
+    {% if route == "font" %}
+        {% set values = values|merge([ parameters.color]) %}
+    {% endif %}
+    {% set values = values|merge([ parameters.size ~ "." ~ parameters.extension ]) %}
+    <a href="{{ url(route, parameters) }}">/{{ values|join("/")  }}</a>
+{% endmacro %}
