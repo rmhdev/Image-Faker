@@ -175,4 +175,17 @@ final class Config
             "gif"   => "image/gif",
         );
     }
+
+    public static function mimeType($extension = "")
+    {
+        $types = self::availableMimeTypes();
+        $type = strtolower(trim($extension));
+        if (!array_key_exists($type, $types)) {
+            throw new InvalidArgumentException(
+                sprintf('Extension "%s" is not available', $type)
+            );
+        }
+
+        return $types[$type];
+    }
 }

@@ -220,4 +220,19 @@ class ConfigTest extends AbstractTestCase
 
         $this->assertEquals($expected, Config::availableMimeTypes());
     }
+
+    public function testMimeTypeForExtensionShouldReturnMimeType()
+    {
+        $this->assertEquals("image/jpeg", Config::mimeType("jpg"));
+        $this->assertEquals("image/png", Config::mimeType("PNG"));
+        $this->assertEquals("image/gif", Config::mimeType(" gif\n"));
+    }
+
+    /**
+     * @expectedException \ImageFaker\Exception\InvalidArgumentException
+     */
+    public function testMimeTypeForUnavailableExtensionShouldThrowException()
+    {
+        Config::mimeType("txt");
+    }
 }
