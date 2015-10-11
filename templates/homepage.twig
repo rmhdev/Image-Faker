@@ -15,6 +15,8 @@
 {% block content %}
 
     <form action="{{ path('homepage') }}" method="post" class="form ">
+        {{ form_widget(form._token) }}
+
         {% for message in app.session.getFlashBag.get('message') %}
             <div class="alert alert-danger">{{ message }}</div>
         {% endfor %}

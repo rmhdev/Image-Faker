@@ -6,6 +6,7 @@ $app = new \Silex\Application();
 $app->register(new Silex\Provider\RoutingServiceProvider());
 $app->register(new Silex\Provider\TwigServiceProvider(), array());
 $app->register(new Silex\Provider\SessionServiceProvider(), array());
+$app->register(new Silex\Provider\CsrfServiceProvider(), array());
 $app->register(new Silex\Provider\FormServiceProvider(), array());
 $app["locale"] = "en";
 $app->register(new Silex\Provider\TranslationServiceProvider(), array());
