@@ -105,13 +105,11 @@ class HomePageTest extends WebTestCase
         return $client;
     }
 
-    public function testInvalidSubmittedData()
+    /**
+     * @dataProvider invalidFormData
+     */
+    public function testInvalidSubmittedData($data)
     {
-        $data = array(
-            "size" => "2001",
-            "extension" => "jpg",
-        );
-
         $client = $this->createClient();
         $crawler = $client->request("GET", "/");
         $form = $crawler->selectButton('submit')->form(array(
@@ -122,5 +120,37 @@ class HomePageTest extends WebTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertEquals("/", $client->getRequest()->getRequestUri());
         $this->assertEquals(1, $crawler->filter('.alert:contains("Error")')->count());
+    }
+
+    public function invalidFormData()
+    {
+        return array(
+            array(
+                array(
+                    "size" => "2001",
+                    "extension" => "jpg",
+                )
+            ),
+            array(
+                array(
+                    "size" => "333",
+                    "extension" => "txt",
+                )
+            ),
+            array(
+                array(
+                    "size" => "333",
+                    "extension" => "jpg",
+                    "color" => "hi",
+                )
+            ),
+            array(
+                array(
+                    "size" => "345",
+                    "extension" => "jpg",
+                    "background" => "hello",
+                )
+            )
+        );
     }
 }
