@@ -209,4 +209,15 @@ class ConfigTest extends AbstractTestCase
         );
         $this->assertGreaterThanOrEqual(125, $brightnessDifference);
     }
+
+    public function testAvailableMimeTypesShouldReturnListOfAvailableExtensionsAndTheirMimeTypes()
+    {
+        $expected = array(
+            "jpg"   => "image/jpeg",
+            "png"   => "image/png",
+            "gif"   => "image/gif",
+        );
+
+        $this->assertEquals($expected, Config::availableMimeTypes());
+    }
 }

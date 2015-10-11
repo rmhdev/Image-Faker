@@ -166,4 +166,13 @@ final class Config
     {
         return $this->fontColor;
     }
+
+    public static function availableMimeTypes()
+    {
+        return array(
+            "jpg"   => "image/jpeg",
+            "png"   => "image/png",
+            "gif"   => "image/gif",
+        );
+    }
 }
