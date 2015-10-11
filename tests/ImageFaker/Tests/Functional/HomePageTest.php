@@ -134,12 +134,6 @@ class HomePageTest extends WebTestCase
             array(
                 array(
                     "size" => "333",
-                    "extension" => "txt",
-                )
-            ),
-            array(
-                array(
-                    "size" => "333",
                     "extension" => "jpg",
                     "color" => "hi",
                 )
