@@ -40,21 +40,8 @@ final class Config
     private function processExtension($extension)
     {
         $extension = strtolower($extension);
-        switch ($extension) {
-            case "jpg";
-                $mimeType = "image/jpeg";
-                break;
-            case "png";
-                $mimeType = "image/png";
-                break;
-            case "gif";
-                $mimeType = "image/gif";
-                break;
-            default:
-                throw new InvalidArgumentException();
-        }
         $this->extension = $extension;
-        $this->mimeType = $mimeType;
+        $this->mimeType = Config::mimeType($extension);
     }
 
     private function processAttributes($attributes = array())
@@ -167,6 +154,9 @@ final class Config
         return $this->fontColor;
     }
 
+    /**
+     * @return array
+     */
     public static function availableMimeTypes()
     {
         return array(
@@ -176,6 +166,11 @@ final class Config
         );
     }
 
+    /**
+     * @param string $extension
+     * @return string
+     * @throws InvalidArgumentException
+     */
     public static function mimeType($extension = "")
     {
         $types = self::availableMimeTypes();
