@@ -34,4 +34,9 @@ final class SizeFactory
             isset($options["options"]) ? $options["options"] : array()
         );
     }
+
+    public static function sizes($customSizes = array())
+    {
+        return array_merge(self::$defaultSizes, $customSizes);
+    }
 }

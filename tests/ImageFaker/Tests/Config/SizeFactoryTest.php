@@ -68,4 +68,29 @@ class SizeFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1200, $size->getMaxWidth());
         $this->assertEquals(1500, $size->getMaxHeight());
     }
+
+    /**
+     * @param array $customSizes
+     * @dataProvider customSizes
+     */
+    public function testSizesShouldReturnAvailableSizes($customSizes = array())
+    {
+        $this->assertEquals(
+            array_merge(SizeFactory::$defaultSizes, $customSizes),
+            SizeFactory::sizes($customSizes)
+        );
+    }
+
+    public function customSizes()
+    {
+        return array(
+            array(),
+            array(
+                array("test" => "123x456")
+            ),
+            array(
+                array("pal" => "999x888")
+            )
+        );
+    }
 }
