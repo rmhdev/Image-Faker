@@ -4,7 +4,6 @@ namespace ImageFaker\Controller;
 
 use ImageFaker\Config\Config;
 use ImageFaker\Config\Size;
-use ImageFaker\Config\SizeFactory;
 use ImageFaker\Form\ImageType;
 use Silex\Application;
 use Symfony\Component\Form\Form;
@@ -34,9 +33,9 @@ class BaseController
 
         return new Response(
             $app['twig']->render("homepage.twig", array(
-                "config"        => new Config(new Size(1, 1)),
-                "defaultSizes"  => SizeFactory::$defaultSizes,
-                "form"          => $form->createView(),
+                "config" => new Config(new Size(1, 1)),
+                "sizes"  => (array)$app["image_faker.sizes"](),
+                "form"   => $form->createView(),
             )),
             200,
             array()

@@ -20,31 +20,29 @@
 </head>
 <body>
 
-<header class="jumbotron subhead" id="overview">
+<nav class="navbar navbar-default">
     <div class="container">
-
-        <div class="row">
-            <div class="col-sm-8 header">
-                <h1>Image Faker</h1>
-                <p class="lead">Generate images dynamically</p>
-            </div>
-            <div class="col-sm-4 version">
-                <p class="">Version: 2.0.0</p>
-                <a href="https://github.com/rmhdev/Image-Faker" class="btn btn-large btn-success">View on GitHub</a>
-            </div>
+        <div class="navbar-header pull-left">
+            <a class="navbar-brand" href="{{ path('homepage') }}">Image Faker</a>
         </div>
-
+        <div class="pull-right" id="">
+            <ul class="nav navbar-nav navbar-right">
+                <li class=""><a href="https://github.com/rmhdev/Image-Faker">View on Github</a></li>
+            </ul>
+        </div>
     </div>
-</header>
+</nav>
 
-<div class="container">
+<main class="container">
 {% block content %}{% endblock %}
-</div>
+</main>
 
 <footer class="footer">
     <div class="container">
-        <p>Created by Rober Martín H.</p>
-        <p>Theme based on <a href="http://twitter.github.io/bootstrap/">Twitter Bootstrap</a>.</p>
+        <ul class="list-unstyled">
+            <li>Created by <a href="http://rmhdev.net" class="">Rober Martín H.</a></li>
+            <li>Code is under MIT License.</li>
+        </ul>
     </div>
 </footer>
 

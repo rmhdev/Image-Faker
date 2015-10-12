@@ -2,6 +2,14 @@
 
 /* @var $app Silex\Application */
 
+$app["image_faker.sizes"] = $app->protect(
+    function () use ($app) {
+        $parameters = isset($app["image_faker.parameters"]) ? $app["image_faker.parameters"] : array();
+
+        return \ImageFaker\Config\SizeFactory::sizes(isset($parameters["sizes"]) ? $parameters["sizes"] : array());
+    }
+);
+
 $app["image_faker.config"] = $app->protect(
     function ($values) use ($app) {
         $custom = array_merge(
