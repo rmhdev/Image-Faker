@@ -40,7 +40,7 @@
                 form_row(form.background, {
                     'attr': {
                         'placeholder': config.backgroundColor|trim("#"),
-                        'maxlength': 6,
+                        'maxlength': 7,
                         'class': 'input-lg'
                     },
                     'required': false
@@ -50,7 +50,7 @@
                 form_row(form.color, {
                     'attr': {
                         'placeholder': config.fontColor|trim("#"),
-                        'maxlength': 6,
+                        'maxlength': 7,
                         'class': 'input-lg'
                     },
                     'label': 'Font color',
@@ -73,7 +73,7 @@
                 <img class="img-responsive center-block thumbnail" src="{{ url("background", paramsBasic) }}">
             </a>
         </div>
-        <div class="col-md-4 col-sm-12">
+        <div class="col-md-4 col-sm-8 col-sm-offset-2">
             <div class="panel panel-default">
                 <ul class="list-group">
                     <li class="list-group-item">Size
@@ -103,6 +103,9 @@
         <ul class="list-group">
             <li class="list-group-item">Max size
                 <span class="pull-right rmh-size">{{ config.size.maxWidth ~ "x" ~ config.size.maxHeight }}</span>
+            </li>
+            <li class="list-group-item">Default background
+                <span class="pull-right rmh-size">{{ config.backgroundColor }}</span>
             </li>
         </ul>
         <div class="panel-heading">Available sizes</div>

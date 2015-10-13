@@ -48,12 +48,14 @@ class BaseController
         $config = $this->createConfig($app, $data);
         $route = "simple";
         if (isset($data["background"]) && $data["background"]) {
+            $data["background"] = ltrim($data["background"], "#");
             $route = "background";
         }
         if ($data["color"]) {
+            $data["color"] = ltrim($data["color"], "#");
             $route = "font";
             if (!isset($data["background"])) {
-                $data["background"] = str_replace("#", "", (string)$config->getBackgroundColor());
+                $data["background"] = ltrim((string)$config->getBackgroundColor(), "#");
             }
         }
 

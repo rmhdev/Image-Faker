@@ -84,6 +84,15 @@ class HomePageTest extends WebTestCase
                     "size" => "ntsc",
                     "extension" => "jpg",
                 )
+            ),
+            array(
+                "/fff111/000aaa/301.jpg",
+                array(
+                    "size" => 301,
+                    "extension" => "jpg",
+                    "background" => "#fff111",
+                    "color" => "#000aaa",
+                )
             )
         );
     }
