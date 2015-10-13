@@ -16,11 +16,14 @@
 {% block content %}
 
 <header>
-    <h1 class="header-title">Create custom images</h1>
-    <p class="lead">Image Faker achieves this by <span class="motto-second">using simple urls</span></p>
+    <div class="container">
+        <h1 class="header-title">Welcome to Image Faker</h1>
+        <p class="lead">A service that creates images <span class="motto-second">using simple urls</span></p>
+    </div>
 </header>
 
-<form action="{{ path('homepage') }}" method="post" class="form">
+<form action="{{ path('homepage') }}" method="post" class="form" autocomplete="on">
+    <div class="container">
     <fieldset>
         <legend class="sr-only">Create an image</legend>
 
@@ -39,7 +42,7 @@
             <div class="col-md-2 col-sm-2 col-xs-6">{{
                 form_row(form.background, {
                     'attr': {
-                        'placeholder': config.backgroundColor|trim("#"),
+                        'placeholder': config.backgroundColor,
                         'maxlength': 7,
                         'class': 'input-lg'
                     },
@@ -49,7 +52,7 @@
             <div class="col-md-2 col-sm-2 col-xs-6">{{
                 form_row(form.color, {
                     'attr': {
-                        'placeholder': config.fontColor|trim("#"),
+                        'placeholder': config.fontColor,
                         'maxlength': 7,
                         'class': 'input-lg'
                     },
@@ -58,45 +61,31 @@
                 })
             }}</div>
             <div class="col-md-4 col-sm-3 col-xs-12">
-                <button type="submit" class="btn btn-success btn-block btn-lg faker-btn-submit">create</button>
+                <button type="submit" class="btn btn-primary btn-block btn-lg faker-btn-submit">create</button>
             </div>
         </div>
     </fieldset>
+    </div>
 </form>
 
 <section>
+    <div class="container">
     <header class=""><h2>Example</h2></header>
 
-    <div class="row">
-        <div class="col-md-offset-2 col-md-4 col-sm-12">
-            <a href="{{ url("background", paramsBasic) }}">
-                <img class="img-responsive center-block thumbnail" src="{{ url("background", paramsBasic) }}">
-            </a>
-        </div>
-        <div class="col-md-4 col-sm-8 col-sm-offset-2">
-            <div class="panel panel-default">
-                <ul class="list-group">
-                    <li class="list-group-item">Size
-                        <span class="pull-right rmh-size">{{ paramsBasic.size }}</span>
-                    </li>
-                    <li class="list-group-item">Extension
-                        <span class="pull-right rmh-size">{{ paramsBasic.extension }}</span>
-                    </li>
-                    <li class="list-group-item">Background color
-                        <span class="pull-right rmh-size">{{ paramsBasic.background }}</span>
-                    </li>
-                    <li class="list-group-item">Font color
-                        <span class="pull-right rmh-size text-muted">[empty]</span>
-                    </li>
-                </ul>
-            </div>
-        </div>
+    <p class="text-center text-muted rmh-url">{{ url("background", paramsBasic) }}</p>
+
+    <div class="">
+        <a href="{{ url("background", paramsBasic) }}">
+            <img class="img-responsive center-block thumbnail" src="{{ url("background", paramsBasic) }}">
+        </a>
+    </div>
     </div>
 </section>
 
 <section class="row">
+    <div class="container">
     <h2>FAQ</h2>
-    <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+    <div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
     <div class="panel panel-default rmh-panel">
         <header class="panel-heading">Custom values</header>
 
@@ -108,7 +97,7 @@
                 <span class="pull-right rmh-size">{{ config.backgroundColor }}</span>
             </li>
         </ul>
-        <div class="panel-heading">Available sizes</div>
+        <div class="panel-heading">Custom sizes</div>
         <ul class="list-group">
             {% for name, size in sizes %}
             <li class="list-group-item">{{ name }}
@@ -116,6 +105,7 @@
             </li>
             {% endfor %}
         </ul>
+    </div>
     </div>
     </div>
 </section>

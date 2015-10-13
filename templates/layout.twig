@@ -14,26 +14,11 @@
     <!--[if lt IE 9]>
     <script src="{{ asset('js/html5shiv.js') }}"></script>
     <![endif]-->
-
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
-
 </head>
 <body>
 
-<nav class="navbar navbar-default navbar-static-top">
-    <div class="container">
-        <div class="navbar-header pull-left">
-            <a class="navbar-brand" href="{{ path('homepage') }}">Image Faker</a>
-        </div>
-        <div class="pull-right" id="">
-            <ul class="nav navbar-nav navbar-right">
-                <li class=""><a href="https://github.com/rmhdev/Image-Faker">View on Github</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
-
-<main class="container">
+<main class="main">
 {% block content %}{% endblock %}
 </main>
 

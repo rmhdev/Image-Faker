@@ -160,8 +160,8 @@ final class Config
     public static function availableMimeTypes()
     {
         return array(
-            "jpg"   => "image/jpeg",
             "png"   => "image/png",
+            "jpg"   => "image/jpeg",
             "gif"   => "image/gif",
         );
     }
