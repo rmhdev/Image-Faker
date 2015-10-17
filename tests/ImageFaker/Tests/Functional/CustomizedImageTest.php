@@ -14,11 +14,11 @@ class CustomizedImageTest extends AbstractWebTest
         $app = require __DIR__ . "/app.php";
         $app["image_faker.parameters"] = array(
             "library"           => "gd",
-            "background-color"  => "#123456",
+            "background_color"  => "#123456",
             "color"             => "#abcdef",
             "cache_ttl"         => 7200,
-            "max-width"         => 1000,
-            "max-height"        => 1100,
+            "max_width"         => 1000,
+            "max_height"        => 1100,
             "sizes" => array(
                 "lorem" => "432x234"
             ),

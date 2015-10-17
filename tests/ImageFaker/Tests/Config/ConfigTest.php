@@ -171,7 +171,7 @@ class ConfigTest extends AbstractTestCase
     public function testPersonalizedBackgroundColor()
     {
         $size = new Size(80, 80);
-        $imageConfig = new Config($size, "jpg", array("background-color" => "FFFFFF"));
+        $imageConfig = new Config($size, "jpg", array("background_color" => "FFFFFF"));
 
         $this->assertEquals("#ffffff", (string)$imageConfig->getBackgroundColor());
     }
@@ -201,7 +201,7 @@ class ConfigTest extends AbstractTestCase
     public function testDefaultFontColorShouldHaveEnoughContrast($extension, $backgroundColor)
     {
         $size               = new Size(75, 75);
-        $imageConfig        = new Config($size, $extension, array("background-color" => $backgroundColor));
+        $imageConfig        = new Config($size, $extension, array("background_color" => $backgroundColor));
         $fontColor          = $this->createColor((string)$imageConfig->getFontColor());
         $backgroundColor    = $imageConfig->getBackgroundColor();
         $brightnessDifference   = abs(

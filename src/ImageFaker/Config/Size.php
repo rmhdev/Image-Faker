@@ -64,14 +64,14 @@ final class Size
                 "Options must be defined in an array"
             );
         }
-        if (!isset($options['max-width'])) {
-            $options['max-width'] = self::DEFAULT_MAX_WIDTH;
+        if (!isset($options['max_width'])) {
+            $options['max_width'] = self::DEFAULT_MAX_WIDTH;
         }
-        $options['max-width'] = $this->processValue($options['max-width']);
-        if (!isset($options['max-height'])) {
-            $options['max-height'] = self::DEFAULT_MAX_HEIGHT;
+        $options['max_width'] = $this->processValue($options['max_width']);
+        if (!isset($options['max_height'])) {
+            $options['max_height'] = self::DEFAULT_MAX_HEIGHT;
         }
-        $options['max-height'] = $this->processValue($options['max-height']);
+        $options['max_height'] = $this->processValue($options['max_height']);
 
         return $options;
     }
@@ -103,7 +103,7 @@ final class Size
      */
     public function getMaxWidth()
     {
-        return $this->options["max-width"];
+        return $this->options["max_width"];
     }
 
     /**
@@ -111,7 +111,7 @@ final class Size
      */
     public function getMaxHeight()
     {
-        return $this->options["max-height"];
+        return $this->options["max_height"];
     }
 
     /**

@@ -138,11 +138,11 @@ The default parameters are defined in `config/parameters.dist.php`:
 ```php
 $app["image_faker.parameters"] = array(
     "library"           => "gd",    // choose between "gd", "imagick" and "gmagick"
-    "background-color"  => null,    // hexadecimal
+    "background_color"  => null,    // hexadecimal
     "color"             => null,    // hexadecimal
     "cache_ttl"         => 3600,    // seconds
-    "max-width"         => 2000,    // pixels
-    "max-height"        => 2000,    // pixels
+    "max_width"         => 2000,    // pixels
+    "max_height"        => 2000,    // pixels
     "sizes"             => array(
         // "lorem" => "300x400"
     ), 

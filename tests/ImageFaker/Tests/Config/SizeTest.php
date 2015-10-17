@@ -88,8 +88,8 @@ class SizeTest extends \PHPUnit_Framework_TestCase
     public function testCustomMaxSizes()
     {
         $attributes = array(
-            "max-width"  => 1500,
-            "max-height" => 1700,
+            "max_width"  => 1500,
+            "max_height" => 1700,
         );
         $size = new Size(200, 250, $attributes);
 

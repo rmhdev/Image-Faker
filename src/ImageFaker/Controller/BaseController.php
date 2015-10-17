@@ -73,7 +73,7 @@ class BaseController
     {
         $values = array(
             "size"              => isset($data["size"]) ? $data["size"] : "",
-            'background-color'  => isset($data["background"]) ? $data["background"] : "",
+            'background_color'  => isset($data["background"]) ? $data["background"] : "",
             'color'             => isset($data["color"]) ? $data["color"] : "",
             'extension'         => isset($data["extension"]) ? $data["extension"] : "",
         );

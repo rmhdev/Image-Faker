@@ -60,8 +60,8 @@ class SizeFactoryTest extends \PHPUnit_Framework_TestCase
     {
         $size = SizeFactory::create("25x26", array(
             "options" => array(
-                "max-width" => 1200,
-                "max-height" => 1500,
+                "max_width" => 1200,
+                "max_height" => 1500,
             )
         ));
 

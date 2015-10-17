@@ -46,10 +46,10 @@ final class Config
 
     private function processAttributes($attributes = array())
     {
-        if (!isset($attributes['background-color'])) {
-            $attributes['background-color'] = $this->getDefaultBackgroundColor();
+        if (!isset($attributes['background_color'])) {
+            $attributes['background_color'] = $this->getDefaultBackgroundColor();
         }
-        $this->backgroundColor = $this->createColor($attributes['background-color']);
+        $this->backgroundColor = $this->createColor($attributes['background_color']);
 
         if (!isset($attributes['color'])) {
             $attributes['color'] = $this->calculateDefaultRGBFontColor();

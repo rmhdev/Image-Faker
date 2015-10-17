@@ -14,11 +14,11 @@ $app["image_faker.config"] = $app->protect(
     function ($values) use ($app) {
         $custom = array_merge(
             array(
-                "background-color" => null,
+                "background_color" => null,
                 "color" => null,
                 "sizes" => null,
-                "max-width" => null,
-                "max-height" => null,
+                "max_width" => null,
+                "max_height" => null,
             ),
             $app["image_faker.parameters"]
         );
@@ -27,13 +27,13 @@ $app["image_faker.config"] = $app->protect(
             array(
                 "sizes" => $custom["sizes"],
                 "options" => array(
-                    "max-width" => $custom["max-width"],
-                    "max-height" => $custom["max-height"],
+                    "max_width" => $custom["max_width"],
+                    "max_height" => $custom["max_height"],
                 ),
             )
         );
-        if (!isset($values["background-color"]) || !$values["background-color"]) {
-            $values["background-color"] = $custom["background-color"];
+        if (!isset($values["background_color"]) || !$values["background_color"]) {
+            $values["background_color"] = $custom["background_color"];
         }
         if (!isset($values["color"]) || !$values["color"]) {
             $values["color"] = $custom["color"];
@@ -43,7 +43,7 @@ $app["image_faker.config"] = $app->protect(
             $size,
             $values["extension"],
             array(
-                'background-color'  => $values['background-color'],
+                'background_color'  => $values['background_color'],
                 'color'             => $values['color'],
             )
         );
