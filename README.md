@@ -1,8 +1,10 @@
-# Image-Faker
+# Image Faker
 
 Image Faker is a `PHP` application built to generate images dynamically, using simple urls.
 
 [![Build Status](https://travis-ci.org/rmhdev/Image-Faker.svg)](https://travis-ci.org/rmhdev/Image-Faker)
+
+## Example
 
 Calling to this URL:
 
@@ -13,6 +15,8 @@ http://example.org/6d3353/300x150.png
 Will return the next image:
 
 ![Fake Image](docs/300x150.png)
+
+## Demo
 
 Are you interested? [Test Image Faker][] by yourself!
 
@@ -102,10 +106,10 @@ Check the [latest release](https://github.com/rmhdev/image-faker/releases) and c
 ### Project dependencies
 
 Retrieve all the dependencies using [Composer](http://getcomposer.org/).
-Install it and then run the `update` command:
+Install it and then run the `install` command:
 
 ```bash
-php composer.phar update
+php composer.phar install
 ```
 
 ### Server configuration
@@ -146,6 +150,17 @@ $app["image_faker.parameters"] = array(
 );
 ```
 
+## Unit tests
+
+Check the [Travis page][] to see the build status.
+If you want to run the tests by yourself, execute the next command:
+
+```bash
+php ./vendor/bin/phpunit
+```
+
+You'll need to install [PHPUnit][] via `composer` if you haven't yet.
+
 ## Code
 
 I started this project with some goals in mind:
@@ -166,7 +181,7 @@ This project is inspired in [Dynamic Dummy Image Generator][] by [Russell Heimli
 
 ## Change log
 
-* `2.0.0` (August 2, 2015): customizable app parameters.
+* `2.0.0` (October 13, 2015): customizable app parameters.
 * `1.4.0` (July 23, 2013): work with `GD`, `Imagick` and `Gmagick`.
 * `1.3.0` (July 5, 2013): use HTTP cache.
 * `1.2.0` (June 23, 2013): font color can be indicated.
@@ -188,6 +203,8 @@ My name is [Rober Martín][] ([@rmhdev][]). I'm a developer from Donostia / San 
 [Igor Wiedler]: https://igor.io/
 [Imagine]: http://imagine.readthedocs.org/
 [Bulat Shakirzyanov]: http://avalanche123.com/
+[Travis page]: https://travis-ci.org/rmhdev/Image-Faker
+[PHPUnit]: http://phpunit.de
 [MIT License]: http://opensource.org/licenses/MIT
 [CC BY 3.0]: http://creativecommons.org/licenses/by/3.0/
 [Dynamic Dummy Image Generator]: http://dummyimage.com/
