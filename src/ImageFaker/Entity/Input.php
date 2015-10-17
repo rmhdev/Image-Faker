@@ -5,13 +5,31 @@ namespace ImageFaker\Entity;
 use ImageFaker\Config\Config;
 use ImageFaker\Config\SizeFactory;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Symfony\Component\Validator\Mapping\ClassMetadata;
 
 final class Input
 {
     private $parameters;
+
+    /**
+     * @Assert\NotBlank()
+     */
     private $size;
+
+    /**
+     * @Assert\NotBlank()
+     */
     private $extension;
+
+    /**
+     * @Assert\Regex("/^#(?:(?:[a-fd]{3}){1,2})$/i")
+     */
     private $background;
+
+    /**
+     * @Assert\Regex("/^#(?:(?:[a-fd]{3}){1,2})$/i")
+     */
     private $color;
 
     public function __construct($parameters = array())
@@ -118,5 +136,33 @@ final class Input
         );
 
         return new Config($this->createSize(), $this->getExtension(), $attributes);
+    }
+
+    public static function loadValidatorMetadata(ClassMetadata $metadata)
+    {
+        $callback = function ($object, ExecutionContextInterface $context) {
+            /* @var Input $object */
+            if (!strlen($object->getSize())) {
+                $context->buildViolation('This value should not be blank.')
+                    ->atPath('size')
+                    ->addViolation();
+            } else {
+                try {
+                    $size = $object->createSize();
+                    if ($size->isOutOfBounds()) {
+                        $context->buildViolation('Out of bounds')
+                            ->atPath('size')
+                            ->addViolation();
+                    }
+                } catch (\Exception $e) {
+                    $context->buildViolation($e->getMessage())
+                        ->atPath('size')
+                        ->addViolation();
+                }
+            }
+        };
+
+        $metadata->addConstraint(new Assert\Callback($callback));
+        $metadata->addGetterConstraint('extension', new Assert\NotBlank());
     }
 }

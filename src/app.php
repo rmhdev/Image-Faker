@@ -7,10 +7,12 @@ $app->register(new Silex\Provider\RoutingServiceProvider());
 $app->register(new Silex\Provider\TwigServiceProvider(), array());
 $app->register(new Silex\Provider\SessionServiceProvider(), array());
 $app->register(new Silex\Provider\CsrfServiceProvider(), array());
-$app->register(new Silex\Provider\ValidatorServiceProvider());
 $app->register(new Silex\Provider\FormServiceProvider(), array());
+$app->register(new Silex\Provider\ValidatorServiceProvider());
 $app["locale"] = "en";
-$app->register(new Silex\Provider\TranslationServiceProvider(), array());
+$app->register(new Silex\Provider\TranslationServiceProvider(), array(
+    'translator.messages' => array(),
+));
 
 $app['twig'] = $app->extend('twig', function ($twig, $app) {
     $twig->addFunction(new \Twig_SimpleFunction('asset', function ($asset) use ($app) {

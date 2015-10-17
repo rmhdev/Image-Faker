@@ -25,11 +25,10 @@ class BaseController
         $form = $this->createForm($app);
         if ($request->isMethod(Request::METHOD_POST)) {
             $form->handleRequest($request);
-            try {
+            if ($form->isValid()) {
                 return $this->redirectToImage($app, $form);
-            } catch (\Exception $e) {
-                $app['session']->getFlashBag()->add('message', 'The data is incorrect');
             }
+            $app['session']->getFlashBag()->add('message', 'The data is incorrect');
         }
 
         return new Response(
@@ -51,7 +50,6 @@ class BaseController
             "size" => $input->getSize(),
             "extension" => $input->getExtension(),
         );
-        //$config = $this->createConfig($app, $data);
         $config = $input->createConfig();
         $route = "simple";
         if ($input->getBackground()) {
@@ -95,11 +93,12 @@ class BaseController
 
     /**
      * @param Application $app
+     * @param Input $input
      * @return Form
      */
-    private function createForm(Application $app)
+    private function createForm(Application $app, Input $input = null)
     {
-        return $app['form.factory']->createBuilder(new ImageType())->getForm();
+        return $app['form.factory']->createBuilder(new ImageType(), $input)->getForm();
     }
 
     public function imageAction(Application $app, Request $request)
