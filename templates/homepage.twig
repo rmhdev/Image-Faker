@@ -34,27 +34,28 @@
 
         <div class="row">
             <div class="col-md-2 col-sm-3 col-xs-6">{{
-                form_row(form.size, { 'attr': {'placeholder': '300x150', 'class': 'input-lg' }})
+                form_row(form.size, { 'attr': {'placeholder': '300x150', 'class': 'input-lg faker-size' }})
             }}</div>
             <div class="col-md-2 col-sm-2 col-xs-6">{{
-                form_row(form.extension, { 'attr': { 'class': 'input-lg' }})
+                form_row(form.extension, { 'attr': { 'class': 'input-lg faker-extension' }})
             }}</div>
             <div class="col-md-2 col-sm-2 col-xs-6">{{
                 form_row(form.background, {
                     'attr': {
                         'placeholder': config.backgroundColor,
                         'maxlength': 7,
-                        'class': 'input-lg'
+                        'class': 'input-lg faker-background'
                     },
                     'required': false
                 })
-            }}</div>
+            }}
+            </div>
             <div class="col-md-2 col-sm-2 col-xs-6">{{
                 form_row(form.color, {
                     'attr': {
                         'placeholder': config.fontColor,
                         'maxlength': 7,
-                        'class': 'input-lg'
+                        'class': 'input-lg faker-font'
                     },
                     'label': 'Font color',
                     'required': false

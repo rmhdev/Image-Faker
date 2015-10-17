@@ -62,6 +62,15 @@ form {
     border-bottom: 1px solid #ddd;
     background-color: #f5f5f5;
 }
+input, select {
+    font-family: monospace;
+}
+input.faker-size {
+    text-transform: lowercase;
+}
+input.faker-background, input.faker-font {
+    text-transform: uppercase;
+}
 .rmh-url {
     font-family: monospace;
 }
