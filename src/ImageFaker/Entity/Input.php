@@ -88,6 +88,15 @@ final class Input
 
     public function createSize()
     {
-        return SizeFactory::create($this->getSize(), $this->parameters);
+        return SizeFactory::create(
+            $this->getSize(),
+            array(
+                "sizes" => isset($this->parameters["sizes"]) ? $this->parameters["sizes"] : array(),
+                "options" => array(
+                    "max_width" => isset($this->parameters["max_width"]) ? $this->parameters["max_width"] : null,
+                    "max_height" => isset($this->parameters["max_height"]) ? $this->parameters["max_height"] : null,
+                ),
+            )
+        );
     }
 }

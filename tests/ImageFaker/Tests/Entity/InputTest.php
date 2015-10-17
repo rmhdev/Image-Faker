@@ -79,4 +79,19 @@ class InputTest extends \PHPUnit_Framework_TestCase
         $expected = new Size(720, 480);
         $this->assertEquals($expected, $input->createSize());
     }
+
+    /**
+     * @expectedException
+     */
+    public function testCreateTooBigSizeShouldReturnOutOfBoundsSizeObject()
+    {
+        $input = new Input(array(
+            "max_width" => 100,
+            "max_height" => 100,
+        ));
+        $input->setSize("101x101");
+        $size = $input->createSize();
+
+        $this->assertTrue($size->isOutOfBounds());
+    }
 }
