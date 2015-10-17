@@ -2,6 +2,7 @@
 
 namespace ImageFaker\Tests\Form;
 
+use ImageFaker\Entity\Input;
 use ImageFaker\Form\ImageType;
 use Symfony\Component\Form\Test\TypeTestCase;
 
@@ -16,8 +17,14 @@ class ImageTypeTest extends TypeTestCase
         $form = $this->factory->create($type);
         $form->submit($data);
 
+        $input = new Input();
+        $input->setSize($data["size"]);
+        $input->setExtension($data["extension"]);
+        $input->setBackground($data["background"]);
+        $input->setColor($data["color"]);
+
         $this->assertTrue($form->isSynchronized());
-        $this->assertEquals($data, $form->getData());
+        $this->assertEquals($input, $form->getData());
 
         $view = $form->createView();
         $children = $view->children;

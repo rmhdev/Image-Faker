@@ -5,6 +5,7 @@ namespace ImageFaker\Form;
 use ImageFaker\Config\Config;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ImageType extends AbstractType
 {
@@ -19,6 +20,15 @@ final class ImageType extends AbstractType
             ->add("background")
             ->add("color")
         ;
+    }
+
+
+
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(array(
+            'data_class' => 'ImageFaker\Entity\Input',
+        ));
     }
 
     /**

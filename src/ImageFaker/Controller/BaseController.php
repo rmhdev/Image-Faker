@@ -45,15 +45,21 @@ class BaseController
 
     private function redirectToImage(Application $app, FormInterface $form)
     {
-        $data = $form->getData();
-        $config = $this->createConfig($app, $data);
+        /* @var Input $input */
+        $input = $form->getData();
+        $data = array(
+            "size" => $input->getSize(),
+            "extension" => $input->getExtension(),
+        );
+        //$config = $this->createConfig($app, $data);
+        $config = $input->createConfig();
         $route = "simple";
-        if (isset($data["background"]) && $data["background"]) {
-            $data["background"] = ltrim($data["background"], "#");
+        if ($input->getBackground()) {
+            $data["background"] = ltrim($input->getBackground(), "#");
             $route = "background";
         }
-        if ($data["color"]) {
-            $data["color"] = ltrim($data["color"], "#");
+        if ($input->getColor()) {
+            $data["color"] = ltrim($input->getColor(), "#");
             $route = "font";
             if (!isset($data["background"])) {
                 $data["background"] = ltrim((string)$config->getBackgroundColor(), "#");
