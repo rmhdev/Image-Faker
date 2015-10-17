@@ -29,10 +29,10 @@ class HomePageTest extends WebTestCase
     public function testCorrectlySubmittedDataShouldReturnImage($expectedUrl, $data)
     {
         $client = $this->submitData($data);
-
         $this->assertEquals(
             $expectedUrl,
-            $client->getRequest()->getRequestUri()
+            $client->getRequest()->getRequestUri(),
+            '"{$expectedUrl}" expected, "' . $client->getRequest()->getRequestUri() . '" received'
         );
     }
 
@@ -105,9 +105,9 @@ class HomePageTest extends WebTestCase
     {
         $client = $this->createClient();
         $crawler = $client->request("GET", "/");
-        $form = $crawler->selectButton('submit')->form(array(
-            "image" => $data
-        ));
+        $form = $crawler->selectButton('create')->form(
+            array("image" => $data)
+        );
         $client->submit($form);
         $client->followRedirect();
 
@@ -121,9 +121,9 @@ class HomePageTest extends WebTestCase
     {
         $client = $this->createClient();
         $crawler = $client->request("GET", "/");
-        $form = $crawler->selectButton('submit')->form(array(
-            "image" => $data
-        ));
+        $form = $crawler->selectButton('create')->form(
+            array("image" => $data)
+        );
         $crawler = $client->submit($form);
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
