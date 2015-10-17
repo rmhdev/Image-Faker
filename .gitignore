@@ -3,3 +3,4 @@
 /config/parameters.php
 /.idea
 .DS_Store
+/phpunit.xml
