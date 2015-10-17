@@ -4,6 +4,7 @@ namespace ImageFaker\Controller;
 
 use ImageFaker\Config\Config;
 use ImageFaker\Config\Size;
+use ImageFaker\Entity\Input;
 use ImageFaker\Form\ImageType;
 use Silex\Application;
 use Symfony\Component\Form\Form;
@@ -77,8 +78,13 @@ class BaseController
             'color'             => isset($data["color"]) ? $data["color"] : "",
             'extension'         => isset($data["extension"]) ? $data["extension"] : "",
         );
+        $input = new Input($app["image_faker.parameters"]);
+        $input->setSize($values["size"]);
+        $input->setExtension($values["extension"]);
+        $input->setBackground($values["background_color"]);
+        $input->setColor($values["color"]);
 
-        return $app["image_faker.config"]($values);
+        return $input->createConfig();
     }
 
     /**
