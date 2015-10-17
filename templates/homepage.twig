@@ -29,7 +29,10 @@
 
         {{ form_widget(form._token) }}
         {% for message in app.session.getFlashBag.get('message') %}
-        <div class="alert alert-danger">{{ message }}</div>
+        <div class="alert alert-danger">
+            <strong>Ooops!</strong>
+            {{ message }}
+        </div>
         {% endfor %}
 
         <div class="row">
@@ -99,15 +102,28 @@
             </li>
         </ul>
         <div class="panel-heading">Custom sizes</div>
-        <ul class="list-group">
+        <div class="list-group">
             {% for name, size in sizes %}
-            <li class="list-group-item">{{ name }}
+            <a class="list-group-item" href="{{ url("simple", {
+                    'extension': 'png',
+                    'size': name
+                }) }}">{{ name }}
                 <span class="pull-right rmh-size">{{ size }}</span>
-            </li>
+            </a>
             {% endfor %}
-        </ul>
+        </div>
     </div>
     </div>
+    </div>
+</section>
+
+<section>
+    <div class="container">
+        <h2>About</h2>
+        <div class="text-center">
+            <p class="text-center">This is an <strong>open source</strong> project. All pull requests are welcome!</p>
+            <a class="btn btn-default" href="https://github.com/rmhdev/Image-Faker">View on GitHub</a>
+        </div>
     </div>
 </section>
 {% endblock %}
