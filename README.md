@@ -20,7 +20,7 @@ Will return the next image:
 
 Are you interested? [Test Image Faker][] by yourself!
 
-## Parameters
+## URL parameters
 
 You can customize 4 aspects of the images:
 
@@ -133,8 +133,7 @@ Easy, right? Just open a browser and enter `http://localhost:8080`
 
 ## Customization
 
-In the `config` folder, copy the file `parameters.dist.php` and paste it with the name `parameters.php`.
-The default values are:
+The default parameters are defined in `config/parameters.dist.php`:
 
 ```php
 $app["image_faker.parameters"] = array(
@@ -149,6 +148,8 @@ $app["image_faker.parameters"] = array(
     ), 
 );
 ```
+
+If you want to customize them, just copy the file and rename it to `parameters.php`.
 
 ## Unit tests
 
