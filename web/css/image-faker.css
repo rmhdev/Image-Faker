@@ -56,7 +56,7 @@ p.lead {
     transition: border 0.2s ease-in-out 0s;
 }
 
-form {
+.form {
     margin-bottom: 2em;
     border-top: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
@@ -141,7 +141,6 @@ input.faker-background, input.faker-font {
         display: block;
     }
 }
-
 
 .container {padding-right: 5px;padding-left: 5px;}
 .row {margin-right: -5px;margin-left: -5px;}
