@@ -27,7 +27,7 @@ class BaseController
             try {
                 return $this->redirectToImage($app, $form);
             } catch (\Exception $e) {
-                $app['session']->getFlashBag()->add('message', 'Error');
+                $app['session']->getFlashBag()->add('message', 'The data is incorrect');
             }
         }
 

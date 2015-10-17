@@ -128,7 +128,7 @@ class HomePageTest extends WebTestCase
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertEquals("/", $client->getRequest()->getRequestUri());
-        $this->assertEquals(1, $crawler->filter('.alert:contains("Error")')->count());
+        $this->assertEquals(1, $crawler->filter('.alert.alert-danger')->count());
     }
 
     public function invalidFormData()
