@@ -2,6 +2,7 @@
 
 namespace ImageFaker\Tests\Entity;
 
+use ImageFaker\Config\Size;
 use ImageFaker\Entity\Input;
 
 class InputTest extends \PHPUnit_Framework_TestCase
@@ -46,5 +47,36 @@ class InputTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("", $input->getExtension());
         $this->assertEquals("", $input->getBackground());
         $this->assertEquals("", $input->getColor());
+    }
+
+    public function testCreateSizeShouldReturnSizeObject()
+    {
+        $input = new Input();
+        $input->setSize("123x456");
+
+        $expected = new Size(123, 456);
+        $this->assertEquals($expected, $input->createSize());
+    }
+
+    public function testCreateCustomSizeShouldReturnSizeObject()
+    {
+        $input = new Input(array(
+            "sizes" => array(
+                "lorem" => "456x789"
+            )
+        ));
+        $input->setSize("lorem");
+
+        $expected = new Size(456, 789);
+        $this->assertEquals($expected, $input->createSize());
+    }
+
+    public function testCreatePredefinedSizeShouldReturnSizeObject()
+    {
+        $input = new Input(array());
+        $input->setSize("ntsc");
+
+        $expected = new Size(720, 480);
+        $this->assertEquals($expected, $input->createSize());
     }
 }

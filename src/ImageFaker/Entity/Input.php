@@ -2,15 +2,20 @@
 
 namespace ImageFaker\Entity;
 
+use ImageFaker\Config\SizeFactory;
+use Symfony\Component\Validator\Constraints as Assert;
+
 final class Input
 {
+    private $parameters;
     private $size;
     private $extension;
     private $background;
     private $color;
 
-    public function __construct()
+    public function __construct($parameters = array())
     {
+        $this->parameters = $parameters;
         $this->size = "";
         $this->extension = "";
         $this->background = "";
@@ -79,5 +84,10 @@ final class Input
     public function setColor($color)
     {
         $this->color = $color;
+    }
+
+    public function createSize()
+    {
+        return SizeFactory::create($this->getSize(), $this->parameters);
     }
 }
