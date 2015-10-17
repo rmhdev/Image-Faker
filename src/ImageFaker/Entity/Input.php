@@ -2,6 +2,7 @@
 
 namespace ImageFaker\Entity;
 
+use ImageFaker\Config\Config;
 use ImageFaker\Config\SizeFactory;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -91,12 +92,31 @@ final class Input
         return SizeFactory::create(
             $this->getSize(),
             array(
-                "sizes" => isset($this->parameters["sizes"]) ? $this->parameters["sizes"] : array(),
+                "sizes" => $this->getParameter("sizes", array()),
                 "options" => array(
-                    "max_width" => isset($this->parameters["max_width"]) ? $this->parameters["max_width"] : null,
-                    "max_height" => isset($this->parameters["max_height"]) ? $this->parameters["max_height"] : null,
+                    "max_width" => $this->getParameter("max_width"),
+                    "max_height" => $this->getParameter("max_height"),
                 ),
             )
         );
+    }
+
+    private function getParameter($name, $default = null)
+    {
+        if (!isset($this->parameters[$name]) || is_null($this->parameters[$name])) {
+            return $default;
+        }
+
+        return $this->parameters[$name];
+    }
+
+    public function createConfig()
+    {
+        $attributes = array(
+            'background_color'  => $this->getParameter("background_color", $this->getBackground()),
+            'color'             => $this->getParameter("color", $this->getColor()),
+        );
+
+        return new Config($this->createSize(), $this->getExtension(), $attributes);
     }
 }

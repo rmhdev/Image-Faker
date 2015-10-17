@@ -2,6 +2,7 @@
 
 namespace ImageFaker\Tests\Entity;
 
+use ImageFaker\Config\Config;
 use ImageFaker\Config\Size;
 use ImageFaker\Entity\Input;
 
@@ -93,5 +94,34 @@ class InputTest extends \PHPUnit_Framework_TestCase
         $size = $input->createSize();
 
         $this->assertTrue($size->isOutOfBounds());
+    }
+
+    public function testCreateSimpleConfigShouldReturnConfigObject()
+    {
+        $input = new Input();
+        $input->setSize("100x200");
+        $input->setExtension("png");
+
+        $size = new Size(100, 200);
+        $expected = new Config($size, "png");
+
+        $this->assertEquals($expected, $input->createConfig());
+    }
+
+    public function testCreateCompleteConfigShouldReturnConfigObject()
+    {
+        $input = new Input();
+        $input->setSize("100x200");
+        $input->setExtension("png");
+        $input->setBackground("#dddddd");
+        $input->setColor("#555555");
+
+        $size = new Size(100, 200);
+        $expected = new Config($size, "png", array(
+            "background_color" => "#dddddd",
+            "color" => "#555555",
+        ));
+
+        $this->assertEquals($expected, $input->createConfig());
     }
 }
