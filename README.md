@@ -182,7 +182,7 @@ This project is inspired in [Dynamic Dummy Image Generator][] by [Russell Heimli
 
 ## Change log
 
-* `2.0.0` (October 13, 2015): customizable app parameters.
+* `2.0.0` (October 18, 2015): customizable app parameters.
 * `1.4.0` (July 23, 2013): work with `GD`, `Imagick` and `Gmagick`.
 * `1.3.0` (July 5, 2013): use HTTP cache.
 * `1.2.0` (June 23, 2013): font color can be indicated.
