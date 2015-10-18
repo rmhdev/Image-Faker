@@ -93,4 +93,28 @@ class SizeFactoryTest extends \PHPUnit_Framework_TestCase
             )
         );
     }
+
+    /**
+     * @expectedException ImageFaker\Exception\InvalidArgumentException
+     * @dataProvider incorrectSizes
+     */
+    public function testIncorrectSizeShouldThrowException($size)
+    {
+        SizeFactory::create($size);
+    }
+
+    public function incorrectSizes()
+    {
+        return array(
+            array(
+                "123xeee"
+            ),
+            array(
+                "lorem"
+            ),
+            array(
+                "111x222x333"
+            ),
+        );
+    }
 }

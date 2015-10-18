@@ -2,6 +2,8 @@
 
 namespace ImageFaker\Config;
 
+use ImageFaker\Exception\InvalidArgumentException;
+
 final class SizeFactory
 {
     public static $defaultSizes = array(
@@ -25,8 +27,14 @@ final class SizeFactory
         }
         $size = strtolower($value);
         $widthHeight = explode("x", $size);
+        if (2 != sizeof($widthHeight)) {
+            throw new InvalidArgumentException('Unknown value.');
+        }
         $width = $widthHeight[0];
         $height = $widthHeight[1];
+        if (!is_numeric($widthHeight[0]) || !is_numeric($widthHeight[1])) {
+            throw new InvalidArgumentException('Invalid size format.');
+        }
 
         return new Size(
             $width,
