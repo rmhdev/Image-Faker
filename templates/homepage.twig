@@ -1,18 +1,9 @@
 {% extends 'layout.twig' %}
 
 {% import 'includes/faker.twig' as faker %}
-
 {% form_theme form 'bootstrap_3_layout.html.twig' %}
-
 {% set paramsBasic = { background: "6d3353", size: "300x150", extension: "png" } %}
-{#
-{% set paramsWidthHeight = {size: "300x150", extension: "png"} %}
-{% set paramsWidth = {size: "300", extension: "png"} %}
-{% set paramsExtension = {size: "300", extension: "jpg"} %}
-{% set paramsBackground = {background: "6d3353", size: "300x150", extension: "png"} %}
-{% set paramsFont = {background: "555555", color: "ffff00", size: "300x150", extension: "png"} %}
-{% set paramsNtsc = {size: "ntsc", extension: "jpg"} %}
-#}
+
 {% block content %}
 
 <header>
@@ -22,7 +13,7 @@
     </div>
 </header>
 
-<form action="{{ path('homepage') }}" method="post" class="form" autocomplete="on">
+<form action="{{ path('homepage') }}" method="post" class="form" autocomplete="off">
     <div class="container">
     <fieldset>
         <legend class="sr-only">Create an image</legend>
@@ -58,13 +49,13 @@
                     'required': false
                 })
             }}</div>
-            <div class="col-md-2 col-sm-3 col-xs-6">{{
+            <div class="col-md-3 col-sm-3 col-xs-6">{{
                 form_row(form.size, { 'attr': {'placeholder': '300x150', 'class': 'input-lg faker-size' }})
                 }}</div>
             <div class="col-md-2 col-sm-2 col-xs-6">{{
                 form_row(form.extension, { 'attr': { 'class': 'input-lg faker-extension' }})
                 }}</div>
-            <div class="col-md-4 col-sm-3 col-xs-12">
+            <div class="col-md-3 col-sm-3 col-xs-12">
                 <button type="submit" class="btn btn-primary btn-block btn-lg faker-btn-submit">create</button>
             </div>
         </div>
@@ -93,14 +84,24 @@
     <div class="panel panel-default rmh-panel">
         <header class="panel-heading">Custom values</header>
 
-        <ul class="list-group">
-            <li class="list-group-item">Max size
+        <div class="list-group">
+            <a class="list-group-item" href="{{
+                url("simple", {
+                    'extension': 'png',
+                    'size': config.size.maxWidth ~ "x" ~ config.size.maxHeight
+                })
+            }}">Max size
                 <span class="pull-right rmh-size">{{ config.size.maxWidth ~ "x" ~ config.size.maxHeight }}</span>
-            </li>
-            <li class="list-group-item">Default background
+            </a>
+            <a class="list-group-item" href="{{
+                url("simple", {
+                    'extension': 'png',
+                    'size': "300x150"
+                })
+            }}">Default background
                 <span class="pull-right rmh-size">{{ config.backgroundColor }}</span>
-            </li>
-        </ul>
+            </a>
+        </div>
         <div class="panel-heading">Custom sizes</div>
         <div class="list-group">
             {% for name, size in sizes %}

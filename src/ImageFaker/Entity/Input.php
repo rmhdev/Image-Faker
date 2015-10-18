@@ -4,6 +4,7 @@ namespace ImageFaker\Entity;
 
 use ImageFaker\Config\Config;
 use ImageFaker\Config\SizeFactory;
+use Imagine\Image\Color;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
@@ -11,25 +12,9 @@ use Symfony\Component\Validator\Mapping\ClassMetadata;
 final class Input
 {
     private $parameters;
-
-    /**
-     * @Assert\NotBlank()
-     */
     private $size;
-
-    /**
-     * @Assert\NotBlank()
-     */
     private $extension;
-
-    /**
-     * @Assert\Regex("/^#(?:(?:[a-fd]{3}){1,2})$/i")
-     */
     private $background;
-
-    /**
-     * @Assert\Regex("/^#(?:(?:[a-fd]{3}){1,2})$/i")
-     */
     private $color;
 
     public function __construct($parameters = array())
@@ -150,7 +135,7 @@ final class Input
                 try {
                     $size = $object->createSize();
                     if ($size->isOutOfBounds()) {
-                        $context->buildViolation('Out of bounds')
+                        $context->buildViolation('Out of bounds.')
                             ->atPath('size')
                             ->addViolation();
                     }
@@ -160,8 +145,25 @@ final class Input
                         ->addViolation();
                 }
             }
+            try {
+                if ($object->getBackground()) {
+                    new Color($object->getBackground());
+                }
+            } catch (\Exception $e) {
+                $context->buildViolation("Incorrect color.")
+                    ->atPath('background')
+                    ->addViolation();
+            }
+            try {
+                if ($object->getColor()) {
+                    new Color($object->getColor());
+                }
+            } catch (\Exception $e) {
+                $context->buildViolation("Incorrect color.")
+                    ->atPath('color')
+                    ->addViolation();
+            }
         };
-
         $metadata->addConstraint(new Assert\Callback($callback));
         $metadata->addGetterConstraint('extension', new Assert\NotBlank());
     }
